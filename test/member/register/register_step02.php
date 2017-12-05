@@ -6,6 +6,8 @@
 <?php
 $_SESSION["mobile_auth_code"] = 123456;
 // echo "Session variables are set.";
+
+$mb_hp = '';
 ?>
 
 <body>
@@ -157,27 +159,30 @@ $_SESSION["mobile_auth_code"] = 123456;
 				<h3 class="tit-h4">본인인증</h3>
 			</div>
 
-			<div class="section-content after">
-				<div class="identify-box" style="width:100%;height:190px;">
-					<div class="identify-inner">
-						<strong>휴대폰 인증</strong>
-						<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
+			<form action="/member/register/register_step03.php" method="POST">
 
-						<br />
-						<input type="text" class="input-text" style="width:50px"/> - 
-						<input type="text" class="input-text" style="width:50px"/> - 
-						<input type="text" class="input-text" style="width:50px"/>
-						<a href="#" class="btn-s-line">인증번호 받기</a>
+				<div class="section-content after">
+					<div class="identify-box" style="width:100%;height:190px;">
+						<div class="identify-inner">
+							<strong>휴대폰 인증</strong>
+							<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
 
-						<br /><br />
-						<input type="text" class="input-text" name="mo_check" style="width:200px"/>
-						<a href="#" class="btn-s-line" id="check_mo_auth">인증번호 확인</a>
+							<br />
+							<input type="text" name="hp_01" id="mb_hp_01" class="input-text" maxlength="3" style="width:50px"/> - 
+							<input type="text" name="hp_01" id="mb_hp_02" class="input-text" maxlength="4" style="width:50px"/> - 
+							<input type="text" name="hp_01" id="mb_hp_03" class="input-text" maxlength="4" style="width:50px"/>
+							<input type="hidden" name="mb_hp" id="mb_hp" value="<?php echo $mb_hp; ?>" />
+							<a href="#" id="getAuthCode" class="btn-s-line">인증번호 받기</a>
+
+							<br /><br />
+							<input type="text" class="input-text" name="mo_check" style="width:200px"/>
+							<button type="submit" href="#" class="btn-s-line" id="check_mo_auth">인증번호 확인</button>
+						</div>
+						<input type="hidden" class="input-text" name="mo_auth" value="<?php echo $_SESSION["mobile_auth_code"]; ?>"/>
+						<i class="graphic-phon"><span>휴대폰 인증</span></i>
 					</div>
-					<input type="hidden" class="input-text" name="mo_auth" value="<?php echo $_SESSION["mobile_auth_code"]; ?>"/>
-					<i class="graphic-phon"><span>휴대폰 인증</span></i>
 				</div>
-			</div>
-
+			<form>
 		</div>
 	</div>
 </div>
@@ -210,10 +215,27 @@ $_SESSION["mobile_auth_code"] = 123456;
 			// alert($('input[name="mo_auth"]').val());
 			if ( $('input[name="mo_check"]').val() == 123456 ) {
 				alert('Succees!! Authentification!!');
+				// location.href = 'register_step03.php';
 			} else {
-				alert('Fail to Authentification!!');
+				alert('Fail to get Authentification!!');
 			}
 		});
+
+		$('#getAuthCode').click('on', function(){
+			alert('인증코드는 123456입니다.');
+		});
+
+		$('input[type="text"][name="hp_01"]').on("change", function(){
+			var hp_complete = [];
+			hp_complete[0] = $('#mb_hp_01').val();
+			hp_complete[1] = $('#mb_hp_02').val();
+			hp_complete[2] = $('#mb_hp_03').val();
+			$('#mb_hp').val(hp_complete[0]+'-'+hp_complete[1]+'-'+hp_complete[2]);
+		});
+
+		function validation_hp() {
+			return true;
+		}
 	});
 </script>
 </body>
