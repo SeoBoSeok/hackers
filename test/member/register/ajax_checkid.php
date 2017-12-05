@@ -1,6 +1,35 @@
 <?php
 
+	$servername = "localhost";
+	$username = "root";
+	$password = "localhost";
+	$dbname = "test";
+
 	$mb_id = trim($_POST['name']);
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+
+	$sql = "SELECT name FROM members WHERE name LIKE 'ggybbo'";
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+    // output data of each row
+    	while($row = $result->fetch_assoc()) {
+        // echo "id: " . $row["name"]. "<br>";
+    		echo true;
+    	}
+	} else {
+    	// echo "0 results";
+    	echo false;
+	}
+	$conn->close();
+
+	// $mb_id = trim($_POST['name']);
 
 	// $id_list = array(
 	// 	array("id"=>'1111', "tel"=>'1111'),

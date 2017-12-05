@@ -1,5 +1,22 @@
 <?php
 	include('../../header.php');
+
+	// echo $_POST['mb_name'];
+	// echo $_POST['mb_id'];
+	// // echo $_POST['mb_password'];
+	// // echo $_POST['mb_password_re'];
+	// // $hashresult = hash('sha256', $data)
+	// echo hash('sha256', $_POST['mb_password']);
+	// echo hash('sha256', $_POST['mb_password_re']);
+	// echo $_POST['mb_hp'];
+	// echo $_POST['mb_tel'];
+	// echo $_POST['mb_email'];
+	// echo $_POST['postcode'];
+	// echo $_POST['addr_basic'];
+	// echo $_POST['addr_detail'];
+	// echo $_POST['sms'];
+	// echo $_POST['mail'];
+
 ?>
 <body>
 <!-- skip nav -->
@@ -145,7 +162,7 @@
 			</div>
 
 			<div class="box-btn mt30">
-				<a href="#" class="btn-l">로그인</a>
+				<a href="/member" class="btn-l">로그인</a>
 				<a href="#" class="btn-l-line ml5">수강신청</a>
 			</div>
 

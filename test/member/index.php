@@ -11,7 +11,7 @@
 			<div class="login-input">
 				<div class="input-text-box">
 					<input type="text" class="input-text mb5" placeholder="아이디" style="width:190px"/>
-					<input type="text" class="input-text" placeholder="비밀번호" style="width:190px"/>
+					<input type="password" class="input-text" placeholder="비밀번호" style="width:190px"/>
 				</div>
 				<button type="submit" class="btn-login">로그인</button>
 			</div>

@@ -163,6 +163,13 @@
 			</div>
 
 			<div class="section-content">
+			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post"> <!--  enctype="multipart/form-data" autocomplete="off" -->
+		    <input type="hidden" name="w" value="<?php echo $w ?>">
+		    <input type="hidden" name="url" value="<?php echo $urlencode ?>">
+		    <input type="hidden" name="agree" value="<?php echo $agree ?>">
+		    <input type="hidden" name="agree2" value="<?php echo $agree2 ?>">
+		    <input type="hidden" name="cert_type" value="<?php echo $member['mb_certify']; ?>">
+		    <input type="hidden" name="cert_no" value="">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
 					<colgroup>
@@ -173,7 +180,7 @@
 					<tbody>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이름</th>
-							<td><input type="text" class="input-text" style="width:302px" required/></td>
+							<td><input type="text" class="input-text" style="width:302px" name="mb_name" required/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
@@ -181,23 +188,25 @@
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호</th>
-							<td><input type="password" class="input-text" style="width:302px" placeholder="8-15자의 영문자/숫자 혼합"/></td>
+							<td><input type="password" class="input-text" style="width:302px" name="mb_password" placeholder="8-15자의 영문자/숫자/특수문자 혼합"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호 확인</th>
-							<td><input type="password" class="input-text" style="width:302px"/></td>
+							<td><input type="password" class="input-text" style="width:302px" name="mb_password_re"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
-								<input type="text" class="input-text" style="width:138px"/> @ <input type="text" class="input-text" style="width:138px"/>
-								<select class="input-sel" style="width:160px">
+								<input type="text" class="input-text"  id="str_email01" name="str_email" style="width:138px"/> @ <input type="text" class="input-text" id="str_email02" name="str_email" style="width:138px"/>
+								<select class="input-sel" id="selectEmail" style="width:160px">
+									<option value="1" selected>직접입력</option>
 									<option value="hackers.com">hackers.com</option>
 									<option value="naver.com">naver.com</option>
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="google.com">google.com</option>
 									<option value="nate.com">nate.com</option>
 								</select>
+								<input type="hidden" name="mb_email" id="mb_email_from_str" />
 							</td>
 						</tr>
 						<tr>
@@ -206,23 +215,25 @@
 								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_01; ?>" readonly /> - 
 								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_02; ?>" readonly/> - 
 								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_03; ?>" readonly/>
+								<input type="hidden" name="mb_hp" value="<?php echo $mb_hp; ?>" />
 							</td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons"></span>일반전화 번호</th>
-							<td><input type="text" class="input-text" style="width:88px"/> - <input type="text" class="input-text" style="width:88px"/> - <input type="text" class="input-text" style="width:88px"/></td>
+							<td><input type="text" name="mb_tel_01" id="mb_tel_01" class="input-text" style="width:88px" maxlength="3" /> - <input type="text" name="mb_tel_01" id="mb_tel_02" class="input-text" style="width:88px" maxlength="4" /> - <input type="text" name="mb_tel_01" id="mb_tel_03" class="input-text" style="width:88px" maxlength="4" /></td>
+							<input type="hidden" id="mb_tel" name="mb_tel" value="<?php echo $mb_tel; ?>" />
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" type="button">주소찾기</a>
+									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="postcode" type="button">주소찾기</a>
 								</p>
 								<p class="mt10">
-									<label>기본주소 <input type="text" id="sample6_address" class="input-text ml5" style="width:719px"/></label>
+									<label>기본주소 <input type="text" id="sample6_address" name="addr_basic" class="input-text ml5" style="width:719px"/></label>
 								</p>
 								<p class="mt10">
-									<label>상세주소 <input type="text" id="sample6_address2" class="input-text ml5" style="width:719px"/></label>
+									<label>상세주소 <input type="text" id="sample6_address2" name="addr_detail" class="input-text ml5" style="width:719px"/></label>
 								</p>
 							</td>
 						</tr>
@@ -231,11 +242,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="radio" id="" checked="checked"/>
+										<input type="radio" name="sms" id="" checked="checked"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="radio" id="" />
+										<input type="radio" name="sms" id="" />
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -247,11 +258,11 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="radio2" id="" checked="checked"/>
+										<input type="radio" name="mail" id="" checked="checked"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="radio2" id="" />
+										<input type="radio" name="mail" id="" />
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
@@ -262,8 +273,10 @@
 				</table>
 
 				<div class="box-btn">
-					<a href="#" class="btn-l">회원가입</a>
+					<input type="submit" class="btn-l" id="btn_submit" value="회원가입" />
 				</div>
+
+			</form>
 			</div>
 		</div>
 	</div>
@@ -301,7 +314,7 @@ $(document).ready(function (e){
             $.ajax({
                 url: "./ajax_checkid.php",
                 type: "POST",
-                data: { name : c_id, address : "1111" },
+                data: { name : c_id },
                 // dataType: "json",
                 cache: false
             }).done(function(response){
@@ -356,6 +369,154 @@ $(document).ready(function (e){
         }).open();
     }
     $('#search_Address').click('on', sample6_execDaumPostcode);
+
+    // submit 최종 폼체크
+    function fregisterform_submit(f)
+    {
+        if (f.w.value == "") {
+            if (f.mb_password.value.length < 3) {
+                alert("비밀번호를 8글자 이상 입력하십시오.");
+                f.mb_password.focus();
+                return false;
+            }
+        }
+
+        if (f.mb_password) {
+        	var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}/;;
+        	
+        	if(!passwordRules.test(f.mb_password.value)){
+        		alert("8-15자의 영문자/숫자/툭수문자 혼합해서 만들어주세요");
+				f.mb_password.focus();
+				return false;
+        	}
+        }
+
+        if (f.mb_password.value != f.mb_password_re.value) {
+            alert("비밀번호가 같지 않습니다.");
+            f.mb_password_re.focus();
+            return false;
+        }
+
+        // 이름 검사
+        if (!f.w.value) {
+            if (f.mb_name.value.length < 1) {
+                alert("이름을 입력하십시오.");
+                f.mb_name.focus();
+                return false;
+            }
+
+            /*
+            var pattern = /([^가-힣\x20])/i;
+            if (pattern.test(f.mb_name.value)) {
+                alert("이름은 한글로 입력하십시오.");
+                f.mb_name.select();
+                return false;
+            }
+            */
+        }
+
+        // <?php if($w == '' && $config['cf_cert_use'] && $config['cf_cert_req']) { ?>
+	       //  // 본인확인 체크
+	       //  if(f.cert_no.value=="") {
+	       //      alert("회원가입을 위해서는 본인확인을 해주셔야 합니다.");
+	       //      return false;
+	       //  }
+        // <?php } ?>
+
+        // E-mail 검사
+        // if ((f.w.value == "") || (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
+        //     var msg = reg_mb_email_check();
+        //     if (msg) {
+        //         alert(msg);
+        //         f.reg_mb_email.select();
+        //         return false;
+        //     }
+        // }
+
+        // <?php if (($config['cf_use_hp'] || $config['cf_cert_hp']) && $config['cf_req_hp']) {  ?>
+        // // 휴대폰번호 체크
+        // var msg = reg_mb_hp_check();
+        // if (msg) {
+        //     alert(msg);
+        //     f.reg_mb_hp.select();
+        //     return false;
+        // }
+        // <?php } ?>
+
+        if(f.mb_email.value) {
+        	if(!emailValidation(f.mb_email.value)) {
+        		alert('email 주소를 형식에 맞게 다시 작성해주세요');
+        		f.str_email02.focus();
+        		return false;
+        	}
+        }
+
+        document.getElementById("btn_submit").disabled = "disabled";
+
+        return true;
+    }
+
+ //    function checkPassword(id,password){
+	// if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
+	// 	alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
+	// 	return false;
+	// }
+
+	// var checkNumber = password.search(/[0-9]/g);
+	// var checkEnglish = password.search(/[a-z]/ig);
+
+	// if(checkNumber <0 || checkEnglish <0){
+	// 	alert("숫자와 영문자를 혼용하여야 합니다.");
+	// return false;
+	// }
+	// if(/(\w)\1\1\1/.test(password)){
+	// 	alert('444같은 문자를 4번 이상 사용하실 수 없습니다.');
+	// return false;
+	// }
+	// if(password.search(id) > -1){
+	// 	alert("비밀번호에 아이디가 포함되었습니다.");
+	// return false;
+	// }
+	// return true;
+	// }
+
+	$('input[type="text"][name="mb_tel_01"]').on("change", function(){
+		var tel_complete = [];
+		tel_complete[0] = $('#mb_tel_01').val();
+		tel_complete[1] = $('#mb_tel_02').val();
+		tel_complete[2] = $('#mb_tel_03').val();
+		$('#mb_tel').val(tel_complete[0]+'-'+tel_complete[1]+'-'+tel_complete[2]);
+	});
+
+	$('#selectEmail').change(function(){ 
+		$("#selectEmail option:selected").each(function () {
+			if($(this).val()== '1'){ //직접입력일 경우
+				$("#str_email02").val(''); //값 초기화 
+				$("#str_email02").attr("disabled",false); //활성화
+			} else { //직접입력이 아닐경우
+				$("#str_email02").val($(this).text()); //선택값 입력
+				$("#str_email02").attr("disabled",true); //비활성화
+			} 
+		});
+		makeEmail();
+	});
+
+	$('input[name="str_email"]').on("change", function(){
+		makeEmail();
+	});
+
+	function makeEmail() {
+		$('#mb_email_from_str').val(
+			$('#str_email01').val() + "@" +
+			$('#str_email02').val()
+		);
+	}
+
+	function emailValidation(email) {
+		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		return re.test(email);
+	}
+
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </body>
