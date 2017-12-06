@@ -1,5 +1,17 @@
 <?php
 	include_once('./header.php');
+
+	session_start();
+
+	// login이 되서 세션값이 존재하면 사이트 이용 가능 아니면 login page로 강제 리다이렉트
+	if(!isset($_SESSION['mb_id'])){
+		echo "<meta http-equiv='refresh' content='0;url=http://test.hackers.com/member/'>";
+		exit;
+		echo $_SESSION['mb_id'];
+	}
+	// echo $_SESSION['mb_id'];
+	$mb_id = $_SESSION['mb_id'];
+	$mb_name = $_SESSION['mb_name'];
 ?>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"> -->
@@ -148,8 +160,14 @@
 			<div class="inner">
 				<div class="link-box">
 					<!-- 로그인전 -->
-					<a href="/member">로그인</a>
-					<a href="#">회원가입</a>
+					<?php
+						if($mb_id)
+							echo "<a href='#'>로그아웃</a><a href='#'>회원정보 수정</a>";
+						else
+							echo "<a href='/member'>로그인</a><a href='#'>회원가입</a>"
+					?>
+					<!-- <a href="/member">로그인</a> -->
+					<!-- <a href="#">회원가입</a> -->
 					<a href="#">상담/고객센터</a>
 					<!-- 로그인후 -->
 					<!-- <a href="#">로그아웃</a>

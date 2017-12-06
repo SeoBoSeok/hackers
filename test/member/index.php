@@ -1,17 +1,20 @@
 <?php
+
 	include('../header.php');
+
 ?>
 <body>
 <div class="login-section">
 	<div class="bg"></div>
 	<div class="login-inner">
 		<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="142" height="31"/></a></h1>
+
+		<form action="login_check.php" method="post">
 		<div class="box-login">
-			
 			<div class="login-input">
 				<div class="input-text-box">
-					<input type="text" class="input-text mb5" placeholder="아이디" style="width:190px"/>
-					<input type="password" class="input-text" placeholder="비밀번호" style="width:190px"/>
+					<input type="text" name="user_id" class="input-text mb5" placeholder="아이디" style="width:190px"/>
+					<input type="password" name="user_pw" class="input-text" placeholder="비밀번호" style="width:190px"/>
 				</div>
 				<button type="submit" class="btn-login">로그인</button>
 			</div>
@@ -27,9 +30,11 @@
 			
 			<div class="box-btn">
 				<a href='/member/register?mode="step_01"' class="btn-m-gray">회원가입</a>
-				<a href="/member/findUserdata" class="btn-m-gray">ID/PW 찾기</a>
+				<a href='/member/register?mode="find_id"' class="btn-m-gray">ID/PW 찾기</a>
 			</div>
 		</div>
+		</form>
+		
 		<div class="login-guide">
 			<strong><i class="icon-guide"></i>로그인에 문제가 있으신가요?</strong>
 			<ol>

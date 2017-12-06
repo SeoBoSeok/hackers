@@ -9,11 +9,11 @@
 	$mb_hp_02 = $mb_hp_full[1];
 	$mb_hp_03 = $mb_hp_full[2];
 
-	$connect = mysqli_connect("localhost","root","localhost", "test");
+	// $connect = mysqli_connect("localhost","root","localhost", "test");
 	 
-	if(!$connect) die('Not connected : ' . mysqli_error()); 
+	// if(!$connect) die('Not connected : ' . mysqli_error()); 
 
-	mysqli_close($connect);
+	// mysqli_close($connect);
 
 ?>
 
@@ -184,7 +184,7 @@
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
-							<td><input type="text" class="input-text" name="user_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/><a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a></td>
+							<td><input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/><a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>비밀번호</th>
@@ -318,6 +318,7 @@ $(document).ready(function (e){
                 // dataType: "json",
                 cache: false
             }).done(function(response){
+            	// alert(response);
             	if (response == 1) {
             		alert('해당 아이디가 이미 존재합니다. 다른 아이디를 선택해주세요.');
             	} else {
