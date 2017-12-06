@@ -12,6 +12,8 @@
 	// echo $_SESSION['mb_id'];
 	$mb_id = $_SESSION['mb_id'];
 	$mb_name = $_SESSION['mb_name'];
+
+	// echo $mb_id;
 ?>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"> -->
@@ -55,127 +57,10 @@
 <div id="wrap">
 	<div id="header" class="header">
 		
-		<div class="nav-section">
-			<div class="inner p-r">
-				<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
-				<div class="nav-box">
-					<h2 class="hidden">주메뉴 시작</h2>
-					
-					<ul class="nav-main-lst">
-						<li class="mnu">
-							<a href="#">일반직무</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu2">
-							<a href="#">산업직무</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu3">
-							<a href="#">공통역량</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu4">
-							<a href="#">어학 및 자격증</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu5">
-							<a href="#">직무교육 안내</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu6">
-							<a href="#">내 강의실</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<?php include_once('./gnu.php'); ?>
 
-			<div class="nav-sub-box">
-				<div class="inner"><!-- <a href="#"><img src="/" alt="배너이미지" width="171" height="196"></a> --></div>
-			</div>
+		<?php include_once('./top_section.php'); ?>
 
-		</div>
-
-		<div class="top-section">
-			<div class="inner">
-				<div class="link-box">
-					<!-- 로그인전 -->
-					<?php
-						if($mb_id)
-							echo "<a href='#'>로그아웃</a><a href='#'>회원정보 수정</a>";
-						else
-							echo "<a href='/member'>로그인</a><a href='#'>회원가입</a>"
-					?>
-					<!-- <a href="/member">로그인</a> -->
-					<!-- <a href="#">회원가입</a> -->
-					<a href="#">상담/고객센터</a>
-					<!-- 로그인후 -->
-					<!-- <a href="#">로그아웃</a>
-					<a href="#">내정보</a>
-					<a href="#">상담/고객센터</a> -->
-				</div>
-			</div>
-		</div>
 	</div>
 <div id="container">
 	<div class="main-slider-applyclass">
@@ -545,6 +430,28 @@ $(document).ready(function(){
 	});
 	$('.page-applyclass').mouseover(function(){
 		slider.startAuto();
+	});
+
+	$('#hackers_logout').click('on', function(){
+		// alert('1111');
+		var logout_key = confirm("정말 로그아웃 하시겠습니까");
+		if (logout_key) {
+			$.ajax({
+                url: "./logout.php",
+                type: "POST",
+                data: { logout_key : true },
+                // dataType: "json",
+                cache: false
+            }).done(function(response){
+            	// alert(response);
+            	if (response == 1) {
+            		alert('로그아웃 되었습니다.');
+            		window.location.reload();
+            	} else {
+            		alert('로그아웃에 실패했습니다.');
+            	}
+            });
+		}
 	});
 });
 </script>

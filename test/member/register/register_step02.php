@@ -1,13 +1,11 @@
 <?php
 	include_once('../../header.php');
 	session_start();
-?>
 
-<?php
-$_SESSION["mobile_auth_code"] = 123456;
-// echo "Session variables are set.";
+	$_SESSION["mobile_auth_code"] = 123456;
+	// echo "Session variables are set.";
 
-$mb_hp = '';
+	$mb_hp = '';
 ?>
 
 <body>

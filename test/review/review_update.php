@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
@@ -50,57 +51,57 @@
 						<li class="mnu">
 							<a href="#">일반직무</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">일반직무_01</a></li>
+								<li><a href="#">일반직무_02</a></li>
+								<li><a href="#">일반직무_03</a></li>
+								<li><a href="#">일반직무_04</a></li>
+								<li><a href="#">일반직무_05</a></li>
+								<li><a href="#">일반직무_06</a></li>
+								<li><a href="#">일반직무_07</a></li>
+								<li><a href="#">일반직무_08</a></li>
+								<li><a href="#">일반직무_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu2">
 							<a href="#">산업직무</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">산업직무_01</a></li>
+								<li><a href="#">산업직무_02</a></li>
+								<li><a href="#">산업직무_03</a></li>
+								<li><a href="#">산업직무_04</a></li>
+								<li><a href="#">산업직무_05</a></li>
+								<li><a href="#">산업직무_06</a></li>
+								<li><a href="#">산업직무_07</a></li>
+								<li><a href="#">산업직무_08</a></li>
+								<li><a href="#">산업직무_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu3">
 							<a href="#">공통역량</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">공통역량_01</a></li>
+								<li><a href="#">공통역량_02</a></li>
+								<li><a href="#">공통역량_03</a></li>
+								<li><a href="#">공통역량_04</a></li>
+								<li><a href="#">공통역량_05</a></li>
+								<li><a href="#">공통역량_06</a></li>
+								<li><a href="#">공통역량_07</a></li>
+								<li><a href="#">공통역량_08</a></li>
+								<li><a href="#">공통역량_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu4">
 							<a href="#">어학 및 자격증</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">어학및자격증_01</a></li>
+								<li><a href="#">어학및자격증_02</a></li>
+								<li><a href="#">어학및자격증_03</a></li>
+								<li><a href="#">어학및자격증_04</a></li>
+								<li><a href="#">어학및자격증_05</a></li>
+								<li><a href="#">어학및자격증_06</a></li>
+								<li><a href="#">어학및자격증_07</a></li>
+								<li><a href="#">어학및자격증_08</a></li>
+								<li><a href="#">어학및자격증_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu5">
@@ -156,52 +157,130 @@
 			</div>
 		</div>
 	</div>
-<div id="container" class="container-full">
+<div id="container" class="container">
+	<div id="nav-left" class="nav-left">
+		<div class="nav-left-tit"> 
+			<span>직무교육 안내</span>
+		</div>
+		<ul class="nav-left-lst">
+			<li><a href="#">해커스 HRD 소개</a></li>
+			<li><a href="#">사업주훈련</a></li>
+			<li><a href="#">근로자카드</a></li>
+			<li><a href="#">학습안내</a></li>
+			<li class="on"><a href="#">수강후기</a></li>
+		</ul>
+	</div>
+
 	<div id="content" class="content">
-		<div class="inner">
-			<div class="tit-box-h3">
-				<h3 class="tit-h3">아이디/비밀번호 찾기</h3>
-				<div class="sub-depth">
-					<span><i class="icon-home"><span>홈</span></i></span>
-					<strong>아이디/비밀번호 찾기</strong>
-				</div>
-			</div>
-
-			<ul class="tab-list">
-				<li><a href="#">아이디 찾기</a></li>
-				<li class="on"><a href="#">비밀번호 찾기</a></li>
-			</ul>
-
-			<div class="tit-box-h4">
-				<h3 class="tit-h4">비밀번호 재설정</h3>
-			</div>
-
-			<div class="section-content mt30">
-				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
-					<caption class="hidden">비밀번호 재설정</caption>
-					<colgroup>
-						<col style="width:17%"/>
-						<col style="*"/>
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th scope="col">신규 비밀번호 입력</th>
-							<td><input type="text" class="input-text" placeholder="영문자로 시작하는 4~15자의 영문소문자,숫자" style="width:302px" /></td>
-						</tr>
-						<tr>
-							<th scope="col">신규 비밀번호 재확인</th>
-							<td><input type="text" class="input-text" style="width:302px" /></td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="box-btn">
-					<a href="#" class="btn-l">확인</a>
-				</div>
+		<div class="tit-box-h3">
+			<h3 class="tit-h3">수강후기</h3>
+			<div class="sub-depth">
+				<span><i class="icon-home"><span>홈</span></i></span>
+				<span>직무교육 안내</span>
+				<strong>수강후기</strong>
 			</div>
 		</div>
+
+		<div class="user-notice">
+			<strong class="fs16">유의사항 안내</strong>
+			<ul class="list-guide mt15">
+				<li class="tc-brand">수강후기는 신청하신 강의의 학습진도율 25%이상 달성시 작성가능합니다. </li>
+				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
+			</ul>
+		</div>
+
+		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
+			<caption class="hidden">강의정보</caption>
+			<colgroup>
+				<col style="width:15%"/>
+				<col style="*"/>
+			</colgroup>
+
+			<tbody>
+				<tr>
+					<th scope="col">강의</th>
+					<td>
+						<select class="input-sel" style="width:160px">
+							<option value="">분류</option>
+						</select>
+						<select class="input-sel ml5" style="width:454px">
+							<option value="">강의명</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th scope="col">제목</th>
+					<td><input type="text" class="input-text" style="width:611px"/></td>
+				</tr>
+				<tr>
+					<th scope="col">강의만족도</th>
+					<td>
+						<ul class="list-rating-choice">
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="radio" id="" checked="checked"/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:100%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="radio" id=""/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:80%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="radio" id=""/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:60%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="radio" id=""/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:40%"></span>
+								</span>
+							</li>
+							<li>
+								<label class="input-sp ico">
+									<input type="radio" name="radio" id=""/>
+									<span class="input-txt">만점</span>
+								</label>
+								<span class="star-rating">
+									<span class="star-inner" style="width:20%"></span>
+								</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="editor-wrap">
+			에디터영역
+		</div>
+	
+		<div class="box-btn t-r">
+			<a href="#" class="btn-m-gray">목록</a>
+			<a href="#" class="btn-m ml5">저장</a>
+		</div>
+
+
+		
 	</div>
 </div>
+
 
 	<div id="footer" class="footer">
 		<div class="inner p-r">

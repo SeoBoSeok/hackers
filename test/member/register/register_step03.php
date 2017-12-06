@@ -9,6 +9,51 @@
 	$mb_hp_02 = $mb_hp_full[1];
 	$mb_hp_03 = $mb_hp_full[2];
 
+	// $_SESSION['mb_id'] = 'ggybbo';
+	// $mb_id = 'ggybbo';
+
+	if ($mb_id) {
+
+	}
+
+	session_start();
+	if ($mb_id) {
+		$write = 'M';
+		include('../../config/database.php');
+
+		$sql = "SELECT * FROM member where mb_id = '$mb_id'";
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$mb_name = $row['mb_name'];
+				$mb_email = $row['mb_email'];
+				$mb_hp = $row['mb_hp'];
+				$mb_tel = $row['mb_tel'];
+				$mb_postcode = $row['mb_postcode'];
+				$mb_add_jibun = $row['mb_add_jibun'];
+				$mb_add2 = $row['mb_add2'];
+			}
+		}
+
+		$mb_email_full = explode('@', $mb_email);
+		$mb_email_1 = $mb_email_full[0];
+		$mb_email_2 = $mb_email_full[1];
+
+		$mb_hp_full = explode('-', $mb_hp);
+		$mb_hp_1 = $mb_hp_full[0];
+		$mb_hp_2 = $mb_hp_full[1];
+		$mb_hp_3 = $mb_hp_full[2];
+
+		$mb_tel_full = explode('-', $mb_tel);
+		$mb_tel_1 = $mb_tel_full[0];
+		$mb_tel_2 = $mb_tel_full[1];
+		$mb_tel_3 = $mb_tel_full[2];
+
+		// echo $mb_postcode;
+
+	}
+
 	// $connect = mysqli_connect("localhost","root","localhost", "test");
 	 
 	// if(!$connect) die('Not connected : ' . mysqli_error()); 
@@ -27,130 +72,19 @@
 <div id="wrap">
 	<div id="header" class="header">
 		
-		<div class="nav-section">
-			<div class="inner p-r">
-				<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
-				<div class="nav-box">
-					<h2 class="hidden">주메뉴 시작</h2>
-					
-					<ul class="nav-main-lst">
-						<li class="mnu">
-							<a href="#">일반직무</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu2">
-							<a href="#">산업직무</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu3">
-							<a href="#">공통역량</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu4">
-							<a href="#">어학 및 자격증</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu5">
-							<a href="#">직무교육 안내</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-						<li class="mnu6">
-							<a href="#">내 강의실</a>
-							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<?php include_once('../../gnu.php'); ?>
 
-			<div class="nav-sub-box">
-				<div class="inner"><!-- <a href="#"><img src="/" alt="배너이미지" width="171" height="196"></a> --></div>
-			</div>
+		<?php include_once('../../top_section.php'); ?>
 
-		</div>
-
-		<div class="top-section">
-			<div class="inner">
-				<div class="link-box">
-					<!-- 로그인전 -->
-					<a href="#">로그인</a>
-					<a href="#">회원가입</a>
-					<a href="#">상담/고객센터</a>
-					<!-- 로그인후 -->
-					<!-- <a href="#">로그아웃</a>
-					<a href="#">내정보</a>
-					<a href="#">상담/고객센터</a> -->
-				</div>
-			</div>
-		</div>
 	</div>
 <div id="container" class="container-full">
 	<div id="content" class="content">
 		<div class="inner">
 			<div class="tit-box-h3">
-				<h3 class="tit-h3">회원가입</h3>
+				<h3 class="tit-h3"><?php echo ($mb_id)?"회원정보 수정":"회원가입"; ?></h3>
 				<div class="sub-depth">
 					<span><i class="icon-home"><span>홈</span></i></span>
-					<strong>회원가입</strong>
+					<strong><?php echo ($mb_id)?"회원정보 수정":"회원가입";?></strong>
 				</div>
 			</div>
 
@@ -164,11 +98,11 @@
 
 			<div class="section-content">
 			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post"> <!--  enctype="multipart/form-data" autocomplete="off" -->
-		    <input type="hidden" name="w" value="<?php echo $w ?>">
+		    <input type="hidden" name="w" value="<?php echo $write ?>">
 		    <input type="hidden" name="url" value="<?php echo $urlencode ?>">
 		    <input type="hidden" name="agree" value="<?php echo $agree ?>">
 		    <input type="hidden" name="agree2" value="<?php echo $agree2 ?>">
-		    <input type="hidden" name="cert_type" value="<?php echo $member['mb_certify']; ?>">
+		    <input type="hidden" name="cert_type" value="<?php echo $mb_id?>">
 		    <input type="hidden" name="cert_no" value="">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
@@ -180,24 +114,24 @@
 					<tbody>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이름</th>
-							<td><input type="text" class="input-text" style="width:302px" name="mb_name" required/></td>
+							<td><input type="text" class="input-text" style="width:302px" name="mb_name" value="<?php echo $mb_name; ?>" required/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
-							<td><input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/><a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a></td>
+							<td><input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자" <?php if($mb_id) echo 'readonly' ?> value="<?php echo $mb_id ?>"/><a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a></td>
 						</tr>
 						<tr>
-							<th scope="col"><span class="icons">*</span>비밀번호</th>
+							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호":"비밀번호"; ?></th>
 							<td><input type="password" class="input-text" style="width:302px" name="mb_password" placeholder="8-15자의 영문자/숫자/특수문자 혼합"/></td>
 						</tr>
 						<tr>
-							<th scope="col"><span class="icons">*</span>비밀번호 확인</th>
+							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호 확인":"비밀번호 확인"; ?></th>
 							<td><input type="password" class="input-text" style="width:302px" name="mb_password_re"/></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
-								<input type="text" class="input-text"  id="str_email01" name="str_email" style="width:138px"/> @ <input type="text" class="input-text" id="str_email02" name="str_email" style="width:138px"/>
+								<input type="text" class="input-text"  id="str_email01" name="str_email" style="width:138px" value="<?php echo $mb_email_1; ?>"/> @ <input type="text" class="input-text" id="str_email02" name="str_email" style="width:138px" value="<?php echo $mb_email_2; ?>"/>
 								<select class="input-sel" id="selectEmail" style="width:160px">
 									<option value="1" selected>직접입력</option>
 									<option value="hackers.com">hackers.com</option>
@@ -212,28 +146,28 @@
 						<tr>
 							<th scope="col"><span class="icons">*</span>휴대폰 번호</th>
 							<td>
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_01; ?>" readonly /> - 
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_02; ?>" readonly/> - 
-								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_03; ?>" readonly/>
+								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_1; ?>" readonly /> - 
+								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_2; ?>" readonly/> - 
+								<input type="text" class="input-text" style="width:50px" value="<?php echo $mb_hp_3; ?>" readonly/>
 								<input type="hidden" name="mb_hp" value="<?php echo $mb_hp; ?>" />
 							</td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons"></span>일반전화 번호</th>
-							<td><input type="text" name="mb_tel_01" id="mb_tel_01" class="input-text" style="width:88px" maxlength="3" /> - <input type="text" name="mb_tel_01" id="mb_tel_02" class="input-text" style="width:88px" maxlength="4" /> - <input type="text" name="mb_tel_01" id="mb_tel_03" class="input-text" style="width:88px" maxlength="4" /></td>
+							<td><input type="text" name="mb_tel_01" id="mb_tel_01" class="input-text" style="width:88px" maxlength="3" value="<?php echo $mb_tel_1; ?>" /> - <input type="text" name="mb_tel_01" id="mb_tel_02" class="input-text" style="width:88px" value="<?php echo $mb_tel_2; ?>" maxlength="4" /> - <input type="text" name="mb_tel_01" id="mb_tel_03" class="input-text" value="<?php echo $mb_tel_3; ?>" style="width:88px" maxlength="4" /></td>
 							<input type="hidden" id="mb_tel" name="mb_tel" value="<?php echo $mb_tel; ?>" />
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="postcode" type="button">주소찾기</a>
+									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="postcode" type="button">주소찾기</a>
 								</p>
 								<p class="mt10">
-									<label>기본주소 <input type="text" id="sample6_address" name="addr_basic" class="input-text ml5" style="width:719px"/></label>
+									<label>기본주소 <input type="text" id="sample6_address" name="addr_basic" class="input-text ml5" style="width:719px" value="<?php echo $mb_add_jibun;?>" /></label>
 								</p>
 								<p class="mt10">
-									<label>상세주소 <input type="text" id="sample6_address2" name="addr_detail" class="input-text ml5" style="width:719px"/></label>
+									<label>상세주소 <input type="text" id="sample6_address2" name="addr_detail" class="input-text ml5"  value="<?php echo $mb_add2;?>" style="width:719px"/></label>
 								</p>
 							</td>
 						</tr>
@@ -309,7 +243,7 @@ $(document).ready(function (e){
 
     $("#check_duplicated_id").on('click',(function(e){
 
-    	var c_id = $('input[name="user_id"]').val();
+    	var c_id = $('input[name="mb_id"]').val();
         e.preventDefault();
             $.ajax({
                 url: "./ajax_checkid.php",
@@ -451,8 +385,6 @@ $(document).ready(function (e){
         		return false;
         	}
         }
-
-        document.getElementById("btn_submit").disabled = "disabled";
 
         return true;
     }

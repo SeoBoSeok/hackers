@@ -619,6 +619,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 	$(document).ready(function(){
 		$('#ccbx').click('on', function(){
 			if ( is_Checked() ){
+				$('#agreeAll').prop("checked", true);
 				location.href = 'register_step02.php';
 			} else {
 				alert('모든 체크박스에 동의해주셔야 합니다');
@@ -626,8 +627,24 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 		});
 
 		$('#agreeAll').click('on', function(){
-			$('input:checkbox[name="agree1"]').attr("checked", true);
-			$('input:checkbox[name="agree2"]').attr("checked", true);
+			// alert('1111');
+			// .attr는 두번째 부터 체크가 안되는 문제가 있음
+			// .prop으로 수정
+			if ($('#agreeAll').prop("checked")){
+				$('input:checkbox[name="agree1"]').prop("checked", true);
+				$('input:checkbox[name="agree2"]').prop("checked", true);
+			} else {
+				$('input:checkbox[name="agree1"]').prop("checked", false);
+				$('input:checkbox[name="agree2"]').prop("checked", false);
+			}
+		});
+
+		$('input:checkbox').click('on', function(){
+			if ( is_Checked() ){
+				$('#agreeAll').prop("checked", true);
+			} else {
+				$('#agreeAll').prop("checked", false);
+			}
 		});
 
 		function is_Checked(){

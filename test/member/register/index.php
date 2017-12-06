@@ -1,8 +1,4 @@
 <?php
-
-	// if (!defined('_HACKERS_')) exit; // 개별 페이지 접근 불가
-
-	// echo $_GET['mode'];
 	
 	switch ($_GET['mode']) {
 		case 'step_01':
@@ -17,11 +13,15 @@
 			include('./register_step03.php');
 			break;
 
+		case 'modify':
+			include('./register_step03.php');
+			break;
+
 		case 'find_id':
 			include('./find_userid.php');
 			break;
 
-		case 'find_pass'
+		case 'find_pass':
 			include('./find_password.php');
 			break;
 

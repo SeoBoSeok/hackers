@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <!--[if (IE 7)]><html class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><![endif]-->
@@ -50,57 +51,57 @@
 						<li class="mnu">
 							<a href="#">일반직무</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">일반직무_01</a></li>
+								<li><a href="#">일반직무_02</a></li>
+								<li><a href="#">일반직무_03</a></li>
+								<li><a href="#">일반직무_04</a></li>
+								<li><a href="#">일반직무_05</a></li>
+								<li><a href="#">일반직무_06</a></li>
+								<li><a href="#">일반직무_07</a></li>
+								<li><a href="#">일반직무_08</a></li>
+								<li><a href="#">일반직무_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu2">
 							<a href="#">산업직무</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">산업직무_01</a></li>
+								<li><a href="#">산업직무_02</a></li>
+								<li><a href="#">산업직무_03</a></li>
+								<li><a href="#">산업직무_04</a></li>
+								<li><a href="#">산업직무_05</a></li>
+								<li><a href="#">산업직무_06</a></li>
+								<li><a href="#">산업직무_07</a></li>
+								<li><a href="#">산업직무_08</a></li>
+								<li><a href="#">산업직무_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu3">
 							<a href="#">공통역량</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">공통역량_01</a></li>
+								<li><a href="#">공통역량_02</a></li>
+								<li><a href="#">공통역량_03</a></li>
+								<li><a href="#">공통역량_04</a></li>
+								<li><a href="#">공통역량_05</a></li>
+								<li><a href="#">공통역량_06</a></li>
+								<li><a href="#">공통역량_07</a></li>
+								<li><a href="#">공통역량_08</a></li>
+								<li><a href="#">공통역량_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu4">
 							<a href="#">어학 및 자격증</a>
 							<ul class="nav-sub-lst">
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">어학및자격증_01</a></li>
+								<li><a href="#">어학및자격증_02</a></li>
+								<li><a href="#">어학및자격증_03</a></li>
+								<li><a href="#">어학및자격증_04</a></li>
+								<li><a href="#">어학및자격증_05</a></li>
+								<li><a href="#">어학및자격증_06</a></li>
+								<li><a href="#">어학및자격증_07</a></li>
+								<li><a href="#">어학및자격증_08</a></li>
+								<li><a href="#">어학및자격증_09</a></li>
 							</ul>
 						</li>
 						<li class="mnu5">
@@ -156,52 +157,131 @@
 			</div>
 		</div>
 	</div>
-<div id="container" class="container-full">
+<div id="container" class="container">
+	<div id="nav-left" class="nav-left">
+		<div class="nav-left-tit"> 
+			<span>직무교육 안내</span>
+		</div>
+		<ul class="nav-left-lst">
+			<li><a href="#">해커스 HRD 소개</a></li>
+			<li><a href="#">사업주훈련</a></li>
+			<li><a href="#">근로자카드</a></li>
+			<li><a href="#">학습안내</a></li>
+			<li class="on"><a href="#">수강후기</a></li>
+		</ul>
+	</div>
+
 	<div id="content" class="content">
-		<div class="inner">
-			<div class="tit-box-h3">
-				<h3 class="tit-h3">아이디/비밀번호 찾기</h3>
-				<div class="sub-depth">
-					<span><i class="icon-home"><span>홈</span></i></span>
-					<strong>아이디/비밀번호 찾기</strong>
-				</div>
+		<div class="tit-box-h3">
+			<h3 class="tit-h3">수강후기</h3>
+			<div class="sub-depth">
+				<span><i class="icon-home"><span>홈</span></i></span>
+				<span>직무교육 안내</span>
+				<strong>수강후기</strong>
 			</div>
+		</div>
 
-			<ul class="tab-list">
-				<li><a href="#">아이디 찾기</a></li>
-				<li class="on"><a href="#">비밀번호 찾기</a></li>
-			</ul>
+		<ul class="tab-list tab5">
+			<li class="on"><a href="#">전체</a></li>
+			<li><a href="#">일반직무</a></li>
+			<li><a href="#">산업직무</a></li>
+			<li><a href="#">공통역량</a></li>
+			<li><a href="#">어학 및 자격증</a></li>
+		</ul>
 
-			<div class="tit-box-h4">
-				<h3 class="tit-h4">비밀번호 재설정</h3>
+		<div class="search-info">
+			<div class="search-form f-r">
+				<select class="input-sel" style="width:158px">
+					<option value="">분류</option>
+				</select>
+				<select class="input-sel" style="width:158px">
+					<option value="">강의명</option>
+					<option value="">작성자</option>
+				</select>
+				<input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
+				<button type="button" class="btn-s-dark">검색</button>
 			</div>
+		</div>
 
-			<div class="section-content mt30">
-				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
-					<caption class="hidden">비밀번호 재설정</caption>
-					<colgroup>
-						<col style="width:17%"/>
-						<col style="*"/>
-					</colgroup>
+		<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
+			<caption class="hidden">수강후기</caption>
+			<colgroup>
+				<col style="width:8%"/>
+				<col style="width:8%"/>
+				<col style="*"/>
+				<col style="width:15%"/>
+				<col style="width:12%"/>
+			</colgroup>
 
-					<tbody>
-						<tr>
-							<th scope="col">신규 비밀번호 입력</th>
-							<td><input type="text" class="input-text" placeholder="영문자로 시작하는 4~15자의 영문소문자,숫자" style="width:302px" /></td>
-						</tr>
-						<tr>
-							<th scope="col">신규 비밀번호 재확인</th>
-							<td><input type="text" class="input-text" style="width:302px" /></td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="box-btn">
-					<a href="#" class="btn-l">확인</a>
-				</div>
-			</div>
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">분류</th>
+					<th scope="col">제목</th>
+					<th scope="col">강좌만족도</th>
+					<th scope="col">작성자</th>
+				</tr>
+			</thead>
+	 
+			<tbody>
+				<!-- set -->
+				<tr class="bbs-sbj">
+					<td><span class="txt-icon-line"><em>BEST</em></span></td>
+					<td>CS</td>
+					<td>
+						<a href="#">
+							<span class="tc-gray ellipsis_line">수강 강의명 : Beyond Trouble, 조직을 감동시키는 관계의 기술</span>
+							<strong class="ellipsis_line">절대 후회 없는 강의 예요!</strong>
+						</a>
+					</td>
+					<td>
+						<span class="star-rating">
+							<span class="star-inner" style="width:80%"></span>
+						</span>
+					</td>
+					<td class="last">이름</td>
+				</tr>
+				<!-- //set -->
+				<!-- set -->
+				<tr class="bbs-sbj">
+					<td>1</td>
+					<td>CS</td>
+					<td>
+						<a href="#">
+							<span class="tc-gray ellipsis_line">수강 강의명 : Beyond Trouble, 조직을 감동시키는 관계의 기술</span>
+							<strong class="ellipsis_line">절대 후회 없는 강의 예요!</strong>
+						</a>
+					</td>
+					<td>
+						<span class="star-rating">
+							<span class="star-inner" style="width:80%"></span>
+						</span>
+					</td>
+					<td class="last">이름</td>
+				</tr>
+				<!-- //set -->
+			</tbody>
+		</table>
+
+		<div class="box-paging">
+			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
+			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
+			<a href="#" class="active">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#">5</a>
+			<a href="#">6</a>
+			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
+			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
+		</div>
+
+		<div class="box-btn t-r">
+			<a href="#" class="btn-m">후기 작성</a>
 		</div>
 	</div>
 </div>
+
 
 	<div id="footer" class="footer">
 		<div class="inner p-r">

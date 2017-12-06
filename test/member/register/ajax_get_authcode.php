@@ -2,11 +2,14 @@
 
 	include_once('../../config/database.php');
 
-	$check_id = $_POST['name'];
+	// $check_id = $_POST['name'];
+    $mb_name = $_POST['mb_name'];
+    $mb_birth = $_POST['mb_birth'];
+    $mb_email = $_POST['mb_email'];
 
 	// echo $check_id;
 
-	$sql = "SELECT mb_id FROM member WHERE mb_id = '$check_id'";
+	$sql = "SELECT mb_name, mb_email FROM member WHERE mb_name = '$mb_name' and mb_email = '$mb_email'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -14,9 +17,6 @@
     	while($row = $result->fetch_assoc()) {
         	// echo "id: " . $row["name"]. "<br>";
         	echo true;
-    		// echo true;
-    		// if ($row["name"] == $mb_id)
-    		// 	echo true;
     	}
 
     	// echo true;

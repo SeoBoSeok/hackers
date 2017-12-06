@@ -1,1 +1,303 @@
 1. git push 후에 remote, origin commit 내역까지 깔끔하기 원복하는 방법
+
+if(!isset($members[$user_id])) {
+	        echo "<script>alert('아이디 또는 패스워드가 잘못되었습니다.');history.back();</script>";
+	        exit;
+	}
+	if($members[$user_id]['pw'] != $user_pw) {
+	        echo "<script>alert('아이디 또는 패스워드가 잘못되었습니다.');history.back();</script>";
+	        exit;
+	}
+	session_start();
+	$_SESSION['user_id'] = $user_id;
+	$_SESSION['user_name'] = $members[$user_id]['name'];
+	?>
+	<meta http-equiv='refresh' content='0;url=main.php'>
+
+
+	<?php
+	include_once('../../header.php');
+	//session_start();
+
+	//$_SESSION['auth_code_for_email'] = '1123456';
+	//$_SESSION['auth_code_for_hp'] = '1223456';
+?>
+<body>
+<!-- skip nav -->
+<div id="skip-nav">
+<a href="#content">본문 바로가기</a>
+</div>
+<!-- //skip nav -->
+
+<div id="wrap">
+	<div id="header" class="header">
+		
+		<div class="nav-section">
+			<div class="inner p-r">
+				<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
+				<div class="nav-box">
+					<h2 class="hidden">주메뉴 시작</h2>
+					
+					<ul class="nav-main-lst">
+						<li class="mnu">
+							<a href="#">일반직무</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+						<li class="mnu2">
+							<a href="#">산업직무</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+						<li class="mnu3">
+							<a href="#">공통역량</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+						<li class="mnu4">
+							<a href="#">어학 및 자격증</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+						<li class="mnu5">
+							<a href="#">직무교육 안내</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+						<li class="mnu6">
+							<a href="#">내 강의실</a>
+							<ul class="nav-sub-lst">
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+								<li><a href="#">서브메뉴</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="nav-sub-box">
+				<div class="inner"><!-- <a href="#"><img src="/" alt="배너이미지" width="171" height="196"></a> --></div>
+			</div>
+
+		</div>
+
+		<div class="top-section">
+			<div class="inner">
+				<div class="link-box">
+					<!-- 로그인전 -->
+					<a href="#">로그인</a>
+					<a href="#">회원가입</a>
+					<a href="#">상담/고객센터</a>
+					<!-- 로그인후 -->
+					<!-- <a href="#">로그아웃</a>
+					<a href="#">내정보</a>
+					<a href="#">상담/고객센터</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+<div id="container" class="container-full">
+	<div id="content" class="content">
+		<div class="inner">
+			<div class="tit-box-h3">
+				<h3 class="tit-h3">아이디/비밀번호 찾기</h3>
+				<div class="sub-depth">
+					<span><i class="icon-home"><span>홈</span></i></span>
+					<strong>아이디/비밀번호 찾기</strong>
+				</div>
+			</div>
+
+			<ul class="tab-list">
+				<li class="on"><a href="#">아이디 찾기</a></li>
+				<li><a href="#">비밀번호 찾기</a></li>
+			</ul>
+
+			<div class="tit-box-h4">
+				<h3 class="tit-h4">아이디 찾기 방법 선택</h3>
+			</div>
+
+			<dl class="find-box">
+				<dt>휴대폰 인증</dt>
+				<dd>
+					고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
+					<label class="input-sp big">
+						<input type="radio" name="radio" checked="checked"/>
+						<span class="input-txt"></span>
+					</label>
+				</dd>
+			</dl>
+
+			<dl class="find-box">
+				<dt>이메일 인증</dt>
+				<dd>
+					고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
+					<label class="input-sp big">
+						<input type="radio" name="radio"/>
+						<span class="input-txt"></span>
+					</label>
+				</dd>
+			</dl>
+			<form action="" type="">
+				<div class="section-content mt30">
+					<input type="hidden" name="find_id_eauth" value="<?php echo ?>"/>
+					<input type="hidden" name="find_id_eauth" value="<?php echo ?>"/>
+					<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
+						<caption class="hidden">아이디 찾기 개인정보 입력</caption>
+						<colgroup>
+							<col style="width:15%"/>
+							<col style="*"/>
+						</colgroup>
+
+						<tbody>
+							<tr>
+								<th scope="col">성명</th>
+								<td><input type="text" name="mb_name" class="input-text" style="width:302px" /></td>
+							</tr>
+							<tr>
+								<th scope="col">생년월일</th>
+								<td>
+									<select class="input-sel" style="width:148px">
+										<option value="">선택</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+									</select>
+									년
+									<select class="input-sel" style="width:147px">
+										<option value="">선택</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+									</select>
+									월
+									<select class="input-sel" style="width:147px">
+										<option value="">선택</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+										<option value="">선택입력</option>
+									</select>
+									일
+								</td>
+							</tr>
+							<tr>
+								<th scope="col">이메일주소</th>
+								
+							</tr>
+							<tr>
+								<th scope="col">인증번호</th>
+								<td><input type="text" class="input-text" style="width:478px" /><a href="#" class="btn-s-tin ml10" id="get_hpauth">인증번호 확인</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#get_eauth').click('on', function(){
+			$.ajax({
+                url: "./ajax_get_authcode.php",
+                type: "POST",
+                data: { name : c_id,  },
+                // dataType: "json",
+                cache: false
+            }).done(function(response){
+            	// alert(response);
+            	if (response == 1) {
+            		alert('해당 아이디가 이미 존재합니다. 다른 아이디를 선택해주세요.');
+            	} else {
+            		alert('가입가능한 아이디 입니다.');
+            	}
+            });
+			alert("<?php echo $_SESSION['auth_code_for_email']?>");
+		});
+		$('#get_hpauth').click('on', function(){
+			alert("<?php echo $_SESSION['auth_code_for_hp']?>");
+		});
+		// $('#selectEmail').change(function(){ 
+		// 	$("#selectEmail option:selected").each(function () {
+		// 		if($(this).val()== '1'){ //직접입력일 경우
+		// 			$("#str_email02").val(''); //값 초기화 
+		// 			$("#str_email02").attr("disabled",false); //활성화
+		// 		} else { //직접입력이 아닐경우
+		// 			$("#str_email02").val($(this).text()); //선택값 입력
+		// 			$("#str_email02").attr("disabled",true); //비활성화
+		// 		} 
+		// 	});
+		// 	makeEmail();
+		// });
+
+		// $('input[name="str_email"]').on("change", function(){
+		// 	makeEmail();
+		// });
+
+		// function makeEmail() {
+		// 	$('#mb_email_from_make').val(
+		// 		$('#make_email01').val() + "@" +
+		// 		$('#make_email02').val()
+		// 	);
+		// }
+		});
+</script>
+
+<?php
+	include_once('../../footer.php');
+?>

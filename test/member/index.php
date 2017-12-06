@@ -29,8 +29,8 @@
 			</div>
 			
 			<div class="box-btn">
-				<a href='/member/register?mode="step_01"' class="btn-m-gray">회원가입</a>
-				<a href='/member/register?mode="find_id"' class="btn-m-gray">ID/PW 찾기</a>
+				<a href='/member/register?mode=step_01' class="btn-m-gray">회원가입</a>
+				<a href='/member/register?mode=find_id' class="btn-m-gray">ID/PW찾기</a>
 			</div>
 		</div>
 		</form>

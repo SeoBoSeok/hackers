@@ -1,6 +1,6 @@
 <?php
 
-	include_once('../../config/database.php');
+	include('../../config/database.php');
 
 	$hashed_pw = trim($_POST['mb_password_re']) . $salt;
 
@@ -14,9 +14,10 @@
 	$db_mb_address = $_POST['addr_basic'];
 	$db_mb_sms = $_POST['sms'];
 	$db_mb_mail = $_POST['mail'];
+	$db_mb_datetime = date("Y-m-d H:i:s");
 
-	$sql = "INSERT INTO member (mb_id, mb_name, mb_email, mb_password, mb_hp, mb_tel, mb_add_jibun, mb_sms, mb_mailing )
-	VALUES ('$db_mb_id', '$db_mb_name', '$db_mb_email', '$db_mb_password','$db_mb_hp', '$db_mb_tel', '$db_mb_address', '$db_mb_sms', '$db_mb_mail')";
+	$sql = "INSERT INTO member (mb_id, mb_name, mb_email, mb_password, mb_hp, mb_tel, mb_add_jibun, mb_sms, mb_mailing, mb_datetime )
+	VALUES ('$db_mb_id', '$db_mb_name', '$db_mb_email', '$db_mb_password','$db_mb_hp', '$db_mb_tel', '$db_mb_address', '$db_mb_sms', '$db_mb_mail', '$db_mb_datetime')";
 
 	if ($conn->query($sql) === TRUE) {
 	    // echo "New record created successfully";
@@ -26,5 +27,7 @@
 	}
 
 	$conn->close();
+
+
 
 ?>
