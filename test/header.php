@@ -28,6 +28,8 @@
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/plugins/bxslider/bxslider.js"></script>
 <script type="text/javascript" src="http://q.hackershrd.com/worksheet/js/ui.js"></script>
+<link rel="stylesheet" href="/daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
+<script src="/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
 <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
 </head>

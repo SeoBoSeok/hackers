@@ -117,7 +117,7 @@
 			</div>
 
 			<div class="section-content">
-			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post"> <!--  enctype="multipart/form-data" autocomplete="off" -->
+			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post" autocomplete="off"> <!--  enctype="multipart/form-data" autocomplete="off" -->
 		    <input type="hidden" name="w" value="<?php echo $write ?>">
 		    <input type="hidden" name="url" value="<?php echo $r_url ?>">
 		    <input type="hidden" name="agree1" value="<?php echo $agree1 ?>">
@@ -189,7 +189,7 @@
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="mb_postcode" type="button">주소찾기</a>
+									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>"name="mb_postcode"style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" type="button">주소찾기</a>
 								</p>
 								<p class="mt10">
 									<label>기본주소 <input type="text" id="sample6_address" name="mb_add1" class="input-text ml5" style="width:719px" value="<?php echo $mb_add1;?>" /></label>
@@ -328,6 +328,7 @@ $(document).ready(function(e){
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                // $('input[type=text][name=mb_add1]').val(data.zonecode);
                 document.getElementById('sample6_address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.

@@ -21,6 +21,8 @@
 	$db_mb_mailing = $_POST['mb_mailing'];
 	$db_mb_datetime = date("Y-m-d H:i:s");
 
+	echo $db_mb_postcode;
+
 	$r_url = $_POST['url'];
 	// echo $r_url;
 
