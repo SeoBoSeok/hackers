@@ -1,7 +1,8 @@
 <?php
-
 	include('../header.php');
+	$r_url = $_SERVER['HTTP_REFERER'];
 
+	// echo $r_url;
 ?>
 <body>
 <div class="login-section">
@@ -33,6 +34,7 @@
 				<a href='/member/register?mode=find_id' class="btn-m-gray">ID/PW찾기</a>
 			</div>
 		</div>
+		<input type="hidden" name="url" value="<?php echo $r_url; ?>">
 		</form>
 		
 		<div class="login-guide">

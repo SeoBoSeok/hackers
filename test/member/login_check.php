@@ -8,6 +8,8 @@
 	// echo hash('sha256', $_POST['user_pw']);
 	// echo $salt;
 
+	$r_url = $_POST['url'];
+
 	$user_id = trim($_POST['user_id']);
 	$hashed_pw = trim($_POST['user_pw']) . $salt;
 	$user_pw = hash('sha256', $hashed_pw);
@@ -25,7 +27,7 @@
 			$_SESSION['mb_id'] = $row['mb_id'];
 			// echo $_SESSION['mb_id'];
 		}
-		header("Location: http://test.hackers.com", true, 301);
+		header("Location: ".$r_url, true, 301);
 
 	} else {
 

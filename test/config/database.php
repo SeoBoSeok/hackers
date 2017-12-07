@@ -13,9 +13,8 @@
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
-
+	
 	// $connect = mysql_connect($servername, $username, $password); 
-	mysql_query("set names utf8");
+	mysqli_query("set names utf8");
 	// mysql_select_db('test' ,$connect);
-
 ?>

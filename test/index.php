@@ -4,11 +4,11 @@
 	session_start();
 
 	// login이 되서 세션값이 존재하면 사이트 이용 가능 아니면 login page로 강제 리다이렉트
-	if(!isset($_SESSION['mb_id'])){
-		echo "<meta http-equiv='refresh' content='0;url=http://test.hackers.com/member/'>";
-		exit;
-		echo $_SESSION['mb_id'];
-	}
+	// if(!isset($_SESSION['mb_id'])){
+	// 	echo "<meta http-equiv='refresh' content='0;url=http://test.hackers.com/member/'>";
+	// 	exit;
+	// 	echo $_SESSION['mb_id'];
+	// }
 	// echo $_SESSION['mb_id'];
 	$mb_id = $_SESSION['mb_id'];
 	$mb_name = $_SESSION['mb_name'];

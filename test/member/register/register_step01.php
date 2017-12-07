@@ -145,7 +145,7 @@
 					<li class="last"><i class="icon-join-inp"></i> 정보입력</li>
 				</ul>
 			</div>
-
+		<form action="./register_step02.php" id="fagree" name="fagree" method="post" onsubmit="return agreeAllCheck();">
 			<div class="section-content">
 				<div class="tit-box-h4">
 					<h3 class="tit-h4">이용약관 <span class="tc-brand">(필수)</span></h3>
@@ -426,7 +426,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">
 						<label class="input-sp">
-							<input type="checkbox"  name="agree1"/>
+							<input type="checkbox"  name="agree1" value="y"/>
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -593,7 +593,7 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 					<button type="button" class="js_agree_open"><em>펼치기 ▼</em></button>
 					<div class="mt10">
 						<label class="input-sp">
-							<input type="checkbox" name="agree2"/>
+							<input type="checkbox" name="agree2" value="y"/>
 							<span class="input-txt">약관에 동의합니다.</span>
 						</label>
 					</div>
@@ -608,24 +608,41 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 			</div>
 
 			<div class="box-btn">
-				<button href="#" class="btn-l" id="ccbx">다음단계 (휴대폰인증)</button>
+				<button type="submit" class="btn-l" id="ccbx">다음단계 (휴대폰인증)</button>
 			</div>
-
+		</form>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#ccbx').click('on', function(){
-			if ( is_Checked() ){
-				$('#agreeAll').prop("checked", true);
-				location.href = 'register_step02.php';
+		// $('#ccbx').click('on', function(){
+		// 	if ( is_Checked() ){
+		// 		$('#agreeAll').prop("checked", true);
+		// 		location.href = 'register_step02.php';
+		// 	} else {
+		// 		alert('모든 체크박스에 동의해주셔야 합니다');
+		// 	}
+		// });
+		$('#ccbx').click('on', function(e){
+			if(is_Checked()){
+				return true;
 			} else {
-				alert('모든 체크박스에 동의해주셔야 합니다');
+				e.preventDefault();
+				alert('먼저 이용약관과 개인정보 취급방침에 동의를 하셔야 합니다.');
 			}
 		});
-
+		function agreeAllCheck(){
+			// alert(fagree.agree1.value);
+			// return false;
+			// alert('1111');
+			// if(fagree.agree1.value){
+			// 	alert(fagree.agree1.value)
+			// 	return false;
+			// }
+			return false;
+		}
 		$('#agreeAll').click('on', function(){
 			// alert('1111');
 			// .attr는 두번째 부터 체크가 안되는 문제가 있음

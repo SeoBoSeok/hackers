@@ -3,7 +3,7 @@
 	session_start();
 
 	$_SESSION['auth_code_for_email'] = '1123456';
-	$_SESSION['auth_code_for_hp'] = '1223456';	
+	$_SESSION['auth_code_for_hp'] = '1223456';
 ?>
 <body>
 <!-- skip nav -->
@@ -144,7 +144,7 @@
 
 			<ul class="tab-list">
 				<li class="on"><a href="#">아이디 찾기</a></li>
-				<li><a href="#">비밀번호 찾기</a></li>
+				<li><a href="./?mode=find_pass">비밀번호 찾기</a></li>
 			</ul>
 
 			<div class="tit-box-h4">
@@ -156,7 +156,7 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 휴대폰 번호와 입력하신 휴대폰 번호가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio" checked="checked"/>
+						<input type="radio" name="auth_radio" value="hp_auth_mode" checked="checked"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
@@ -167,13 +167,14 @@
 				<dd>
 					고객님이 회원 가입 시 등록한 이메일 주소와 입력하신 이메일 주소가 동일해야 합니다.
 					<label class="input-sp big">
-						<input type="radio" name="radio"/>
+						<input type="radio" name="auth_radio" value="email_auth_mode"/>
 						<span class="input-txt"></span>
 					</label>
 				</dd>
 			</dl>
 
 			<div class="section-content mt30">
+			<form action='./find_userid_complete.php' id="f_id_confirm" method="post">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">아이디 찾기 개인정보 입력</caption>
 					<colgroup>
@@ -184,9 +185,9 @@
 					<tbody>
 						<tr>
 							<th scope="col">성명</th>
-							<td><input type="text" class="input-text" style="width:302px" /></td>
+							<td><input type="text" class="input-text" style="width:302px" name="find_name"/></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th scope="col">생년월일</th>
 							<td>
 								<select class="input-sel" style="width:148px">
@@ -214,11 +215,11 @@
 								</select>
 								일
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th scope="col">이메일주소</th>
 							<td>
-								<input type="text" class="input-text" style="width:138px"/> @ <input type="text" class="input-text" style="width:138px"/>
+								<input type="text" class="input-text" style="width:138px" name="str_email" id="str_email01"/> @ <input type="text" class="input-text" id="str_email02" name="str_email" style="width:138px"/>
 								<select class="input-sel" style="width:160px">
 									<option value="">선택입력</option>
 									<option value="">선택입력</option>
@@ -227,41 +228,78 @@
 									<option value="">선택입력</option>
 								</select>
 								<a href="#" class="btn-s-tin ml10" id="get_eauth">인증번호 받기</a>
+								<input type="hidden" name="find_email" value="" />
 							</td>
 						</tr>
 						<tr>
 							<th scope="col">인증번호</th>
-							<td><input type="text" class="input-text" style="width:478px" /><a href="#" class="btn-s-tin ml10" id="get_hpauth">인증번호 확인</a></td>
+							<td><input type="text" class="input-text" style="width:478px" id="auth_code_input"/><a href="#" class="btn-s-tin ml10" id="get_hpauth">인증번호 확인</a></td>
+							<input type="hidden" name="hp_auth_confirm" value="">
+							<input type="hidden" name="email_auth_confirm" value="">
+							<input type="hidden" name="hp_auth_confirm_code" value="">
+							<input type="hidden" name="email_auth_confirm_code" value="">
 						</tr>
 					</tbody>
 				</table>
-
+			</form>
 			</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#get_eauth').click('on', function(){
-			$.ajax({
-                url: "./ajax_get_authcode.php",
-                type: "POST",
-                data: { name : c_id,  },
-                // dataType: "json",
-                cache: false
-            }).done(function(response){
-            	// alert(response);
-            	if (response == 1) {
-            		alert('해당 아이디가 이미 존재합니다. 다른 아이디를 선택해주세요.');
-            	} else {
-            		alert('가입가능한 아이디 입니다.');
-            	}
-            });
-			alert("<?php echo $_SESSION['auth_code_for_email']?>");
+		$('#get_eauth').click('on', function(e){
+			// alert("<?php echo $_SESSION['auth_code_for_email']?>");
+			var c_id = $('input[type=text][name="find_name"]').val();
+			var c_email = $('input[type=hidden][name=find_email]').val();
+	        e.preventDefault();
+	            $.ajax({
+	                url: "./ajax_checkid.php",
+	                type: "POST",
+	                data: { name : c_id, email : c_email },
+	                // dataType: "json",
+	                cache: false
+	            }).done(function(response){
+	            	// alert(response);
+	            	if (response == 1) {
+	            		alert("<?php echo $_SESSION['auth_code_for_hp']?>");
+	            		$('input[type=hidden][name=email_auth_confirm]').val('y');
+	            		$('input[type=hidden][name=email_auth_confirm_code]').val("<?php echo $_SESSION['auth_code_for_hp']?>");
+	            	} else {
+	            		alert('해당 회원 정보를 찾을 수 없습니다.');
+	            	}
+	            });
 		});
 		$('#get_hpauth').click('on', function(){
-			alert("<?php echo $_SESSION['auth_code_for_hp']?>");
+			if($('#auth_code_input').val()){
+				if($('#auth_code_input').val() == $('input[type=hidden][name=email_auth_confirm_code]').val()){
+					alert('인증되었습니다');
+					$('#f_id_confirm').submit();
+				} else {
+					alert('코드를 확인 해주세요');
+				}
+			} else {
+				alert('코드를 입력해주세요');
+			}
 		});
+
+		$('input[name="str_email"]').on("change", function(){
+			makeEmail();
+		});
+
+		function makeEmail() {
+		$('input[type=hidden][name=find_email]').val(
+				$('#str_email01').val() + "@" +
+				$('#str_email02').val()
+			);
+		}
+		// $('input[type=radio][name=auth_radio]').click('on', function(e){
+		// 	if(this.value == 'hp_auth_mode'){
+		// 		alert("인증번호는 " + "<?php echo $_SESSION['auth_code_for_hp']?>" + "입니다");
+		// 	}
+		// });
+
+	});
 </script>
 <?php
 	include_once('../../footer.php');

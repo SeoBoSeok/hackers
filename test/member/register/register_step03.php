@@ -3,20 +3,36 @@
 ?>
 
 <?php
+	session_start();
 	// echo $_POST['mb_hp'];
+	// echo $_POST['agree1'];
+	// echo $_POST['agree2'];
+	// echo $_POST['auth_hp'];
+
+	// echo $mb_id;
+
+	$_SESSION['agree1'] = $_POST['agree1'];
+	$_SESSION['agree2'] = $_POST['agree2'];
+	$_SESSION['auth_hp'] = $_POST['auth_hp'];
+
+	$agree1 = $_POST['agree1'];
+	$agree2 = $_POST['agree2'];
+	$auth_hp = $_POST['auth_hp'];
+
 	$mb_hp_full = explode('-', $_POST['mb_hp']);
-	$mb_hp_01 = $mb_hp_full[0];
-	$mb_hp_02 = $mb_hp_full[1];
-	$mb_hp_03 = $mb_hp_full[2];
+	$mb_hp_1 = $mb_hp_full[0];
+	$mb_hp_2 = $mb_hp_full[1];
+	$mb_hp_3 = $mb_hp_full[2];
+
+	$r_url = $_SERVER['HTTP_REFERER'];
+
+	// echo $r_url;
+
+	$write = 'W'; // write mode 가입모드
 
 	// $_SESSION['mb_id'] = 'ggybbo';
 	// $mb_id = 'ggybbo';
 
-	if ($mb_id) {
-
-	}
-
-	session_start();
 	if ($mb_id) {
 		$write = 'M';
 		include('../../config/database.php');
@@ -52,13 +68,17 @@
 
 		// echo $mb_postcode;
 
+	} else {
+
+		if ( (($_POST['agree1'] == 'y') + ($_POST['agree2'] == 'y')) <= 1 ) {
+			echo "<script>alert(\"먼저 이용약관과 개인정보 취급방침에 동의를 하셔야 합니다.\");</script>";
+			echo "<meta http-equiv='refresh' content='0; url=./register_step01.php'>";
+		} else if (($_POST['auth_hp']=='y')==0) {
+			echo "<script>alert(\"핸드폰 번호 인증에 실패 했습니다.\");</script>";
+			echo "<meta http-equiv='refresh' content='0; url=./register_step02.php'>";
+		}
+
 	}
-
-	// $connect = mysqli_connect("localhost","root","localhost", "test");
-	 
-	// if(!$connect) die('Not connected : ' . mysqli_error()); 
-
-	// mysqli_close($connect);
 
 ?>
 
@@ -99,11 +119,11 @@
 			<div class="section-content">
 			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post"> <!--  enctype="multipart/form-data" autocomplete="off" -->
 		    <input type="hidden" name="w" value="<?php echo $write ?>">
-		    <input type="hidden" name="url" value="<?php echo $urlencode ?>">
-		    <input type="hidden" name="agree" value="<?php echo $agree ?>">
+		    <input type="hidden" name="url" value="<?php echo $r_url ?>">
+		    <input type="hidden" name="agree1" value="<?php echo $agree1 ?>">
 		    <input type="hidden" name="agree2" value="<?php echo $agree2 ?>">
-		    <input type="hidden" name="cert_type" value="<?php echo $mb_id?>">
-		    <input type="hidden" name="cert_no" value="">
+		    <input type="hidden" name="auth_hp" value="<?php echo $auth_hp ?>">
+		    <!-- <input type="hidden" name="cert_no" value=""> -->
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
 					<colgroup>
@@ -118,8 +138,13 @@
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
-							<td><input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자" <?php if($mb_id) echo 'readonly' ?> value="<?php echo $mb_id ?>"/><a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a></td>
+							<td>
+								<input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자" <?php if($mb_id) echo 'readonly' ?> value="<?php echo $mb_id ?>"/>
+								<?php echo ($mb_id)?'' : '<a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a>';
+								?>
+							</td>
 						</tr>
+						<?php if(!$mb_id): ?>
 						<tr>
 							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호":"비밀번호"; ?></th>
 							<td><input type="password" class="input-text" style="width:302px" name="mb_password" placeholder="8-15자의 영문자/숫자/특수문자 혼합"/></td>
@@ -128,6 +153,8 @@
 							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호 확인":"비밀번호 확인"; ?></th>
 							<td><input type="password" class="input-text" style="width:302px" name="mb_password_re"/></td>
 						</tr>
+						<?php endif; ?>
+						<?php if(!$mb_id): ?>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이메일주소</th>
 							<td>
@@ -143,6 +170,7 @@
 								<input type="hidden" name="mb_email" id="mb_email_from_str" />
 							</td>
 						</tr>
+						<?php endif; ?>
 						<tr>
 							<th scope="col"><span class="icons">*</span>휴대폰 번호</th>
 							<td>
@@ -161,13 +189,13 @@
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="postcode" type="button">주소찾기</a>
+									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>" style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" name="mb_postcode" type="button">주소찾기</a>
 								</p>
 								<p class="mt10">
-									<label>기본주소 <input type="text" id="sample6_address" name="addr_basic" class="input-text ml5" style="width:719px" value="<?php echo $mb_add_jibun;?>" /></label>
+									<label>기본주소 <input type="text" id="sample6_address" name="mb_add1" class="input-text ml5" style="width:719px" value="<?php echo $mb_add1;?>" /></label>
 								</p>
 								<p class="mt10">
-									<label>상세주소 <input type="text" id="sample6_address2" name="addr_detail" class="input-text ml5"  value="<?php echo $mb_add2;?>" style="width:719px"/></label>
+									<label>상세주소 <input type="text" id="sample6_address2" name="mb_add2" class="input-text ml5"  value="<?php echo $mb_add2;?>" style="width:719px"/></label>
 								</p>
 							</td>
 						</tr>
@@ -176,14 +204,15 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="sms" id="" checked="checked"/>
+										<input type="radio" name="sms" checked="checked" value="y"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="sms" id="" />
+										<input type="radio" name="sms" value="n"/>
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
+								<input type="hidden" name="mb_sms" value="<?php echo $mb_sms;?>" />
 								<p>SMS수신 시, 해커스의 혜택 및 이벤트 정보를 받아보실 수 있습니다.</p>
 							</td>
 						</tr>
@@ -192,14 +221,15 @@
 							<td>
 								<div class="box-input">
 									<label class="input-sp">
-										<input type="radio" name="mail" id="" checked="checked"/>
+										<input type="radio" name="mailing" value="y" checked="checked"/>
 										<span class="input-txt">수신함</span>
 									</label>
 									<label class="input-sp">
-										<input type="radio" name="mail" id="" />
+										<input type="radio" name="mailing" value="n" />
 										<span class="input-txt">미수신</span>
 									</label>
 								</div>
+								<input type="hidden" name="mb_mailing" value="<?php echo $mb_mailing;?>" />
 								<p>메일수신 시, 해커스의 혜택 및 이벤트 정보를 받아보실 수 있습니다.</p>
 							</td>
 						</tr>
@@ -207,7 +237,7 @@
 				</table>
 
 				<div class="box-btn">
-					<input type="submit" class="btn-l" id="btn_submit" value="회원가입" />
+					<input type="submit" class="btn-l" id="btn_submit" value="<?php echo ($mb_id)?"회원정보 수정":"회원가입"; ?>" />
 				</div>
 
 			</form>
@@ -239,7 +269,9 @@
 	</div>
 </div>
 <script type="text/javascript">
-$(document).ready(function (e){
+$(document).ready(function(e){
+
+	// alert($('input[type=radio][name=mb_sms]').is(':checked').val());
 
     $("#check_duplicated_id").on('click',(function(e){
 
@@ -350,14 +382,6 @@ $(document).ready(function (e){
             */
         }
 
-        // <?php if($w == '' && $config['cf_cert_use'] && $config['cf_cert_req']) { ?>
-	       //  // 본인확인 체크
-	       //  if(f.cert_no.value=="") {
-	       //      alert("회원가입을 위해서는 본인확인을 해주셔야 합니다.");
-	       //      return false;
-	       //  }
-        // <?php } ?>
-
         // E-mail 검사
         // if ((f.w.value == "") || (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
         //     var msg = reg_mb_email_check();
@@ -368,16 +392,6 @@ $(document).ready(function (e){
         //     }
         // }
 
-        // <?php if (($config['cf_use_hp'] || $config['cf_cert_hp']) && $config['cf_req_hp']) {  ?>
-        // // 휴대폰번호 체크
-        // var msg = reg_mb_hp_check();
-        // if (msg) {
-        //     alert(msg);
-        //     f.reg_mb_hp.select();
-        //     return false;
-        // }
-        // <?php } ?>
-
         if(f.mb_email.value) {
         	if(!emailValidation(f.mb_email.value)) {
         		alert('email 주소를 형식에 맞게 다시 작성해주세요');
@@ -385,7 +399,6 @@ $(document).ready(function (e){
         		return false;
         	}
         }
-
         return true;
     }
 
@@ -449,6 +462,15 @@ $(document).ready(function (e){
 		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 		return re.test(email);
 	}
+
+	// sms, mailing 수신 동의
+	$('input[type="radio"][name="sms"]').click('on', function(){
+		$('input[type="hidden"][name="mb_sms"]').val(this.value);
+	});
+
+	$('input[type="radio"][name="mailing"]').click('on', function(){
+		$('input[type="hidden"][name="mb_mailing"]').val(this.value);
+	});	
 
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

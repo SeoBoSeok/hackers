@@ -2,10 +2,22 @@
 	include_once('../../header.php');
 	session_start();
 
+	// echo $_POST['agree1'];
+
 	$_SESSION["mobile_auth_code"] = 123456;
 	// echo "Session variables are set.";
 
-	$mb_hp = '';
+	$auth_hp = '';
+
+	// print_r($_SERVER);
+	// echo $_SERVER['HTTP_REFERER'];
+
+	// echo (!($_POST['agree1']=='y'));
+
+	if ( (($_POST['agree1'] == 'y') + ($_POST['agree2'] == 'y')) <= 1 ) {
+		echo "<script>alert(\"먼저 이용약관과 개인정보 취급방침에 동의를 하셔야 합니다.\");</script>";
+		echo "<meta http-equiv='refresh' content='0; url=./register_step01.php'>";
+	}
 ?>
 
 <body>
@@ -157,7 +169,7 @@
 				<h3 class="tit-h4">본인인증</h3>
 			</div>
 
-			<form action="/member/register/register_step03.php" method="POST">
+			<form action="./register_step03.php" name="fhauth_form" id="fhauth_form" method="post" onsubmit="return checkAuthCode(e)" autocomplete="off">
 
 				<div class="section-content after">
 					<div class="identify-box" style="width:100%;height:190px;">
@@ -166,6 +178,7 @@
 							<p>주민번호 없이 메시지 수신가능한 휴대폰으로 1개 아이디만 회원가입이 가능합니다. </p>
 
 							<br />
+
 							<input type="text" name="hp_01" id="mb_hp_01" class="input-text" maxlength="3" style="width:50px"/> - 
 							<input type="text" name="hp_01" id="mb_hp_02" class="input-text" maxlength="4" style="width:50px"/> - 
 							<input type="text" name="hp_01" id="mb_hp_03" class="input-text" maxlength="4" style="width:50px"/>
@@ -174,13 +187,16 @@
 
 							<br /><br />
 							<input type="text" class="input-text" name="mo_check" style="width:200px"/>
-							<button type="submit" href="#" class="btn-s-line" id="check_mo_auth">인증번호 확인</button>
+							<button type="submit" class="btn-s-line" id="check_mo_auth">인증번호 확인</button>
 						</div>
 						<input type="hidden" class="input-text" name="mo_auth" value="<?php echo $_SESSION["mobile_auth_code"]; ?>"/>
+						<input type="hidden" name="agree1" value="<?php echo $_POST['agree1']; ?>" />
+						<input type="hidden" name="agree2" value="<?php echo $_POST['agree2']; ?>" />
+						<input type="hidden" name="auth_hp" id="auth_hp" value="<?php echo $auth_hp; ?>" />
 						<i class="graphic-phon"><span>휴대폰 인증</span></i>
 					</div>
 				</div>
-			<form>
+			</form>
 		</div>
 	</div>
 </div>
@@ -209,17 +225,20 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#check_mo_auth').click('on', function(){
+		$('#check_mo_auth').click('on', function(e){
 			// alert($('input[name="mo_auth"]').val());
 			if ( $('input[name="mo_check"]').val() == 123456 ) {
+				$('#auth_hp').val('y');
 				alert('Succees!! Authentification!!');
-				// location.href = 'register_step03.php';
+				// location.href = './register_step03.php';
 			} else {
 				alert('Fail to get Authentification!!');
+				e.preventDefault();
 			}
 		});
 
-		$('#getAuthCode').click('on', function(){
+		$('#getAuthCode').click('on', function(e){
+			e.preventDefault();
 			alert('인증코드는 123456입니다.');
 		});
 
