@@ -1,8 +1,6 @@
 <?php
 	include('../header.php');
 	$r_url = $_SERVER['HTTP_REFERER'];
-
-	// echo $r_url;
 ?>
 <body>
 <div class="login-section">

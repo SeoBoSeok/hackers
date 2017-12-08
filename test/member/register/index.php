@@ -4,7 +4,6 @@
 		// case 'step_01':
 		// 	include('./register_step01.php');
 		// 	break;
-
 		case 'step_02':
 			include('./register_step02.php');
 			break;

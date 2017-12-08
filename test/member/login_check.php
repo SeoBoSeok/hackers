@@ -25,7 +25,6 @@
 		while($row = $result->fetch_assoc()) {
 			// echo "id: " . $row['mb_id'] . "<br>";
 			$_SESSION['mb_id'] = $row['mb_id'];
-			// echo $_SESSION['mb_id'];
 		}
 		header("Location: ".$r_url, true, 301);
 

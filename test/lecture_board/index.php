@@ -5,11 +5,11 @@
 		// 	break;
 
 		case 'write':
-			include('./review_update.php');
+			include('./review_write.php');
 			break;
 
 		case 'view':
-			include('./review_detail.php');
+			include('./review_view.php');
 			break;
 
 		case 'modify':

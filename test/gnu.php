@@ -64,7 +64,7 @@
 						<li class="mnu5">
 							<a href="#">직무교육 안내</a>
 							<ul class="nav-sub-lst">
-								<li><a href="/">수강후기</a></li>
+								<li><a href="/lecture_board/?mode=list">수강후기</a></li>
 								<li><a href="#">서브메뉴</a></li>
 								<li><a href="#">서브메뉴</a></li>
 								<li><a href="#">서브메뉴</a></li>

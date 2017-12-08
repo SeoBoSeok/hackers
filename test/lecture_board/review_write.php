@@ -1,5 +1,6 @@
 <?php
 	include_once('../header.php');
+
 	include_once('../config/database.php');
 
 	$sql = "SELECT * FROM hac_board";
@@ -23,7 +24,6 @@
 	$categories = explode('|', $bo_info[0]['bocategorylist']);
 
 	$conn->close();
-
 ?>
 <body>
 <!-- skip nav -->
@@ -34,12 +34,12 @@
 
 <div id="wrap">
 	<div id="header" class="header">
-		<?php include_once('../gnu.php'); ?>
+		<?php include_once('../gnu.php'); ?>	
 		<?php include_once('../top_section.php'); ?>
 	</div>
 <div id="container" class="container">
-		<?php include_once('./lecture_board_sidemenu.php'); ?>
-		<div id="content" class="content">
+	<?php include_once('./lecture_board_sidemenu.php'); ?>
+	<div id="content" class="content">
 		<div class="tit-box-h3">
 			<h3 class="tit-h3">수강후기</h3>
 			<div class="sub-depth">
@@ -56,6 +56,7 @@
 				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
 			</ul>
 		</div>
+	<form name="tx_editor_form" id="tx_editor_form" action="./review_update.php" method="post" accept-charset="utf-8">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -89,7 +90,7 @@
 						<ul class="list-rating-choice">
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id="" checked="checked"/>
+									<input type="radio" name="stradio" id="" checked="checked" value="5"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -98,7 +99,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id="" value="4"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -107,7 +108,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id=""  value="3"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -116,7 +117,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id=""  value="2"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -125,7 +126,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id=""  value="1"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -139,15 +140,16 @@
 		</table>
 
 		<div class="editor-wrap">
-			<form name="tx_editor_form" id="tx_editor_form" action="./review_update.php" method="post" accept-charset="utf-8">
 			<?php include_once('../daumeditor/editor.html'); ?>
-			</form>
+			
 		</div>
 	
 		<div class="box-btn t-r">
 			<a href="#" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5">수정 </a>
+			<a href="#" class="btn-m ml5">저장</a>
 		</div>
+	</form>
+	
 	</div>
 </div>
 <script type="text/javascript">

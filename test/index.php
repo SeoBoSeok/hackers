@@ -431,28 +431,6 @@ $(document).ready(function(){
 	$('.page-applyclass').mouseover(function(){
 		slider.startAuto();
 	});
-
-	$('#hackers_logout').click('on', function(){
-		// alert('1111');
-		var logout_key = confirm("정말 로그아웃 하시겠습니까");
-		if (logout_key) {
-			$.ajax({
-                url: "./logout.php",
-                type: "POST",
-                data: { logout_key : true },
-                // dataType: "json",
-                cache: false
-            }).done(function(response){
-            	// alert(response);
-            	if (response == 1) {
-            		alert('로그아웃 되었습니다.');
-            		window.location.reload();
-            	} else {
-            		alert('로그아웃에 실패했습니다.');
-            	}
-            });
-		}
-	});
 });
 </script>
 
