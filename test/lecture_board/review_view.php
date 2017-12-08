@@ -1,5 +1,31 @@
 <?php
 	include_once('../header.php');
+	include_once('../config/database.php');
+
+	// echo $_GET['no'];
+	$w_id = $_GET['no'];
+
+	$sql = "SELECT * FROM hac_board_write WHERE writeid = '$w_id'";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$bo_content = $row;
+		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	// print_r($bo_list);
+
+	$conn->close();
+
+
 ?>
 <body>
 <!-- skip nav -->
@@ -33,28 +59,25 @@
 			</colgroup>
 			<tbody>
 				 <tr>
-					<th scope="col">제목</th>
-					<th scope="col" class="user-id">작성자 | idididi**</th>
+					<th scope="col"><?=$bo_content['writesubject']?></th>
+					<th scope="col" class="user-id"><?=$bo_content['writername']?> | <?=$bo_content['writerid']?></th>
 				 </tr>
 				<tr>
 					<td colspan="2">
 						<div class="box-rating">
 							<span class="tit_rating">강의만족도</span>
 							<span class="star-rating">
-								<span class="star-inner" style="width:80%"></span>
+								<span class="star-inner" style='width:<?=$bo_content["lecturestar"]*20?>%'></span>
 							</span>
 						</div>
-						
-						절대 후회 없는 강의예요!<br />
-						강의시간도 적당하고 요점만 잘 잡아서 설명해주시네요!<br />
-						조직에서 관리직을 담당하고 계신 분이라면 꼭 추천합니다. <br />
+						<?=$bo_content['writecontents']?>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		
 		
-		<p class="mb15"><strong class="tc-brand fs16">dlwlsl**님의 수강하신 강의 정보</strong></p>
+		<p class="mb15"><strong class="tc-brand fs16"><?=$bo_content['writerid']?>님의 수강하신 강의 정보</strong></p>
 		
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-lecture-list">
 			<caption class="hidden">강의정보</caption>
@@ -72,7 +95,7 @@
 						</a>
 					</td>
 					<td class="lecture-txt">
-						<em class="tit mt10">Beyond Trouble, 조직을 감동시키는 관계의 기술</em>
+						<em class="tit mt10"><?=$bo_content['writesubject']?></em>
 						<p class="tc-gray mt20">강사: 최환규 | 학습난이도 : 하 | 교육시간: 18시간 (18강)</p>
 					</td>
 					<td class="t-r"><a href="#" class="btn-square-line">강의<br />상세</a></td>

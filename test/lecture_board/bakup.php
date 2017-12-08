@@ -29,49 +29,15 @@
 <a href="#content">본문 바로가기</a>
 </div>
 <!-- //skip nav -->
-
 <div id="wrap">
 	<div id="header" class="header">
-		
 		<?php include_once('../gnu.php'); ?>
-		<!-- gnu.php -->
 		<?php include_once('../top_section.php'); ?>
-
 	</div>
+</div>
 <div id="container" class="container">
-	<?php include_once('./lecture_board_sidemenu.php');?>
+	<?php include_once('./lecture_board_sidemenu.php'); ?>
 	<div id="content" class="content">
-		<div class="tit-box-h3">
-			<h3 class="tit-h3">수강후기</h3>
-			<div class="sub-depth">
-				<span><i class="icon-home"><span>홈</span></i></span>
-				<span>직무교육 안내</span>
-				<strong>수강후기</strong>
-			</div>
-		</div>
-
-		<ul class="tab-list tab5">
-			<li class="on"><a href="#">전체</a></li>
-			<li><a href="#">일반직무</a></li>
-			<li><a href="#">산업직무</a></li>
-			<li><a href="#">공통역량</a></li>
-			<li><a href="#">어학 및 자격증</a></li>
-		</ul>
-
-		<div class="search-info">
-			<div class="search-form f-r">
-				<select class="input-sel" style="width:158px">
-					<option value="">분류</option>
-				</select>
-				<select class="input-sel" style="width:158px">
-					<option value="">강의명</option>
-					<option value="">작성자</option>
-				</select>
-				<input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
-				<button type="button" class="btn-s-dark">검색</button>
-			</div>
-		</div>
-
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-bbs">
 			<caption class="hidden">수강후기</caption>
 			<colgroup>
@@ -94,6 +60,7 @@
 	 
 			<tbody>
 				<!-- set -->
+
 				<tr class="bbs-sbj">
 					<td><span class="txt-icon-line"><em>BEST</em></span></td>
 					<td>CS</td>
@@ -120,7 +87,7 @@
 						<?=$value['bocategory'];?>
 					</td>
 					<td>
-						<a href="?mode=view&no=<?=$value['writeid']?>">
+						<a href="#">
 							<span class="tc-gray ellipsis_line">수강 강의명 : <?=$value['writesubject'];?></span>
 							<strong class="ellipsis_line"><?=$value['writecontents']?></strong>
 						</a>	
@@ -130,7 +97,7 @@
 							<span class="star-inner" style='width:<?=$value['lecturestar']*20?>%'></span>
 						</span>
 					</td>
-					<td><?=$value['writername'];?></td>
+					<td><?=$value['writename'];?></td>
 				</tr>
 				<?php } ?>
 				<!-- //set -->

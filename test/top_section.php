@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	$mb_id = $_SESSION['mb_id'];
+	$mb_name = $_SESSION['mb_name'];
 ?>
 
 <div class="top-section">

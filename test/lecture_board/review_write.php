@@ -56,7 +56,7 @@
 				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
 			</ul>
 		</div>
-	<form name="tx_editor_form" id="tx_editor_form" action="./review_update.php" method="post" accept-charset="utf-8">
+		<form name="tx_editor_form" id="tx_editor_form" action="review_update.php" method="post" accept-charset="utf-8">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -82,7 +82,7 @@
 				</tr>
 				<tr>
 					<th scope="col">제목</th>
-					<td><input type="text" class="input-text" style="width:611px"/></td>
+					<td><input type="text" class="input-text" name="review_title" style="width:611px"/></td>
 				</tr>
 				<tr>
 					<th scope="col">강의만족도</th>
@@ -133,23 +133,25 @@
 									<span class="star-inner" style="width:20%"></span>
 								</span>
 							</li>
+							<input type="hidden" name="review_star" value="5" />
+							<input type="hidden" name="mb_id" value="<?=$mb_id?>" />
+							<input type="hidden" name="mb_name" value="<?=$mb_name?>" />
 						</ul>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-
 		<div class="editor-wrap">
-			<?php include_once('../daumeditor/editor.html'); ?>
-			
+			<?php include_once('./daumeditor/hac_editor.html'); ?>
 		</div>
-	
+
+		</form>
+
 		<div class="box-btn t-r">
 			<a href="#" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5">저장</a>
+			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
 		</div>
-	</form>
-	
+
 	</div>
 </div>
 <script type="text/javascript">
@@ -278,6 +280,13 @@
         }
         return true;
 	}
+	$('#review_modify').click(function(){
+    	// alert(editor.getContent());
+    	saveContent();
+    });
+    $('input[type=radio][name=stradio]').change(function(){
+    	$('input[type=hidden][name="review_star"]').val(this.value);
+    });
 </script>
 <script type="text/javascript">
     $("select[name=lecture_title]").change((function(e){

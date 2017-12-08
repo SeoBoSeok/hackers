@@ -10,13 +10,15 @@
 
 	$r_url = $_POST['url'];
 
+	// print_r(trim($_POST['user_pw']));
+
 	$user_id = trim($_POST['user_id']);
 	$hashed_pw = trim($_POST['user_pw']) . $salt;
 	$user_pw = hash('sha256', $hashed_pw);
 
 	// echo $user_pw;
 
-	$sql = "SELECT mb_id FROM member WHERE mb_id = '$user_id' and mb_password = '$user_pw'";
+	$sql = "SELECT mb_id, mb_name FROM member WHERE mb_id = '$user_id' and mb_password = '$user_pw'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -25,11 +27,13 @@
 		while($row = $result->fetch_assoc()) {
 			// echo "id: " . $row['mb_id'] . "<br>";
 			$_SESSION['mb_id'] = $row['mb_id'];
+			$_SESSION['mb_name'] = $row['mb_name'];
 		}
 		header("Location: ".$r_url, true, 301);
 
 	} else {
 
+		echo '비밀번호 오류';
     	echo false;
     	
 	}

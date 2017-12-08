@@ -1,3 +1,6 @@
+<?php
+	include_once('../../header.php');
+?>
 <body>
 <!-- skip nav -->
 <div id="skip-nav">
@@ -234,7 +237,5 @@
 	</div>
 </div>
 <?php
-
 	include_once('../../footer.php');
-
 ?>
