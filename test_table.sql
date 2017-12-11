@@ -54,3 +54,16 @@ create table hac_board_write(
 	writedate datetime not null default '0000-00-00 00:00:00',
 	writefile varchar(255) not null default ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table lecture_board(
+	lid int(11) not null auto_increment,
+	lname varchar(50) not null default '',
+	lcat
+	ltitle
+	lauthor
+	lhard
+	ltime
+	ldescription varchar(255) not null default '',
+	lthumnail varchar(255) not null default '',
+	PRIMARY KEY (`lid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

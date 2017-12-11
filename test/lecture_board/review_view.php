@@ -21,7 +21,21 @@
     	
 	}
 
-	// print_r($bo_list);
+	$sql = "SELECT botable FROM hac_board";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$bo_category = $row;
+		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
 
 	$conn->close();
 
@@ -104,7 +118,7 @@
 		</table>
 
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
+			<a href="/lecture_board/?mode=list&page=1" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5">수정</a>
 			<a href="#" class="btn-m-dark">삭제</a>
 		</div>
@@ -112,6 +126,9 @@
 		<div class="search-info">
 			<div class="search-form f-r">
 				<select class="input-sel" style="width:158px">
+					<? foreach ($categories as $key => $value) { ?>
+						
+					<? } ?>
 					<option value="">분류</option>
 				</select>
 				<select class="input-sel" style="width:158px">

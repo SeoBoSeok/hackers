@@ -4,12 +4,6 @@
 
 <?php
 	session_start();
-	// echo $_POST['mb_hp'];
-	// echo $_POST['agree1'];
-	// echo $_POST['agree2'];
-	// echo $_POST['auth_hp'];
-
-	// echo $mb_id;
 
 	$_SESSION['agree1'] = $_POST['agree1'];
 	$_SESSION['agree2'] = $_POST['agree2'];
@@ -26,8 +20,6 @@
 
 	$r_url = $_SERVER['HTTP_REFERER'];
 
-	// echo $r_url;
-
 	$write = 'W'; // write mode 가입모드
 
 	// $_SESSION['mb_id'] = 'ggybbo';
@@ -42,11 +34,18 @@
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
+
+				print_r($row);
+
+				$agree1 = $row['mb_agree1'];
+				$agree2 = $row['mb_agree2'];
+				$auth_hp = $row['mb_hp_certify'];
 				$mb_name = $row['mb_name'];
 				$mb_email = $row['mb_email'];
 				$mb_hp = $row['mb_hp'];
 				$mb_tel = $row['mb_tel'];
 				$mb_postcode = $row['mb_postcode'];
+				$mb_add1 = $row['mb_add1'];
 				$mb_add_jibun = $row['mb_add_jibun'];
 				$mb_add2 = $row['mb_add2'];
 			}
@@ -117,7 +116,7 @@
 			</div>
 
 			<div class="section-content">
-			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post" autocomplete="off"> <!--  enctype="multipart/form-data" autocomplete="off" -->
+			<form id="fregisterform" name="fregisterform" action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post"> <!--  enctype="multipart/form-data" autocomplete="off" -->
 		    <input type="hidden" name="w" value="<?php echo $write ?>">
 		    <input type="hidden" name="url" value="<?php echo $r_url ?>">
 		    <input type="hidden" name="agree1" value="<?php echo $agree1 ?>">
@@ -189,13 +188,13 @@
 							<th scope="col"><span class="icons">*</span>주소</th>
 							<td>
 								<p >
-									<label>우편번호 <input type="text" id="sample6_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>"name="mb_postcode"style="width:242px" disabled /></label><a href="#" class="btn-s-tin ml10" id="search_Address" type="button">주소찾기</a>
+									<label>우편번호 <input type="text" id="mb_postcode" class="input-text ml5" value="<?php echo $mb_postcode; ?>" name="mb_postcode" style="width:242px" readonly /></label><a href="#" class="btn-s-tin ml10" id="search_Address" type="button">주소찾기</a>
 								</p>
 								<p class="mt10">
-									<label>기본주소 <input type="text" id="sample6_address" name="mb_add1" class="input-text ml5" style="width:719px" value="<?php echo $mb_add1;?>" /></label>
+									<label>기본주소 <input type="text" id="sample6_address" name="mb_add1" class="input-text ml5" value="<?php echo $mb_add1;?>" style="width:719px"/></label>
 								</p>
 								<p class="mt10">
-									<label>상세주소 <input type="text" id="sample6_address2" name="mb_add2" class="input-text ml5"  value="<?php echo $mb_add2;?>" style="width:719px"/></label>
+									<label>상세주소 <input type="text" id="sample6_address2" name="mb_add2" class="input-text ml5" value="<?php echo $mb_add2;?>" style="width:719px"/></label>
 								</p>
 							</td>
 						</tr>
@@ -327,7 +326,7 @@ $(document).ready(function(e){
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('mb_postcode').value = data.zonecode; //5자리 새우편번호 사용
                 // $('input[type=text][name=mb_add1]').val(data.zonecode);
                 document.getElementById('sample6_address').value = fullAddr;
 

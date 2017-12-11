@@ -13,6 +13,7 @@
 			$bo_table[] = $row['botable'];
 			$bo_category[] = $row['bocategorylist'];
 			$bo_info[] = $row;
+			// print_r($row);
 		}
 
 	} else {
@@ -22,6 +23,7 @@
 	}
 
 	$categories = explode('|', $bo_info[0]['bocategorylist']);
+	// print_r($categories);
 
 	$conn->close();
 ?>
@@ -148,7 +150,7 @@
 		</form>
 
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
+			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
 		</div>
 
@@ -297,18 +299,18 @@
                 url: "./get_board_category.php",
                 type: "POST",
                 data: { cat : c_id },
-                cache: false,
+                // cache: false,
+                // dataType: json,
                 success : function(data, status, xhr) {
-                	// alert(data);
+                	// console.log(data, status, xhr);
                 	$("select[name=lecture_cat]").find('option').remove().end();
                 	var category_detail = data.split('|');
-                	for(i=0; i<category_detail.length;i++){
+                	for(i=0; i<category_detail.length; i++){
                 		$("select[name=lecture_cat]").append( $('<option/>').val(category_detail[i]).text(category_detail[i]) );
                 	}
                 },
             }).done(function(response, data){
-            	// alert(response);
-            	// alert(data);
+            	console.log(data);
             });
         }));
 </script>

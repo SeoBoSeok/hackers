@@ -5,6 +5,7 @@
 	$bo_table = $_POST['cat'];
 
 	// echo $bo_table;
+	// print_r($bo_table);
 
 	$sql = "SELECT bocategorylist FROM hac_board WHERE botable = '$bo_table'";
 
@@ -18,11 +19,12 @@
 		while($row = $result->fetch_assoc()) {
 			// echo "id: " . $row['mb_id'] . "<br>";
 			// $bo_table[] = $row['botable'];
-			// $bo_category[] = $row['bocategorylist'];
+			$bo_category[] = $row['bocategorylist'];
 			// $bo_info[] = $row;
-			print_r($row['bocategorylist']);
-			return $row['bocategorylist'];
+			// print_r($row['bocategorylist']);
+			echo $row['bocategorylist'];
 		}
+		// return $bo_category[];
 
 	} else {
 

@@ -2,9 +2,46 @@
 	include_once('../header.php');
 	include_once('../config/database.php');
 
-	$sql = "SELECT * FROM hac_board_write";
+	$sql = "SELECT COUNT(*) as count FROM hac_board_write";
 
 	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$total = $row['count'];
+		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	$page = 1;
+
+	$sql = "SELECT * FROM hac_board_write";
+
+	$offset = 0;
+	$page_result = 5;
+
+	if ($_GET['page']) {
+
+		$page = $_GET['page'];
+		if ($page > 1) {
+			$offset = ($page - 1) * $page_result;
+		}
+
+		$sql .= " LIMIT $offset, $page_result";
+	} else {
+		$sql .= " LIMIT 0, $page_result";	
+	}
+
+	// print_r($sql);
+
+	$result = $conn->query($sql);
+
+	echo $row_cnt;
 
 	if ($result->num_rows > 0) {
 
@@ -17,8 +54,6 @@
     	echo "0 results";
     	
 	}
-
-	print_r($bo_list);
 
 	$conn->close();
 
@@ -114,7 +149,7 @@
 				<?php foreach ($bo_list as $key => $value) { ?>
 				<tr class="bbs-sbj">
 					<td>
-						<?=$key+1;?>
+						<?=$value['writeid'];?>
 					</td>
 					<td>
 						<?=$value['bocategory'];?>
@@ -137,7 +172,7 @@
 			</tbody>
 		</table>
 
-		<div class="box-paging">
+<!-- 		<div class="box-paging">
 			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
 			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
 			<a href="#" class="active">1</a>
@@ -148,10 +183,49 @@
 			<a href="#">6</a>
 			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
 			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
+		</div> -->
+
+		<div class="box-paging">
+			<a href="?mode=list&page=1"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
+			<!-- <a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a> -->
+			<?php
+
+				$num_of_rows = $result->num_rows;
+				$num = $total / $page_result;
+				$numoflimit = ceil($num);
+				// print_r($numoflimit);
+				$prev = $_GET['page'] - 1;
+				$next = $_GET['page'] + 1;
+
+				if(($_GET['page'] == 1) || ($_GET['page']=='')){
+					echo '';
+				} else {
+					echo "<a href='?mode=list&page=$prev'><i class='icon-prev'><span class='hidden'>이전페이지</span></i></a>";
+				}
+
+				for ($i=1; $i<=$numoflimit; $i++){
+					if ($i==$page) {
+						echo "<a href='?mode=list&page=$i' class='active'>" . $i . "</a>";
+					} else {
+						echo "<a href='?mode=list&page=$i'>" . $i . "</a>";
+					}
+					// echo "<a href='mode=list&page='". $i ."'>" . $i . "</a>";
+				}
+
+				if(($numoflimit != 1) && ($numoflimit != $_GET['page'])) {
+					echo "<a href='?mode=list&page=$next'><i class='icon-next'><span class='hidden'>다음페이지</span></i></a>";
+				} else {
+					echo "";
+				}
+
+				echo "<a href='?mode=list&page=$numoflimit'><i class='icon-last'><span class='hidden'>마지막페이지</span></i></a>";
+			?>
+			<!-- <a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a> -->
+			<!-- <a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a> -->
 		</div>
 
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m">후기 작성</a>
+			<a href="./review_write.php" class="btn-m">후기 작성</a>
 		</div>
 	</div>
 </div>

@@ -12,6 +12,7 @@
 			$bo_table[] = $row['botable'];
 			$bo_category[] = $row['bocategorylist'];
 			$bo_info[] = $row;
+			// print_r($row);
 		}
 
 	} else {
@@ -20,7 +21,13 @@
     	
 	}
 
+	print_r($mb_id);
+
 	$categories = explode('|', $bo_info[0]['bocategorylist']);
+
+	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id'";
+
+
 
 	$conn->close();
 
@@ -41,11 +48,11 @@
 		<?php include_once('./lecture_board_sidemenu.php'); ?>
 		<div id="content" class="content">
 		<div class="tit-box-h3">
-			<h3 class="tit-h3">수강후기</h3>
+			<h3 class="tit-h3">수강후기 수정</h3>
 			<div class="sub-depth">
 				<span><i class="icon-home"><span>홈</span></i></span>
 				<span>직무교육 안내</span>
-				<strong>수강후기</strong>
+				<strong>수강후기 수정</strong>
 			</div>
 		</div>
 
@@ -56,6 +63,7 @@
 				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
 			</ul>
 		</div>
+		<form name="tx_editor_form" id="tx_editor_form" action="review_update.php" method="post" accept-charset="utf-8">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -139,13 +147,13 @@
 		</table>
 
 		<div class="editor-wrap">
-			<form name="tx_editor_form" id="tx_editor_form" action="./review_update.php" method="post" accept-charset="utf-8">
-			<?php include_once('../daumeditor/editor.html'); ?>
-			</form>
+			<?php include_once('./daumeditor/hac_editor.html'); ?>
 		</div>
+
+		</form>
 	
 		<div class="box-btn t-r">
-			<a href="#" class="btn-m-gray">목록</a>
+			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5">수정 </a>
 		</div>
 	</div>
