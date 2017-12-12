@@ -1,14 +1,33 @@
 <?php
 	include('../header.php');
+	include('../config/database.php');
 
 	if ($is_adm) {
 
 	} else {
 		echo "<script>관리자 전용 페이지 입니다.</script>";
 	}
-?>
 
-	<body>
+	$sql = "SELECT * FROM hac_board";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while ($row = $result->fetch_assoc()) {
+			$total[] = $row;
+		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	// print_r($total);
+
+?>
+<body>
 <!-- skip nav -->
 <div id="skip-nav">
 <a href="#content">본문 바로가기</a>
@@ -36,20 +55,6 @@
 				</div>
 			</div>
 
-			<!-- <div class="search-info">
-				<div class="search-form f-r">
-					<select class="input-sel" style="width:158px">
-						<option value="">분류</option>
-					</select>
-					<select class="input-sel" style="width:158px">
-						<option value="">강의명</option>
-						<option value="">작성자</option>
-					</select>
-					<input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
-					<button type="button" class="btn-s-dark">검색</button>
-				</div>
-			</div> -->
-
 			<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 				<caption class="hidden">강의정보</caption>
 				<colgroup>
@@ -63,8 +68,14 @@
 						<td><input type="text" class="input-text" name="lname" style="width:302px"/></td>
 					</tr>
 					<tr>
-						<th scope="col"><span class="icons">*</span>분류</th>
-						<td><input type="text" class="input-text" name="lcat" style="width:302px" placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자"/></td>
+					<th scope="col">강의 목록</th>
+						<td>
+							<select class="input-sel" name="lcat" style="width:160px">
+							<?php foreach ($total as $key => $value) { ?>
+								<option value="<?=$value['botable'];?>"><?=$value['botable'];?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th scope="col"><span class="icons">*</span>강의 제목</th>
@@ -92,20 +103,6 @@
 					</tr>
 				</tbody>
 			</table>
-
-	<!-- 		<div class="box-paging">
-				<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-				<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
-				<a href="#" class="active">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#">6</a>
-				<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
-				<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
-			</div> -->
-
 			<div class="box-btn t-r">
 				<input type="submit" class="btn-m" value="강의 등록">
 			</div>

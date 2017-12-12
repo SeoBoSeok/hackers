@@ -12,7 +12,6 @@
 			$bo_table[] = $row['botable'];
 			$bo_category[] = $row['bocategorylist'];
 			$bo_info[] = $row;
-			// print_r($row);
 		}
 
 	} else {
@@ -21,13 +20,9 @@
     	
 	}
 
-	print_r($mb_id);
-
-	$categories = explode('|', $bo_info[0]['bocategorylist']);
+	// print_r($mb_id);
 
 	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id'";
-
-
 
 	$conn->close();
 

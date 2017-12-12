@@ -2,6 +2,8 @@
 	include_once('../header.php');
 	include_once('../config/database.php');
 
+	$category = $_GET['category'];
+
 	$sql = "SELECT COUNT(*) as count FROM hac_board_write";
 
 	$result = $conn->query($sql);
@@ -22,6 +24,11 @@
 
 	$sql = "SELECT * FROM hac_board_write";
 
+	if($_GET['category'])
+		$sql .= " WHERE bocategory = '$category'";
+
+	// print_r($sql);
+
 	$offset = 0;
 	$page_result = 5;
 
@@ -37,17 +44,33 @@
 		$sql .= " LIMIT 0, $page_result";	
 	}
 
-	// print_r($sql);
-
 	$result = $conn->query($sql);
 
-	echo $row_cnt;
+	// echo $row_cnt;
 
 	if ($result->num_rows > 0) {
 
 		while($row = $result->fetch_assoc()) {
 			$bo_list[] = $row;
 		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	$sql = "SELECT * FROM hac_board";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$bo_category[] = $row;
+		}
+
+		// print_r($bo_category);
 
 	} else {
 
@@ -86,21 +109,22 @@
 		</div>
 
 		<ul class="tab-list tab5">
-			<li class="on"><a href="#">전체</a></li>
-			<li><a href="#">일반직무</a></li>
-			<li><a href="#">산업직무</a></li>
-			<li><a href="#">공통역량</a></li>
-			<li><a href="#">어학 및 자격증</a></li>
+			<li class="on"><a href="./?mode=list&page=1">전체</a></li>
+			<?php foreach ($bo_category as $key => $value) { ?>
+				<li><a href="./?mode=list&page=1&category=<?=stripcslashes($value['botable'])?>"><?=$value['botable']?></a></li>
+			<?php } ?>
 		</ul>
 
 		<div class="search-info">
 			<div class="search-form f-r">
 				<select class="input-sel" style="width:158px">
-					<option value="">분류</option>
+					<?php foreach ($bo_category as $key => $value) { ?>
+						<option value="<?=$value['botable'];?>"><?=$value['botable'];?></option>
+					<?php } ?>
 				</select>
 				<select class="input-sel" style="width:158px">
-					<option value="">강의명</option>
-					<option value="">작성자</option>
+					<option value="강의명">강의명</option>
+					<option value="작성자">작성자</option>
 				</select>
 				<input type="text" class="input-text" placeholder="강의명을 입력하세요." style="width:158px"/>
 				<button type="button" class="btn-s-dark">검색</button>
@@ -149,7 +173,8 @@
 				<?php foreach ($bo_list as $key => $value) { ?>
 				<tr class="bbs-sbj">
 					<td>
-						<?=$value['writeid'];?>
+						<!-- <?=$value['writeid'];?> -->
+						<?=$key+$page?>
 					</td>
 					<td>
 						<?=$value['bocategory'];?>

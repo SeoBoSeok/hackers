@@ -2,9 +2,6 @@
 
 	include ('../config/database.php');
 
-	// print_r($_FILES);
-	// $lid = $_POST['lid'];
-	// print_r($_POST);
 	$lname = $_POST['lname'];
 	$lcat = $_POST['lcat'];
 	$ltitle = $_POST['ltitle'];
@@ -15,7 +12,8 @@
 	$thiumnail = '';
 
 	$uploaddir = $_SERVER['DOCUMENT_ROOT'] . "/data";
-	// $target_file = $uploaddir . basename($_FILES["lthumbnail"]["name"]);
+
+  define('_UPLOADPATH', 'data/');
 
  	if(isset($_FILES['lthumbnail'])){
       $errors= array();
@@ -23,7 +21,8 @@
       $file_size = $_FILES['lthumbnail']['size'];
       $file_tmp = $_FILES['lthumbnail']['tmp_name'];
       $tmp_name = basename($file_tmp);
-      $target_file = $uploaddir . basename($_FILES["lthumbnail"]["name"]);
+      // $target_file = $uploaddir . basename($_FILES["lthumbnail"]["name"]);
+      $target = time() . $file_name;
 
       print_r($file_tmp);
       print_r($tmp_name);
@@ -41,36 +40,26 @@
          $errors[]='File size must be excately 2 MB';
       }
       
-      // $dir = $uploaddir.'/'.$tmp_name.'/'.$file_ext;
-      // $upload = $uploaddir . $file_tmp;
       if(empty($errors)==true){
-        move_uploaded_file($file_tmp, $target_file);
+        move_uploaded_file($file_tmp, _UPLOADPATH . $target);
 
-        $lthumnail = "$uploaddir" . "/" . "$file_name";
-        // print_r($file_ext);
-        // print_r($lthumnail);
+        $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$target')";
 
-        $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$lthumnail')";
+  		$result = $conn->query($sql);
 
-		$result = $conn->query($sql);
+  		if ($result->num_rows > 0) {
 
-		if ($result->num_rows > 0) {
+  			while($row = $result->fetch_assoc()) {
+  				// $bo_list[] = $row;
+  			}
 
-			while($row = $result->fetch_assoc()) {
-				// $bo_list[] = $row;
-			}
+  		} else {
 
-		} else {
+  	    	echo "0 results";
+  	    	
+  		}
 
-	    	echo "0 results";
-	    	
-		}
-
-		// print_r($bo_list);
-
-		$conn->close();
-
-
+		  $conn->close();
          echo "Success";
       }else{
          print_r($errors);

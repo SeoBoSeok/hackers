@@ -5,21 +5,21 @@
 		// 	include('./review_list.php');
 		// 	break;
 
-		case 'register':
-			include('./lecture_register.php');
-			break;
+		// case 'register':
+		// 	include('./lecture_register.php');
+		// 	break;
 
-		case 'view':
-			include('./review_view.php');
-			break;
+		// case 'view':
+		// 	include('./review_view.php');
+		// 	break;
 
-		case 'modify':
-			include('./review_modify.php');
-			break;							
+		// case 'modify':
+		// 	include('./review_modify.php');
+		// 	break;							
 		
-		default:
-			include('./review_list.php');
-			break;
+		// default:
+		// 	include('./review_list.php');
+		// 	break;
 	}
 
 ?>

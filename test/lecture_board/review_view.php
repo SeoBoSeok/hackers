@@ -21,15 +21,56 @@
     	
 	}
 
-	$sql = "SELECT botable FROM hac_board";
+	// $sql = "SELECT botable FROM hac_board";
+
+	// $result = $conn->query($sql);
+
+	// if ($result->num_rows > 0) {
+
+	// 	while($row = $result->fetch_assoc()) {
+	// 		$bo_category = $row;
+	// 	}
+
+	// } else {
+
+ //    	echo "0 results";
+    	
+	// }
+
+	$bo_content_q_subject = $bo_content['bocategory'];
+	$bo_content_q_table =  $bo_content['botable'];
+
+	$sql = "SELECT * FROM lecture_board WHERE lname='$bo_content_q_subject' AND lcat = '$bo_content_q_table'";
+
+	print_r($sql);
 
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
 
 		while($row = $result->fetch_assoc()) {
-			$bo_category = $row;
+			$bo_detail = $row;
 		}
+
+		print_r($bo_detail);
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	$sql = "SELECT * FROM hac_board";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$bo_detail_category[] = $row;
+		}
+
+		// print_r($bo_category);
 
 	} else {
 
@@ -38,7 +79,6 @@
 	}
 
 	$conn->close();
-
 
 ?>
 <body>
@@ -104,13 +144,13 @@
 				<tr>
 					<td>
 						<a href="#" class="sample-lecture">
-							<img src="http://via.placeholder.com/144x101" alt="" width="144" height="101" />
+							<img src="../adm/data/<?=$bo_detail['lthumnail']?>" alt="" width="144" height="101" />
 							<span class="tc-brand">샘플강의 ▶</span>
 						</a>
 					</td>
 					<td class="lecture-txt">
-						<em class="tit mt10"><?=$bo_content['writesubject']?></em>
-						<p class="tc-gray mt20">강사: 최환규 | 학습난이도 : 하 | 교육시간: 18시간 (18강)</p>
+						<em class="tit mt10"><?=$bo_detail['ltitle']?></em>
+						<p class="tc-gray mt20">강사: <?=$bo_detail['lauthor']?> | 학습난이도 : <?=$bo_detail['lhard']?> | 교육시간: <?=$bo_detail['ltime']?>시간 (<?=$bo_detail['ltime']?>강)</p>
 					</td>
 					<td class="t-r"><a href="#" class="btn-square-line">강의<br />상세</a></td>
 				</tr>
@@ -119,17 +159,20 @@
 
 		<div class="box-btn t-r">
 			<a href="/lecture_board/?mode=list&page=1" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5">수정</a>
-			<a href="#" class="btn-m-dark">삭제</a>
+			
+			<?php if ($bo_content['writerid'] == $mb_id): ?>
+				<a href="./review_modify.php?mode='M'" class="btn-m ml5">수정</a>
+				<a href="./review_detele.php" class="btn-m-dark">삭제</a>
+			<?php endif; ?>
+
 		</div>
 
 		<div class="search-info">
 			<div class="search-form f-r">
 				<select class="input-sel" style="width:158px">
-					<? foreach ($categories as $key => $value) { ?>
-						
+					<? foreach ($bo_detail_category as $key => $value) { ?>
+						<option value="<?=$value['botable']?>"><?=$value['botable']?></option>
 					<? } ?>
-					<option value="">분류</option>
 				</select>
 				<select class="input-sel" style="width:158px">
 					<option value="">강의명</option>

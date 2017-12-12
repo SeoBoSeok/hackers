@@ -7,7 +7,7 @@
 	// echo $bo_table;
 	// print_r($bo_table);
 
-	$sql = "SELECT bocategorylist FROM hac_board WHERE botable = '$bo_table'";
+	$sql = "SELECT lname FROM lecture_board WHERE lcat = '$bo_table'";
 
 	// print_r($sql);
 
@@ -19,16 +19,16 @@
 		while($row = $result->fetch_assoc()) {
 			// echo "id: " . $row['mb_id'] . "<br>";
 			// $bo_table[] = $row['botable'];
-			$bo_category[] = $row['bocategorylist'];
+			$bo_category[] = $row['lname'];
 			// $bo_info[] = $row;
 			// print_r($row['bocategorylist']);
-			echo $row['bocategorylist'];
+			echo implode("|", $bo_category);
 		}
 		// return $bo_category[];
 
 	} else {
 
-    	echo "0 results";
+    	echo "등록된 강좌가 없습니다.";
     	
 	}
 
