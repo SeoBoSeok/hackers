@@ -2,6 +2,11 @@
 	include('../header.php');
 	include ('../config/database.php');
 
+	if($_SESSION['mb_level'] < 10) {
+		echo '<script>window.location.href="'. $home_url . '"</script>';
+		header('Location: ' . $home_url);
+	}
+	
 	$sql = "SELECT * FROM lecture_board";
 
 	$result = $conn->query($sql);
@@ -14,7 +19,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -90,7 +95,8 @@
 				</tbody>
 			</table>
 			<div class="box-btn t-r">
-				<input type="submit" class="btn-m" value="강의 등록">
+				<!-- <input type="submit" class="btn-m" value="강의 등록"> -->
+				<a href="./lecture_register.php" class="btn-m">강의 등록</a>
 			</div>
 		</div>
 	</form>

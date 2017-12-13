@@ -21,12 +21,8 @@
       $file_size = $_FILES['lthumbnail']['size'];
       $file_tmp = $_FILES['lthumbnail']['tmp_name'];
       $tmp_name = basename($file_tmp);
-      // $target_file = $uploaddir . basename($_FILES["lthumbnail"]["name"]);
       $target = time() . $file_name;
 
-      print_r($file_tmp);
-      print_r($tmp_name);
-      // print_r($tmp_name);
       $file_type = $_FILES['lthumbnail']['type'];
       $file_ext = strtolower(end(explode('.',$_FILES['lthumbnail']['name'])));
       
@@ -36,33 +32,35 @@
          $errors[]="extension not allowed, please choose a JPEG or PNG file.";
       }
       
-      if($file_size > 2097152){
-         $errors[]='File size must be excately 2 MB';
-      }
-      
-      if(empty($errors)==true){
-        move_uploaded_file($file_tmp, _UPLOADPATH . $target);
+        if($file_size > 2097152){
+           $errors[]='File size must be excately 2 MB';
+        }
+        
+        if(empty($errors)==true){
+          move_uploaded_file($file_tmp, _UPLOADPATH . $target);
 
-        $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$target')";
+          $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$target')";
 
-  		$result = $conn->query($sql);
+    		$result = $conn->query($sql);
 
-  		if ($result->num_rows > 0) {
+    		if ($result->num_rows > 0) {
 
-  			while($row = $result->fetch_assoc()) {
-  				// $bo_list[] = $row;
-  			}
+    			while($row = $result->fetch_assoc()) {
+    			
+          }
 
-  		} else {
+    		} else {
 
-  	    	echo "0 results";
-  	    	
-  		}
+    	    	// echo "0 results";
+    	    	
+    		}
 
-		  $conn->close();
-         echo "Success";
-      }else{
-         print_r($errors);
+  		  $conn->close();
+
+        header('Location: ' . $home_url);
+
+      } else {
+
       }
    }
 ?>

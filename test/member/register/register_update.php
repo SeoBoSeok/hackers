@@ -4,7 +4,7 @@
 
 	$hashed_pw = trim($_POST['mb_password_re']) . $salt;
 
-	print_r($_POST);
+	// print_r($_POST);
 
 	$db_mb_name = $_POST['mb_name'];
 	$db_mb_id = $_POST['mb_id'];
@@ -41,11 +41,16 @@
 		$sql = "UPDATE member SET mb_name = '$db_mb_name', mb_tel = '$db_mb_tel', mb_postcode = '$db_mb_postcode', mb_add1 = '$db_mb_add1', mb_add2 = '$db_mb_add2', mb_hp_certify = '$db_mb_auth_hp', mb_sms = '$db_mb_sms', mb_mailing = '$db_mb_mailing' WHERE mb_id = '$db_mb_id'";
 		if ($conn->query($sql) === TRUE) {
 		    // echo "New record updated successfully";
-			header("Location: ".$r_url , true, 301);
+		    $home_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SESSION['PHP_SELF']) . '/index.php';
+		    // print_r($home_url);
+		    // alert("수정되었습니다.");
+			header('Location: ' . $home_url);
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
+
+	// header('Location: ' . $home_url);
 
 	$conn->close();
 

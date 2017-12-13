@@ -18,7 +18,7 @@
     	
 	}
 
-	print_r($total);
+	// print_r($total);
 	// print_r($total[0]['lthumbnail']);
 	// print_r($total['lthumnail']);
 
@@ -60,14 +60,15 @@
 
 				<thead>
 					<tr>
-						<th scope="col">카테고리 명</th>
-						<th scope="col">카테고리 설명</th>
+						<th scope="col"><span class="icons">*</span>카테고리 명</th>
+						<!-- <th scope="col"><span class="icons">*</span>카테고리 설명</th> -->
+						<td><input type="text" name="cat_name" /></td>
 					</tr>
 				</thead>
 	
 				<tbody>
 					<tr>
-						<td><input type="text" name="cat_name" /></td>
+						<th scope="col"><span class="icons">*</span>카테고리 설명</th>
 						<td><input type="text" name="cat_detail" /></td>
 					</tr>
 				</tbody>

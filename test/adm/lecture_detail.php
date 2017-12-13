@@ -20,7 +20,7 @@
     	
 	}
 
-	print_r($total);
+	// print_r($total);
 
 ?>
 

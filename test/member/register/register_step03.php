@@ -35,7 +35,8 @@
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 
-				print_r($row);
+				// print_r($row);
+				// print_r($mb_level);
 
 				$agree1 = $row['mb_agree1'];
 				$agree2 = $row['mb_agree2'];
@@ -133,7 +134,7 @@
 					<tbody>
 						<tr>
 							<th scope="col"><span class="icons">*</span>이름</th>
-							<td><input type="text" class="input-text" style="width:302px" name="mb_name" value="<?php echo $mb_name; ?>" required/></td>
+							<td><input type="text" class="input-text" style="width:302px" name="mb_name" value="<?php echo $mb_name; ?>" required/><p class="tip name_error"></p></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span>아이디</th>
@@ -141,6 +142,7 @@
 								<input type="text" class="input-text" name="mb_id" style="width:302px" required placeholder="영문자로 시작하는 4~15자의 영문소문자, 숫자" <?php if($mb_id) echo 'readonly' ?> value="<?php echo $mb_id ?>"/>
 								<?php echo ($mb_id)?'' : '<a href="#" class="btn-s-tin ml10" id="check_duplicated_id">중복확인</a>';
 								?>
+								<p class="tip id_alert"></p>
 							</td>
 						</tr>
 						<?php if(!$mb_id): ?>
@@ -368,6 +370,7 @@ $(document).ready(function(e){
         if (!f.w.value) {
             if (f.mb_name.value.length < 1) {
                 alert("이름을 입력하십시오.");
+                name_validate(f.mb_name, name_error);
                 f.mb_name.focus();
                 return false;
             }
@@ -471,6 +474,311 @@ $(document).ready(function(e){
 	$('input[type="radio"][name="mailing"]').click('on', function(){
 		$('input[type="hidden"][name="mb_mailing"]').val(this.value);
 	});	
+
+	$('input[type=text][name=mb_name]').focusout(function(){
+		name_validate($('input[type=text][name=mb_name]'));
+	});
+
+	$('input[type=text][name=mb_id]').focusout(function(){
+		userid_validate($('input[type=text][name=mb_id]'), $('.id_alert'));
+	});
+
+	/**
+	 * 이름 유효성 체크
+	 * @param is_this
+	 * @param alert_area
+	 * @returns {boolean}
+	 */
+	function name_validate(is_this,alert_area){
+
+		var inter_data = /[~!@\#$%^?&*\()|\-{}\[\]=+,.;:'\/\\]|[0-9]/gi;
+		var inter_date_etc = /[^가-힣a-zA-Z-\s/]/gi; //한글,영문,띄어쓰기만 허용
+	    var blank_pattern = /^\s+|\s+$/g; //띄어 쓰기
+
+		if($('input[name=is_mobile]').val() == 'Y') { //천지인 자판 허용으로 모바일만 적용 해야됨
+	        //var inter_date_kr_str = /[ㄱ-ㅎㅏ-ㅣ가-힣|\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55]/gi;
+	        //var inter_date_kr = /[^ㄱ-ㅎㅏ-ㅣ가-힣|\u318D\u119E\u11A2\u2022\u2025a\u00B7\uFE55]/gi;
+	        var inter_date_kr_str = /[ㄱ-ㅎㅏ-ㅣ가-힣]/gi;
+	        var inter_date_kr = /[^ㄱ-ㅎㅏ-ㅣ가-힣]/gi;
+	    }else{
+	        var inter_date_kr_str = /[ㄱ-ㅎㅏ-ㅣ가-힣]/gi;
+	        var inter_date_kr = /[^ㄱ-ㅎㅏ-ㅣ가-힣]/gi;
+	    }
+	    var inter_date_eng_str = /[a-zA-Z-\s/]/gi;
+		var inter_date_eng = /[^a-zA-Z-\s/]/gi;
+
+		if(!alert_area){
+	      var  alert_area = 'name_error';
+	    }
+	    //공백 체크
+	    if(is_this.val().replace(blank_pattern, '' ) == "" ){
+	        $("."+alert_area).html("이름을 입력 해주세요.");
+	        return false;
+	    }
+	    //빈값 체크
+	    if(is_this.val() == ''){
+	        $("."+alert_area).html("이름을 입력 해주세요.");
+	        return false;
+	    }
+	    //영문,한글,띄어쓰기 허용
+	    if(inter_date_etc.test(is_this.val())){
+	        $("."+alert_area).html("한글 또는 영문을 사용하세요.");
+	        return false;
+	    }
+	    //한글 인지 아닌지 체크 후 글자 수 계산
+	    if(inter_date_kr_str.test(is_this.val())) {
+	        if(is_this.val().length  < 2){
+	            $("."+alert_area).html("이름은 2자 이상이어야 합니다.");
+	            return false;
+	        }
+	        if(is_this.val().length  >  25){
+	            $("."+alert_area).html("이름은 25자 이하이어야 합니다.");
+	            return false;
+	        }
+	    }else{
+	        if(is_this.val().length  < 2){
+	            $("."+alert_area).html("이름은 2자 이상이어야 합니다.");
+	            return false;
+	        }
+	        if(is_this.val().length  >  50){
+	            $("."+alert_area).html("이름은 50자 이하이어야 합니다.");
+	            return false;
+	        }
+	    }
+
+		if (inter_data.test(is_this.val())) {
+	        if(is_this.attr('name') == 'name'){
+	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로만 입력 하세요.'));
+	        }
+			is_this.val(is_this.val().replace(inter_data, ''));
+			return false;
+		}
+
+	    //영문,한글 혼용 불가
+	    if(inter_date_kr_str.test(is_this.val())) {
+	        if (inter_date_kr.test(is_this.val())) {
+	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로 혼동이 불가능 합니다.'));
+	            //is_this.val(is_this.val().replace(inter_date_kr, ''));
+	            is_this.val('');
+	            return false;
+	        }
+	    }else if(inter_date_eng_str.test(is_this.val())) {
+	        if (inter_date_eng.test(is_this.val())) {
+	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로 혼동이 불가능 합니다.'));
+	            //is_this.val(is_this.val().replace(inter_date_eng, ''));
+	            is_this.val('');
+	            return false;
+	        }
+	    }
+
+	    // alert(alert_area);
+
+	    is_this.siblings($("."+alert_area).html(''));
+
+		return true;
+	}
+
+	/**
+	 * 문자열의 바이트수 리턴
+	 * @returns {Number}
+	 */
+	function byteLength(text) {
+	    var l= 0;
+	    for(var idx=0; idx < text.length; idx++) {
+	        var c = encodeURI(text.charAt(idx));
+	        if( c.length==1 ) l ++;
+	        else if( c.indexOf("%u")!=-1 ) l += 2;
+	        else if( c.indexOf("%")!=-1 ) l += c.length/3;
+	    }
+	    return l;
+	};
+
+	/**
+	 * ID 유효성 검사
+	 * @param is_this
+	 * @param alert_area
+	 * @returns {boolean}
+	 */
+	function userid_validate(is_this,alert_area){
+
+	    var inter_date = /[^a-zA-Z0-9-\-_]/gi;
+
+	    // alert(is_this.val());
+
+	    if (is_this.val() == ''){
+	        $("."+alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        return false;
+	    }
+
+
+	    if (inter_date.test(is_this.val())){
+	        is_this.val(is_this.val().replace(is_this.val(), ''));
+	        $("."+alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        return false;
+	    }
+
+	    if((is_this.val().length < 4) && alert_area == 'id_alert'){
+		    $("."+alert_area).html("<span style='color:red'>아이디는 4자 이상의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+		    return false;
+		}
+
+	    if((is_this.val().length > 50) && alert_area == 'id_alert'){
+	        $("."+alert_area).html("<span style='color:red'>아이디는 50자 이하의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+	        return false;
+	    }
+	    //모든 문자는 소문자로 변환
+		is_this.val(is_this.val().toLowerCase());
+		return true;
+	}
+
+	/**
+	 * 숫자만 유효성 검사
+	 * @param is_this
+	 * @returns {boolean}
+	 */
+	function number_validate(is_this){
+		var inter_data = /[^0-9]/gi;
+
+		if (inter_data.test(is_this.val())) {
+			is_this.val(is_this.val().replace(inter_data, ''));
+			return false;
+		}
+	}
+
+	/**
+	 * 비밀 번호 유효성
+	 * @param is_this
+	 * @param alert_area
+	 * @returns {boolean}
+	 */
+	function pass_validate(is_this,alert_area){
+
+		var pw = is_this.val();
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
+
+		if(!pw) {
+			$("."+alert_area).html("비밀번호를 입력 해주세요.");
+			return;
+		}
+
+		if(pw.length < 10 || pw.length > 32){
+		    $("."+alert_area).html("10~32자로 입력해주세요");
+		    return;
+		}
+
+	    if(pw.search(/\s/) != -1){
+			$("."+alert_area).html("비밀번호는 공백없이 입력해주세요.");
+		    return;
+		}
+
+		if(num < 0 || eng < 0){
+			$("."+alert_area).html("영문,숫자 조합하여 10자리 이상으로 설정해주세요.");
+		    return;
+		}
+		return true;
+	}
+
+	/**
+	 * 모바일 숫자 유효성 체크
+	 * @param mobile_val
+	 * @param alert_area
+	 * @returns {boolean}
+	 */
+	function mobile_validate(mobile_val,alert_area){
+
+		if (mobile_val == '' || mobile_val.length < 10) {
+	        $("." + alert_area).html("휴대폰 번호를 입력하지 않으셨습니다.");
+	        return;
+		}
+		$("." + alert_area).html('');
+		return true;
+	}
+
+	/**
+	 * email 유효성 체크
+	 * @param email_val
+	 * @param alert_area
+	 * @returns {boolean}
+	 */
+	function email_validate(email_val,alert_area){
+	    //email 규칙 정규식
+	    var inter_data = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    var mail_id = $('input[name=mail_id]');
+	    //email 값이 있다면 eam
+	    if(email_val !== '') {
+	        //@ 이후 도메인을 추출 후 input을 생성
+	        var start = email_val.indexOf("@");
+	        var domain_id = email_val.substring(0, start);
+	        var domain_list = email_val.substring(start + 1);
+	    }
+
+	    if(email_val == ''){
+	        $('.' + alert_area).removeClass('success');
+	        $('.' + alert_area).addClass('error');
+	        $("."+alert_area).html("E-mail을 입력하지 않으셨습니다.");
+	        return false;
+	    }else {
+	        if (!inter_data.test(email_val)) {
+	            mail_id.val('');
+	            $('.' + alert_area).removeClass('success');
+	            $('.' + alert_area).addClass('error');
+	            $("." + alert_area).html("잘못된 E-mail 형식 입니다.");
+	            return false;
+	        } else {
+	            $("." + alert_area).html('');
+	            $("input[name=email]").val(email_val);
+	            $("input[name=mail_id_f]").val(domain_id);
+	            $("input[name=mail_id_s]").val(domain_list);
+	            return true;
+	        }
+	    }
+
+	}
+
+	/**
+	 * 생년 월일 유효성 체크
+	 * @param param
+	 * @returns {boolean}
+	 */
+	function isValidDate(param) {
+	    try{
+	        param = param.replace(/-/g,'');
+
+	        // 자리수가 맞지않을때
+	        if( isNaN(param) || param.length!=8 ) {
+	            return false;
+	        }
+
+	        var year = Number(param.substring(0, 4));
+	        var month = Number(param.substring(4, 6));
+	        var day = Number(param.substring(6, 8));
+
+	        var dd = day / 0;
+
+	        if( month<1 || month>12 ) {
+	            return false;
+	        }
+
+	        var maxDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	        var maxDay = maxDaysInMonth[month-1];
+
+	        // 윤년 체크
+	        if( month==2 && ( year%4==0 && year%100!=0 || year%400==0 ) ) {
+	            maxDay = 29;
+	        }
+
+	        if( day<=0 || day>maxDay ) {
+	            return false;
+	        }
+	        return true;
+
+	    } catch (err) {
+	        return false;
+	    }
+	}
+
 
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

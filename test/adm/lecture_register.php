@@ -2,10 +2,10 @@
 	include('../header.php');
 	include('../config/database.php');
 
-	if ($is_adm) {
+	if ($mb_level) {
 
 	} else {
-		echo "<script>관리자 전용 페이지 입니다.</script>";
+		echo "<script>alert('관리자 전용 페이지 입니다.');</script>";
 	}
 
 	$sql = "SELECT * FROM hac_board";
@@ -104,7 +104,7 @@
 				</tbody>
 			</table>
 			<div class="box-btn t-r">
-				<input type="submit" class="btn-m" value="강의 등록">
+				<input type="submit" class="btn-m" value="등록 하기">
 			</div>
 		</div>
 	</form>

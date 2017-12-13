@@ -2,6 +2,11 @@
 	include_once('../header.php');
 	include_once('../config/database.php');
 
+	// print_r($_GET);
+
+	$b_no = trim($_GET['no']);
+	$b_mode = trim($_GET['mode']);
+
 	$sql = "SELECT * FROM hac_board";
 
 	$result = $conn->query($sql);
@@ -22,7 +27,23 @@
 
 	// print_r($mb_id);
 
-	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id'";
+	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id' AND writeid = '$b_no'";
+
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		while($row = $result->fetch_assoc()) {
+			$bo_content = $row;
+		}
+
+	} else {
+
+    	echo "0 results";
+    	
+	}
+
+	// print_r($bo_content);
 
 	$conn->close();
 
@@ -71,20 +92,19 @@
 					<th scope="col">강의</th>
 					<td>
 						<select class="input-sel" name="lecture_title" style="width:160px">
-						<?php foreach ($bo_info as $key => $value) { ?>
+<!-- 						<?php foreach ($bo_info as $key => $value) { ?>
 							<option value="<?=$value['botable'];?>"><?=$value['botable'];?></option>
-						<?php } ?>
+						<?php } ?> -->
+						<option><?php echo $bo_content['botable'] ?></option>
 						</select>
 						<select class="input-sel ml5" name="lecture_cat" style="width:454px">
-						<?php foreach ($categories as $key => $value) { ?>
-							<option value="<?=$value;?>"><?=$value;?></option>
- 						<?php } ?>		
+						<option><?php echo $bo_content['bocategory'] ?></option>
 						</section>
 					</td>
 				</tr>
 				<tr>
 					<th scope="col">제목</th>
-					<td><input type="text" class="input-text" style="width:611px"/></td>
+					<td><input type="text" class="input-text" name="review_title" style="width:611px" value="<?php echo $bo_content['writesubject'] ?>"/></td>
 				</tr>
 				<tr>
 					<th scope="col">강의만족도</th>
@@ -92,7 +112,7 @@
 						<ul class="list-rating-choice">
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id="" checked="checked"/>
+									<input type="radio" name="stradio" id="star5" value="5"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -101,7 +121,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id="star4" value="4"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -110,7 +130,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id="star3"  value="3"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -119,7 +139,7 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id="star2"  value="2"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
@@ -128,13 +148,17 @@
 							</li>
 							<li>
 								<label class="input-sp ico">
-									<input type="radio" name="radio" id=""/>
+									<input type="radio" name="stradio" id="star1"  value="1"/>
 									<span class="input-txt">만점</span>
 								</label>
 								<span class="star-rating">
 									<span class="star-inner" style="width:20%"></span>
 								</span>
 							</li>
+							<input type="hidden" name="review_star" value="5" />
+							<input type="hidden" name="mb_id" value="<?=$mb_id?>" />
+							<input type="hidden" name="mb_name" value="<?=$mb_name?>" />
+							<input type="hidden" name="mode" value="<?=$b_mode?>" />
 						</ul>
 					</td>
 				</tr>
@@ -149,7 +173,7 @@
 	
 		<div class="box-btn t-r">
 			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5">수정 </a>
+			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
 		</div>
 	</div>
 </div>
@@ -281,6 +305,20 @@
 	}
 </script>
 <script type="text/javascript">
+	$(document).ready(function(){
+	    $("#star"+<?php echo $bo_content['lecturestar']?>).attr('checked', true);
+	    $('input[type=hidden][name="review_star"]').val(<?php echo $bo_content['lecturestar']?>);
+		Editor.modify({
+			"content": "<?php echo $bo_content['writecontents']; ?>"/* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
+		});
+		$('input[type=radio][name=stradio]').change(function(){
+	    	$('input[type=hidden][name=review_star]').val(this.value);
+	    });
+	    $('#review_modify').click(function(){
+	    	// alert(editor.getContent());
+	    	saveContent();
+	    });
+	});
     $("select[name=lecture_title]").change((function(e){
     	var c_id = $("select[name=lecture_title]").val();
     	// alert(c_id);
@@ -292,10 +330,15 @@
                 cache: false,
                 success : function(data, status, xhr) {
                 	// alert(data);
-                	$("select[name=lecture_cat]").find('option').remove().end();
-                	var category_detail = data.split('|');
-                	for(i=0; i<category_detail.length;i++){
-                		$("select[name=lecture_cat]").append( $('<option/>').val(category_detail[i]).text(category_detail[i]) );
+                	if(data == false){
+                		$("select[name=lecture_cat]").append( $('<option/>').val('등록된 강의가 없습니다.').text('등록된 강의가 없습니다.') );
+                	}
+                	else {
+                		$("select[name=lecture_cat]").find('option').remove().end();
+	                	var category_detail = $.parseJSON(data);
+	                	for(i=0; i<category_detail.length;i++){
+	                		$("select[name=lecture_cat]").append( $('<option/>').val(category_detail[i]).text(category_detail[i]) );
+	                	}
                 	}
                 },
             }).done(function(response, data){

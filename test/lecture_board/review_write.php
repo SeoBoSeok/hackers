@@ -177,7 +177,7 @@
 		</form>
 
 		<div class="box-btn t-r">
-			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
+			<a href="./review_list.php?page=1" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
 		</div>
 
@@ -329,16 +329,21 @@
                 // cache: false,
                 // dataType: json,
                 success : function(data, status, xhr) {
-                	// console.log(data, status, xhr);
-                	console.log(data);
+
+                	// console.log(data[0]);
+
                 	$("select[name=lecture_cat]").find('option').remove().end();
-                	var category_detail = data.split('|');
-                	for(i=0; i<category_detail.length; i++){
+                	// var category_detail = data.split('|');
+                	var category_detail = $.parseJSON(data);
+                	// console.log(data);
+                	// console.log($.parseJSON(data));
+
+                	for (i=0; i<category_detail.length; i++) {
                 		$("select[name=lecture_cat]").append( $('<option/>').val(category_detail[i]).text(category_detail[i]) );
                 	}
                 },
             }).done(function(response, data){
-            	console.log(data);
+            	// console.log(data);
             });
         }));
 </script>

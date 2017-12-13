@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	switch ($_GET['mode']) {
 		// case 'list':
 		// 	include('./review_list.php');
@@ -17,9 +19,9 @@
 		// 	include('./review_modify.php');
 		// 	break;							
 		
-		// default:
-		// 	include('./review_list.php');
-		// 	break;
+		default:
+			include('./lecture_list.php');
+			break;
 	}
 
 ?>

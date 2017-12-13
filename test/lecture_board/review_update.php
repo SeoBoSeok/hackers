@@ -23,14 +23,19 @@
 	// print_r($_POST['content']);
 	// echo $_POST['mb_id'];
 
-	$sql = "INSERT INTO hac_board_write (writerid, writername, writesubject, writecontents, botable, bocategory, lecturestar )
+	if ( trim($_GET['mode']='M') ){
+		$sql = "UPDATE hac_board_write SET writername = '$writername', writesubject = '$writesubject', writecontents = '$writecontents', botable = '$botable', bocategory = '$bocategory', lecturestar = '$lecturestar' WHERE writerid = '$writerid'";
+	} else {
+		$sql = "INSERT INTO hac_board_write (writerid, writername, writesubject, writecontents, botable, bocategory, lecturestar )
 	VALUES ('$writeid', '$writername', '$writesubject', '$writecontents','$botable', '$bocategory', '$lecturestar')";
-		if ($conn->query($sql) === TRUE) {
-		    // echo "New record created successfully";
-			header("Location: http://test.hackers.com/lecture_board/?mode=list", true, 301);
-		} else {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
-		}
+	}
+
+	if ($conn->query($sql) === TRUE) {
+	    // echo "New record created successfully";
+		header("Location: http://test.hackers.com/lecture_board/?mode=list", true, 301);
+	} else {
+	    echo "Error: " . $sql . "<br>" . $conn->error;
+	}
 
 	$conn->close();
 

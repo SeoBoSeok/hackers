@@ -2,6 +2,7 @@
 	session_start();
 	$mb_id = $_SESSION['mb_id'];
 	$mb_name = $_SESSION['mb_name'];
+	$mb_level = $_SESSION['mb_level'];
 ?>
 
 <div class="top-section">
@@ -9,7 +10,7 @@
 				<div class="link-box">
 					<?php
 						if ($mb_id) // 로그인한 상태($mb_id로 구별)
-							echo "<a href='/logout.php' id='hackers_logout'>로그아웃</a><a href='/member/register?mode=modify'>회원정보 수정</a>";
+							echo "<a href='#' id='hackers_logout'>로그아웃</a><a href='/member/register?mode=modify'>회원정보 수정</a>";
 						else // 로그아웃 상태
 							echo "<a href='/member'>로그인</a><a href='/member/register?mode=step_01'>회원가입</a>"
 					?>
@@ -26,7 +27,7 @@
 				var logout_key = confirm("정말 로그아웃 하시겠습니까");
 				if (logout_key) {
 					$.ajax({
-		                url: "./logout.php",
+		                url: "/logout.php",
 		                type: "POST",
 		                data: { logout_key : true },
 		                // dataType: "json",

@@ -18,7 +18,7 @@
     	
 	}
 
-	print_r($total);
+	// print_r($total);
 	// print_r($total[0]['lthumbnail']);
 	// print_r($total['lthumnail']);
 
@@ -69,7 +69,7 @@
 			</table>
 
 			<div class="box-btn t-r">
-				<a href="./lecture_cat_add.php">분류 추가</a>
+				<a href="./lecture_cat_add.php" class="btn-m">분류 추가</a>
 			</div>
 		</div>
 	<!-- </form> -->

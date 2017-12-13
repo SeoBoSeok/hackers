@@ -65,7 +65,7 @@
 							<a href="#">직무교육 안내</a>
 							<ul class="nav-sub-lst">
 								<li><a href="/lecture_board/?mode=list">수강후기</a></li>
-								<li><a href="#">서브메뉴</a></li>
+								<li><a href="/adm/index.php" class="is_adm">관리자</a></li>
 								<li><a href="#">서브메뉴</a></li>
 								<li><a href="#">서브메뉴</a></li>
 								<li><a href="#">서브메뉴</a></li>
@@ -98,3 +98,13 @@
 			</div>
 
 		</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.is_adm').click(function(){
+			if(<?php echo $mb_level?> < 10) {
+				alert('관리자 권한 획득 후 이용하실 수 있습니다.');
+			}
+		});
+	});
+</script>
