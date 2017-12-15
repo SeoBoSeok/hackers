@@ -2,17 +2,12 @@
 	include_once('../../header.php');
 	session_start();
 
-	// echo $_POST['agree1'];
-
 	$_SESSION["mobile_auth_code"] = 123456;
-	// echo "Session variables are set.";
 
 	$auth_hp = '';
 
 	// print_r($_SERVER);
 	// echo $_SERVER['HTTP_REFERER'];
-
-	// echo (!($_POST['agree1']=='y'));
 
 	if ( (($_POST['agree1'] == 'y') + ($_POST['agree2'] == 'y')) <= 1 ) {
 		echo "<script>alert(\"먼저 이용약관과 개인정보 취급방침에 동의를 하셔야 합니다.\");</script>";
@@ -115,14 +110,12 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#check_mo_auth').click('on', function(e){
-			// alert($('input[name="mo_auth"]').val());
 			if ( $('input[name="mo_check"]').val() == 123456 ) {
 				$('#auth_hp').val('y');
-				alert('Succees!! Authentification!!');
-				// location.href = './register_step03.php';
+				alert('성공!! 다음 단계로 이동합니다!!');
 			} else {
-				alert('Fail to get Authentification!!');
-				e.preventDefault();
+				alert('인증번호를 다시 확인해주세요!!');
+				e.preventDefault();				
 			}
 		});
 

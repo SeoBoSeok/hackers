@@ -22,9 +22,6 @@
 
 	$write = 'W'; // write mode 가입모드
 
-	// $_SESSION['mb_id'] = 'ggybbo';
-	// $mb_id = 'ggybbo';
-
 	if ($mb_id) {
 		$write = 'M';
 		include('../../config/database.php');
@@ -34,10 +31,6 @@
 
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-
-				// print_r($row);
-				// print_r($mb_level);
-
 				$agree1 = $row['mb_agree1'];
 				$agree2 = $row['mb_agree2'];
 				$auth_hp = $row['mb_hp_certify'];
@@ -65,8 +58,6 @@
 		$mb_tel_1 = $mb_tel_full[0];
 		$mb_tel_2 = $mb_tel_full[1];
 		$mb_tel_3 = $mb_tel_full[2];
-
-		// echo $mb_postcode;
 
 	} else {
 
@@ -123,7 +114,7 @@
 		    <input type="hidden" name="agree1" value="<?php echo $agree1 ?>">
 		    <input type="hidden" name="agree2" value="<?php echo $agree2 ?>">
 		    <input type="hidden" name="auth_hp" value="<?php echo $auth_hp ?>">
-		    <!-- <input type="hidden" name="cert_no" value=""> -->
+		    <input type="hidden" name="auth_id" value="<?php echo $auth_id ?>">
 				<table border="0" cellpadding="0" cellspacing="0" class="tbl-col-join">
 					<caption class="hidden">강의정보</caption>
 					<colgroup>
@@ -148,11 +139,11 @@
 						<?php if(!$mb_id): ?>
 						<tr>
 							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호":"비밀번호"; ?></th>
-							<td><input type="password" class="input-text" style="width:302px" name="mb_password" placeholder="8-15자의 영문자/숫자/특수문자 혼합"/></td>
+							<td><input type="password" class="input-text" style="width:302px" name="mb_password" placeholder="8-15자의 영문자/숫자/특수문자 혼합"/><p class="tip pass_alert"></p></td>
 						</tr>
 						<tr>
 							<th scope="col"><span class="icons">*</span><?php echo ($write=='M')?"새로운 비밀번호 확인":"비밀번호 확인"; ?></th>
-							<td><input type="password" class="input-text" style="width:302px" name="mb_password_re"/></td>
+							<td><input type="password" class="input-text" style="width:302px" name="mb_password_re"/><p class="tip re_pass_alertare"></p></td>
 						</tr>
 						<?php endif; ?>
 						<?php if(!$mb_id): ?>
@@ -169,6 +160,7 @@
 									<option value="nate.com">nate.com</option>
 								</select>
 								<input type="hidden" name="mb_email" id="mb_email_from_str" />
+								<p class="tip email_alert"></p>
 							</td>
 						</tr>
 						<?php endif; ?>
@@ -277,6 +269,10 @@ $(document).ready(function(e){
     $("#check_duplicated_id").on('click',(function(e){
 
     	var c_id = $('input[name="mb_id"]').val();
+    	if (!c_id) {
+    		alert('아이디를 입력해주세요');
+    		return;
+    	}
         e.preventDefault();
             $.ajax({
                 url: "./ajax_checkid.php",
@@ -483,6 +479,23 @@ $(document).ready(function(e){
 		userid_validate($('input[type=text][name=mb_id]'), $('.id_alert'));
 	});
 
+	$('input[type=password][name=mb_password]').focusout(function(){
+		pass_validate($('input[type=password][name=mb_password]'), $('.pass_alert'));
+	});
+
+	$('input[type=password][name=mb_password_re]').focusout(function(){
+		if($('input[type=password][name=mb_password]').val() != $('input[type=password][name=mb_password_re]').val()){
+			$('.re_pass_alertare').html('<span style="color:red">비밀번호를 동일하게 입력해주세요</span>');
+			$('input[type=password][name=mb_password_re]').focus();
+			return false;
+		}
+		$('.re_pass_alertare').html('');
+	});
+
+	$('input[type=text][name=mb_tel_01]').focusin(function(){
+		email_validate($('input[type=hidden][name=mb_email]'), $('.email_alert'));
+	});
+
 	/**
 	 * 이름 유효성 체크
 	 * @param is_this
@@ -512,43 +525,51 @@ $(document).ready(function(e){
 	    }
 	    //공백 체크
 	    if(is_this.val().replace(blank_pattern, '' ) == "" ){
-	        $("."+alert_area).html("이름을 입력 해주세요.");
+	        $("."+alert_area).html("<span style='color:red'>이름을 입력 해주세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 	    //빈값 체크
 	    if(is_this.val() == ''){
-	        $("."+alert_area).html("이름을 입력 해주세요.");
+	        $("."+alert_area).html("<span style='color:red'>이름을 입력 해주세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 	    //영문,한글,띄어쓰기 허용
 	    if(inter_date_etc.test(is_this.val())){
-	        $("."+alert_area).html("한글 또는 영문을 사용하세요.");
+	        $("."+alert_area).html("<span style='color:red'>한글 또는 영문을 사용하세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 	    //한글 인지 아닌지 체크 후 글자 수 계산
 	    if(inter_date_kr_str.test(is_this.val())) {
 	        if(is_this.val().length  < 2){
-	            $("."+alert_area).html("이름은 2자 이상이어야 합니다.");
+	            $("."+alert_area).html("<span style='color:red'>이름은 2자 이상이어야 합니다.</span>");
+	            is_this.focus();
 	            return false;
 	        }
 	        if(is_this.val().length  >  25){
-	            $("."+alert_area).html("이름은 25자 이하이어야 합니다.");
+	            $("."+alert_area).html("<span style='color:red'>이름은 25자 이하이어야 합니다.</span>");
+	            is_this.focus();
 	            return false;
 	        }
 	    }else{
 	        if(is_this.val().length  < 2){
-	            $("."+alert_area).html("이름은 2자 이상이어야 합니다.");
+	            $("."+alert_area).html("<span style='color:red'>이름은 2자 이상이어야 합니다.</span>");
+	            is_this.focus();
 	            return false;
 	        }
 	        if(is_this.val().length  >  50){
-	            $("."+alert_area).html("이름은 50자 이하이어야 합니다.");
+	            $("."+alert_area).html("<span style='color:red'>이름은 50자 이하이어야 합니다.</span>");
+	            is_this.focus();
 	            return false;
 	        }
 	    }
 
 		if (inter_data.test(is_this.val())) {
 	        if(is_this.attr('name') == 'name'){
-	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로만 입력 하세요.'));
+	            is_this.siblings( $("."+alert_area).html('<span style="color:red">이름을 한글 또는 영문으로만 입력 하세요.</span>'));
+	            is_this.focus();
 	        }
 			is_this.val(is_this.val().replace(inter_data, ''));
 			return false;
@@ -557,14 +578,16 @@ $(document).ready(function(e){
 	    //영문,한글 혼용 불가
 	    if(inter_date_kr_str.test(is_this.val())) {
 	        if (inter_date_kr.test(is_this.val())) {
-	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로 혼동이 불가능 합니다.'));
+	            is_this.siblings( $("."+alert_area).html('<span style="color:red">이름을 한글 또는 영문으로 혼동이 불가능 합니다.</span>'));
+	            is_this.focus();
 	            //is_this.val(is_this.val().replace(inter_date_kr, ''));
 	            is_this.val('');
 	            return false;
 	        }
 	    }else if(inter_date_eng_str.test(is_this.val())) {
 	        if (inter_date_eng.test(is_this.val())) {
-	            is_this.siblings( $("."+alert_area).html('이름을 한글 또는 영문으로 혼동이 불가능 합니다.'));
+	            is_this.siblings( $("."+alert_area).html('<span style="color:red">이름을 한글 또는 영문으로 혼동이 불가능 합니다.</span>'));
+	            is_this.focus();
 	            //is_this.val(is_this.val().replace(inter_date_eng, ''));
 	            is_this.val('');
 	            return false;
@@ -606,28 +629,33 @@ $(document).ready(function(e){
 	    // alert(is_this.val());
 
 	    if (is_this.val() == ''){
-	        $("."+alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        $(alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 
 
 	    if (inter_date.test(is_this.val())){
 	        is_this.val(is_this.val().replace(is_this.val(), ''));
-	        $("."+alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        $(alert_area).html("<span style='color:red'>아이디를 입력해주세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 
 	    if((is_this.val().length < 4) && alert_area == 'id_alert'){
-		    $("."+alert_area).html("<span style='color:red'>아이디는 4자 이상의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+		    $(alert_area).html("<span style='color:red'>아이디는 4자 이상의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+		    is_this.focus();
 		    return false;
 		}
 
 	    if((is_this.val().length > 50) && alert_area == 'id_alert'){
-	        $("."+alert_area).html("<span style='color:red'>아이디는 50자 이하의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+	        $(alert_area).html("<span style='color:red'>아이디는 50자 이하의 영문(소문자), 숫자, 특수문자(-,_)를 입력해주세요.</span>");
+	        is_this.focus();
 	        return false;
 	    }
 	    //모든 문자는 소문자로 변환
 		is_this.val(is_this.val().toLowerCase());
+		$(alert_area).html('');
 		return true;
 	}
 
@@ -659,22 +687,26 @@ $(document).ready(function(e){
 		var spe = pw.search(/[`~!@@#$%^&*|\\\'\";:\/?]/gi);
 
 		if(!pw) {
-			$("."+alert_area).html("비밀번호를 입력 해주세요.");
+			$(alert_area).html("비밀번호를 입력 해주세요.");
+			is_this.focus();
 			return;
 		}
 
 		if(pw.length < 10 || pw.length > 32){
-		    $("."+alert_area).html("10~32자로 입력해주세요");
+		    $(alert_area).html("10~32자로 입력해주세요");
+		    is_this.focus();
 		    return;
 		}
 
 	    if(pw.search(/\s/) != -1){
-			$("."+alert_area).html("비밀번호는 공백없이 입력해주세요.");
+			$(alert_area).html("비밀번호는 공백없이 입력해주세요.");
+			is_this.focus();
 		    return;
 		}
 
 		if(num < 0 || eng < 0){
-			$("."+alert_area).html("영문,숫자 조합하여 10자리 이상으로 설정해주세요.");
+			$(alert_area).html("영문,숫자 조합하여 10자리 이상으로 설정해주세요.");
+			is_this.focus();
 		    return;
 		}
 		return true;
@@ -705,36 +737,34 @@ $(document).ready(function(e){
 	function email_validate(email_val,alert_area){
 	    //email 규칙 정규식
 	    var inter_data = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    var mail_id = $('input[name=mail_id]');
+	    // var mail_id = $('input[name=mail_id]');
 	    //email 값이 있다면 eam
-	    if(email_val !== '') {
-	        //@ 이후 도메인을 추출 후 input을 생성
-	        var start = email_val.indexOf("@");
-	        var domain_id = email_val.substring(0, start);
-	        var domain_list = email_val.substring(start + 1);
-	    }
+	    // if(email_val !== '') {
+	    //     //@ 이후 도메인을 추출 후 input을 생성
+	    //     var start = email_val.indexOf("@");
+	    //     var domain_id = email_val.substring(0, start);
+	    //     var domain_list = email_val.substring(start + 1);
+	    // }
 
-	    if(email_val == ''){
-	        $('.' + alert_area).removeClass('success');
-	        $('.' + alert_area).addClass('error');
-	        $("."+alert_area).html("E-mail을 입력하지 않으셨습니다.");
+	    if (email_val == '') {
+	        $(alert_area).removeClass('success');
+	        $(alert_area).addClass('error');
+	        $(alert_area).html("E-mail을 입력하지 않으셨습니다.");
 	        return false;
-	    }else {
+	    } else {
 	        if (!inter_data.test(email_val)) {
-	            mail_id.val('');
-	            $('.' + alert_area).removeClass('success');
-	            $('.' + alert_area).addClass('error');
-	            $("." + alert_area).html("잘못된 E-mail 형식 입니다.");
+	            $(alert_area).removeClass('success');
+	            $(alert_area).addClass('error');
+	            $(alert_area).html("<span style='color:red'>잘못된 E-mail 형식 입니다.</span>");
 	            return false;
 	        } else {
-	            $("." + alert_area).html('');
+	            $(alert_area).html('');
 	            $("input[name=email]").val(email_val);
 	            $("input[name=mail_id_f]").val(domain_id);
 	            $("input[name=mail_id_s]").val(domain_list);
 	            return true;
 	        }
 	    }
-
 	}
 
 	/**
