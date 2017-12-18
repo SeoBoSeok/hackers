@@ -42,6 +42,8 @@
 				$mb_add1 = $row['mb_add1'];
 				$mb_add_jibun = $row['mb_add_jibun'];
 				$mb_add2 = $row['mb_add2'];
+				$mb_sms = $row['mb_sms'];
+				$mb_mailing = $row['mb_mailing'];
 			}
 		}
 
@@ -809,6 +811,24 @@ $(document).ready(function(e){
 	    }
 	}
 
+	// $('input[type=radio][name=sms][value=n]').attr('checked', true);
+
+	// SMS 수신 및 메일 수신 불러오기
+	if (<?php echo ($mb_sms == 'y') ? "true" : "false";  ?> == true) {
+		$('input[type=radio][name=sms][value=y]').attr('checked', true);
+		$('input[type=radio][name=sms][value=n]').attr('checked', false);
+	} else {
+		$('input[type=radio][name=sms][value=y]').attr('checked', false);
+		$('input[type=radio][name=sms][value=n]').attr('checked', true);
+	}
+
+	if (<?php echo ($mb_mailing == 'y') ? "true" : "false";  ?> == true) {
+		$('input[type=radio][name=mailing][value=y]').attr('checked', true);
+		$('input[type=radio][name=mailing][value=n]').attr('checked', false);
+	} else {
+		$('input[type=radio][name=mailing][value=y]').attr('checked', false);
+		$('input[type=radio][name=mailing][value=n]').attr('checked', true);
+	}
 
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

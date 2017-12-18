@@ -18,7 +18,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -178,7 +178,7 @@
 
 		<div class="box-btn t-r">
 			<a href="./review_list.php?page=1" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
+			<a href="#" class="btn-m ml5" id="review_modify">등록 </a>
 		</div>
 
 	</div>

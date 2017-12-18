@@ -18,7 +18,7 @@
     	
 	}
 
-	print_r($bo_list);
+	// print_r($bo_list);
 
 	$conn->close();
 

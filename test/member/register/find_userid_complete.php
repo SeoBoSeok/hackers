@@ -4,9 +4,10 @@
 
 	session_start();
 
+	$mb_id = $_POST['mb_id_find'];
 	$mb_name = $_POST['find_name'];
 
-	$sql = "SELECT mb_id FROM member WHERE mb_name = '$mb_name'";
+	$sql = "SELECT mb_id FROM member WHERE mb_id = '$mb_id_find' AND mb_name = '$mb_name'";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {

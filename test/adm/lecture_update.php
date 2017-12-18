@@ -2,6 +2,8 @@
 
 	include ('../config/database.php');
 
+  $home_url = 'http://test.hackers.com/adm/';
+
 	$lname = $_POST['lname'];
 	$lcat = $_POST['lcat'];
 	$ltitle = $_POST['ltitle'];
@@ -12,6 +14,8 @@
 	$thiumnail = '';
 
 	$uploaddir = $_SERVER['DOCUMENT_ROOT'] . "/data";
+
+  // print_r($home_url);
 
   define('_UPLOADPATH', 'data/');
 
@@ -46,7 +50,7 @@
     		if ($result->num_rows > 0) {
 
     			while($row = $result->fetch_assoc()) {
-    			
+    			 header('Location: ' . $home_url);
           }
 
     		} else {

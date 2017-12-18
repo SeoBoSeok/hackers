@@ -2,7 +2,13 @@
 	
 	include('../config/database.php');
 
-	$writeid = $_POST['mb_id'];
+	// print_r($_POST);
+	// print_r($_FILE);
+
+	$review_mode = trim($_POST['mode']);
+	$bo_name = trim($_POST['board_no']);
+
+	$writerid = $_POST['mb_id'];
 	$writername = $_POST['mb_name'];
 	$writesubject = $_POST['review_title'];
 	$writecontents = stripslashes($_POST['content']);
@@ -11,23 +17,15 @@
 	$bocategory = $_POST['lecture_cat'];
 	$lecturestar = $_POST['review_star'];
 
+	// $thumnail[] = $_
+
 	$url = $_POST['url'];
 
-	// print_r($_POST);
-
-	// echo $_POST['lecture_cat'];
-	// echo $_POST['review_title'];
-	// echo $_POST['review_star'];
-	// echo $_POST['content'];
-	// echo $_POST['lecture_content'];
-	// print_r($_POST['content']);
-	// echo $_POST['mb_id'];
-
-	if ( trim($_GET['mode']='M') ){
-		$sql = "UPDATE hac_board_write SET writername = '$writername', writesubject = '$writesubject', writecontents = '$writecontents', botable = '$botable', bocategory = '$bocategory', lecturestar = '$lecturestar' WHERE writerid = '$writerid'";
+	if ( $review_mode ){
+		$sql = "UPDATE hac_board_write SET writername = '$writername', writesubject = '$writesubject', writecontents = '$writecontents', botable = '$botable', bocategory = '$bocategory', lecturestar = '$lecturestar' WHERE writeid = '$bo_name'";
 	} else {
 		$sql = "INSERT INTO hac_board_write (writerid, writername, writesubject, writecontents, botable, bocategory, lecturestar )
-	VALUES ('$writeid', '$writername', '$writesubject', '$writecontents','$botable', '$bocategory', '$lecturestar')";
+	VALUES ('$writerid', '$writername', '$writesubject', '$writecontents','$botable', '$bocategory', '$lecturestar')";
 	}
 
 	if ($conn->query($sql) === TRUE) {

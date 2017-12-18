@@ -159,6 +159,7 @@
 							<input type="hidden" name="mb_id" value="<?=$mb_id?>" />
 							<input type="hidden" name="mb_name" value="<?=$mb_name?>" />
 							<input type="hidden" name="mode" value="<?=$b_mode?>" />
+							<input type="hidden" name="board_no" value="<?=$_GET['no']?>" />
 						</ul>
 					</td>
 				</tr>

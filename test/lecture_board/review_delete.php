@@ -3,7 +3,7 @@
 	include_once('../header.php');
 	include_once('../config/database.php');
 
-	$bo_no = $_GET['no'];
+	$bo_no = $_POST['no'];
 
 	$sql = "DELETE FROM hac_board_write WHERE writeid = '$bo_no' LIMIT 1";
 

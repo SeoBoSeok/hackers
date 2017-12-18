@@ -14,13 +14,9 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
-
-	// print_r($total);
-	// print_r($total[0]['lthumbnail']);
-	// print_r($total['lthumnail']);
 
 ?>
 <body>

@@ -21,7 +21,7 @@
     	
 	}
 
-	print_r($home_url);
+	// print_r($home_url);
 
 	$bo_content_q_subject = $bo_content['bocategory'];
 	$bo_content_q_table =  $bo_content['botable'];
@@ -226,7 +226,7 @@
 			
 			<?php if ($bo_content['writerid'] == $mb_id): ?>
 				<a href="./review_modify.php?mode=M&no=<?php echo $w_id; ?>" class="btn-m ml5">수정</a>
-				<a href="./review_delete.php?no=<?php echo $w_id; ?>" class="btn-m-dark">삭제</a>
+				<a href="#" class="btn-m-dark" id="btn_review_delete">삭제</a>
 			<?php endif; ?>
 
 		</div>
@@ -283,7 +283,7 @@
 					<td>
 						<a href="?mode=view&no=<?=$value['writeid']?>">
 							<span class="tc-gray ellipsis_line">수강 강의명 : <?=$value['writesubject'];?></span>
-							<strong class="ellipsis_line"><?=$value['writecontents']?></strong>
+							<strong class="ellipsis_line"><?php echo strip_tags($value['writecontents']); ?></strong>
 						</a>	
 					</td>
 					<td>
@@ -338,6 +338,31 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#btn_review_delete').click(function(e){
+			e.preventDefault();
+			var delete_board = confirm('정말 삭제하시겠습니까?');
+			if (delete_board) {
+				$.ajax({
+	                url: "./review_delete.php",
+	                type: "POST",
+	                data: { no : <?php echo $w_id; ?> },
+	                cache: false
+	            }).done(function(response){
+	            	if (response) {
+	            		alert('삭제가 완료되었습니다.');
+	            		window.location.href = "http://test.hackers.com/lecture_board/?mode=list";
+	            	} else {
+	            		alert('해당 분류가 등록되어 있지 않습니다.');
+	            	}
+	            });
+			} else {
+				return;
+			}
+		});
+	});
+</script>
 <?php
 	include_once('../footer.php');
 ?>

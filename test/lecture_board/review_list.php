@@ -1,6 +1,7 @@
 <?php
 	include_once('../header.php');
 	include_once('../config/database.php');
+	include_once('../common.php');
 
 	$category = $_GET['category'];
 
@@ -19,7 +20,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -29,6 +30,8 @@
 
 	if($_GET['category'])
 		$sql .= " WHERE bocategory = '$category'";
+
+	$sql .= " ORDER BY writeid DESC ";
 
 	// print_r($sql);
 
@@ -44,8 +47,10 @@
 
 		$sql .= " LIMIT $offset, $page_result";
 	} else {
-		$sql .= " LIMIT 0, $page_result";	
+		$sql .= " LIMIT 0, $page_result";
 	}
+
+	// print_r($sql);
 
 	$result = $conn->query($sql);
 
@@ -59,7 +64,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -77,7 +82,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -91,9 +96,11 @@
 	$sql = "SELECT * FROM hac_board_write";
 
 	if($_GET['category'])
-		$sql .= " WHERE bocategory = '$category'";
+		$sql .= " WHERE botable = '$category'";
 
 	$sql .= " ORDER BY writehit DESC LIMIT 3";
+
+	// print_r($sql);
 
 	$result = $conn->query($sql);
 
@@ -107,7 +114,7 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
 
@@ -197,7 +204,11 @@
 						<td>
 							<a href="?mode=view&no=<?=$value['writeid']?>">
 								<span class="tc-gray ellipsis_line">수강 강의명 : <?=$value['writesubject'];?></span>
-								<strong class="ellipsis_line"><?=$value['writecontents']?></strong>
+								<strong class="ellipsis_line">
+									<?php
+										echo strip_tags($value['writecontents']);
+									?>
+								</strong>
 							</a>
 						</td>
 						<td>
@@ -227,7 +238,11 @@
 					<td>
 						<a href="?mode=view&no=<?=$value['writeid']?>">
 							<span class="tc-gray ellipsis_line">수강 강의명 : <?=$value['writesubject'];?></span>
-							<strong class="ellipsis_line"><?=$value['writecontents']?></strong>
+							<strong class="ellipsis_line">
+								<?php
+									echo strip_tags($value['writecontents']);
+								?>
+							</strong>
 						</a>	
 					</td>
 					<td>

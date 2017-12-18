@@ -9,7 +9,7 @@
 	$result = $conn->query($sql);
 
 	// print_r($result);
-	print_r($result->num_rows);
+	// print_r($result->num_rows);
 
 	if ($result->num_rows > 0) {
 
@@ -21,5 +21,5 @@
     	
 	}
 
-	print_r($total);
+	// print_r($total);
 ?>

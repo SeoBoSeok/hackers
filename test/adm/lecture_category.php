@@ -14,14 +14,9 @@
 
 	} else {
 
-    	echo "0 results";
+    	// echo "0 results";
     	
 	}
-
-	// print_r($total);
-	// print_r($total[0]['lthumbnail']);
-	// print_r($total['lthumnail']);
-
 ?>
 <body>
 <!-- skip nav -->
@@ -80,7 +75,7 @@
 	$(document).ready(function(){
 		$('.del_cat').click('on', function(){
 			// alert(this.value);
-			var agree = confirm('저말 삭제하시 겠습니까');
+			var agree = confirm('정말 삭제하시겠습니까');
 			if(agree){
 				$.ajax({
 	                url: "./lecture_cat_update.php",
@@ -88,11 +83,10 @@
 	                data: { name : this.value },
 	                // dataType: "json",
 	                cache: false
-	            }).done(function(response){
-	            	alert(response);
-	            	if (response) {
+	            }).done(function(response, data){
+	            	if (data == 'success') {
 	            		alert('삭제가 완료되었습니다.');
-	            		window.reload();
+	            		location.reload();
 	            	} else {
 	            		alert('해당 분류가 등록되어 있지 않습니다.');
 	            	}

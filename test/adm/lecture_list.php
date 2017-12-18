@@ -60,7 +60,7 @@
 				</colgroup>
 
 			<thead>
-				<tr>
+				<tr style="height:50px;">
 					<th scope="col">번호</th>
 					<th scope="col">분류</th>
 					<th scope="col">제목</th>

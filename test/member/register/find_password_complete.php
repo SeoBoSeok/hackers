@@ -3,7 +3,11 @@
 
 	session_start();
 
-	$re_mb_id = $_POST['fp_mb_id'];
+	$_SESSION['re_mb_id'] = $_POST['fp_mb_id'];
+
+	// print_r($re_mb_id);
+	// print_r($_SESSION['re_mb_id']);
+	
 ?>
 <body>
 <!-- skip nav -->
@@ -171,7 +175,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<input type="hidden" value="<?php echo $re_mb_id ?>">
+					<input type="hidden" name="re_mb_id" value="<?php echo $re_mb_id ?>">
 					<div class="box-btn">
 						<input type="submit" href="#" class="btn-l" value="확인">
 					</div>

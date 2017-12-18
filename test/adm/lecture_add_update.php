@@ -13,7 +13,7 @@
 	// print_r($sql);
 
 	if ($conn->query($sql) === TRUE) {
-		    echo "New record created successfully";
+		    // echo "New record created successfully";
 			header("Location: http://test.hackers.com/adm/lecture_category.php", true, 301);
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
