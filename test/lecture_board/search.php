@@ -18,26 +18,7 @@
 		$sql .= " AND writername = '$cat3'";
 	}
 
-	// print_r($sql);
-
-	// $offset = 0;
-	// $page_result = 5;
-
-	// if ($_GET['page']) {
-
-	// 	$page = $_GET['page'];
-	// 	if ($page > 1) {
-	// 		$offset = ($page - 1) * $page_result;
-	// 	}
-
-	// 	$sql .= " LIMIT $offset, $page_result";
-	// } else {
-	// 	$sql .= " LIMIT 0, $page_result";	
-	// }
-
 	$result = $conn->query($sql);
-
-	// echo $row_cnt;
 
 	if ($result->num_rows > 0) {
 
@@ -46,8 +27,6 @@
 		}
 
 	} else {
-
-    	// echo "0 results";
     	
 	}
 
@@ -61,17 +40,11 @@
 			$bo_detail_category[] = $row;
 		}
 
-		// print_r($bo_category);
-
 	} else {
-
-    	// echo "0 results";
     	
 	}
 
 	$conn->close();
-	// print_r($sql);
-	// print_r($bo_list);
 
 ?>
 <body>

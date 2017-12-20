@@ -19,8 +19,6 @@
 		}
 
 	} else {
-
-    	// echo "0 results";
     	
 	}
 
@@ -29,11 +27,9 @@
 	$sql = "SELECT * FROM hac_board_write";
 
 	if($_GET['category'])
-		$sql .= " WHERE bocategory = '$category'";
+		$sql .= " WHERE botable = '$category'";
 
 	$sql .= " ORDER BY writeid DESC ";
-
-	// print_r($sql);
 
 	$offset = 0;
 	$page_result = 5;
@@ -50,11 +46,7 @@
 		$sql .= " LIMIT 0, $page_result";
 	}
 
-	// print_r($sql);
-
 	$result = $conn->query($sql);
-
-	// echo $row_cnt;
 
 	if ($result->num_rows > 0) {
 
@@ -63,8 +55,6 @@
 		}
 
 	} else {
-
-    	// echo "0 results";
     	
 	}
 
@@ -78,29 +68,21 @@
 			$bo_category[] = $row;
 		}
 
-		// print_r($bo_category);
-
 	} else {
-
-    	// echo "0 results";
     	
 	}
 
-	// print_r($_GET['category']);
 	if(!isset($_GET['category']))
 		$_cat = 'on';
 	else
 		$_cat = '';
 
-	// 히트수 많은 글 출력
 	$sql = "SELECT * FROM hac_board_write";
 
 	if($_GET['category'])
 		$sql .= " WHERE botable = '$category'";
 
 	$sql .= " ORDER BY writehit DESC LIMIT 3";
-
-	// print_r($sql);
 
 	$result = $conn->query($sql);
 
@@ -110,15 +92,9 @@
 			$hottest_list[] = $row;
 		}
 
-		// print_r($bo_category);
-
 	} else {
-
-    	// echo "0 results";
     	
 	}
-
-	// print_r($hottest_list);
 
 	$conn->close();
 ?>
@@ -149,7 +125,7 @@
 			</div>
 		</div>
 
-		<ul class="tab-list tab5">
+		<ul class="<?php echo "tab-list tab". (count($bo_category) + 1); ?>">
 			<li class=<?php echo $_cat;?>><a href="./?mode=list&page=1">전체</a></li>
 			<?php foreach ($bo_category as $key => $value) { ?>
 				<li class="<?php echo ($value['botable'] == $_GET['category'])?"on":""; ?>"><a href="./?mode=list&page=1&category=<?=stripcslashes($value['botable'])?>"><?=$value['botable']?></a></li>
