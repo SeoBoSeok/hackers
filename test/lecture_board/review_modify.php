@@ -37,6 +37,18 @@
 
 	$conn->close();
 
+	// print_r($bo_content);
+    preg_match_all("/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/i", $bo_content['writecontents'], $matches);
+    // print_r($matches[1][0]);
+
+    $f_divide = explode("/", $matches[1][0]);
+    $f_count = count($f_divide) - 1;
+
+    // print_r($f_divide[1]);
+    print_r($f_divide[$f_count]);
+
+    // print_r($bo_content['writecontents']);
+
 ?>
 <body>
 <!-- skip nav -->
@@ -164,10 +176,11 @@
 	
 		<div class="box-btn t-r">
 			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
-			<a href="#" class="btn-m ml5" id="review_modify">수정 </a>
+			<a href="#" class="btn-m ml5" id="review_modify">수정</a>
 		</div>
 	</div>
 </div>
+<?php //echo $bo_content['writecontents']; ?>
 <script type="text/javascript">
 	var config = {
 		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
@@ -299,8 +312,37 @@
 	$(document).ready(function(){
 	    $("#star"+<?php echo $bo_content['lecturestar']?>).attr('checked', true);
 	    $('input[type=hidden][name="review_star"]').val(<?php echo $bo_content['lecturestar']?>);
+	    var attachments = {};
+		attachments['image'] = [];
+		attachments['image'].push({
+			'attacher': 'image',
+			'data': {
+				'imageurl': '<?=$matches[1]?>',
+				'filename': '<?=$f_divide[$f_count]?>',
+				'filesize': 59501,
+				'originalurl': '<?=$matches[1]?>',
+				'thumburl': '<?=$matches[1]?>'
+			}
+		});
+		// attachments['file'] = [];
+		// attachments['file'].push({
+		// 	'attacher': 'file',
+		// 	'data': {
+		// 		'attachurl': 'http://cfile297.uf.daum.net/attach/207C8C1B4AA4F5DC01A644',
+		// 		'filemime': 'image/gif',
+		// 		'filename': 'editor_bi.gif',
+		// 		'filesize': 640
+		// 	}
+		// });
 		Editor.modify({
-			"content": "<?php echo $bo_content['writecontents']; ?>"/* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
+			"attachments": function () { /* 저장된 첨부가 있을 경우 배열로 넘김, 위의 부분을 수정하고 아래 부분은 수정없이 사용 */
+				var allattachments = [];
+				for (var i in attachments) {
+					allattachments = allattachments.concat(attachments[i]);
+				}
+				return allattachments;
+			}(),
+			"content": '<?=$bo_content['writecontents'];?>' /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
 		});
 		$('input[type=radio][name=stradio]').change(function(){
 	    	$('input[type=hidden][name=review_star]').val(this.value);
