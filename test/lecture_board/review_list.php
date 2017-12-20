@@ -186,7 +186,7 @@
 						</td>
 						<td>
 							<span class="star-rating">
-								<span class="star-inner" style="width:80%"></span>
+								<span class="star-inner" style='width:<?=$value['lecturestar']*20?>%'></span>
 							</span>
 						</td>
 						<td><?=$value['writername'];?></td>
