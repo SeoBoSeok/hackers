@@ -32,9 +32,9 @@
 		                data: { logout_key : true },
 		                // dataType: "json",
 		                cache: false
-		            }).done(function(response){
+		            }).done(function(response, data){
 		            	// alert(response);
-		            	if (response == 1) {
+		            	if (data == 'success') {
 		            		alert('로그아웃 되었습니다.');
 		            		window.location.href = 'http://test.hackers.com';
 		            	} else {
