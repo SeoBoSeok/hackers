@@ -1,9 +1,6 @@
 <?php
 	include('../../header.php');
-	
 	if ($mb_id){
-
-		// print_r($home_url);
 		header('Location: ' . $home_url);
 	}
 ?>
@@ -40,7 +37,7 @@
 					<li class="last"><i class="icon-join-inp"></i> 정보입력</li>
 				</ul>
 			</div>
-		<form action="./register_step02.php" id="fagree" name="fagree" method="post" onsubmit="return agreeAllCheck();">
+		<form action="./?mode=step02" id="fagree" name="fagree" method="post" onsubmit="return agreeAllCheck();">
 			<div class="section-content">
 				<div class="tit-box-h4">
 					<h3 class="tit-h4">이용약관 <span class="tc-brand">(필수)</span></h3>
@@ -512,14 +509,6 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		// $('#ccbx').click('on', function(){
-		// 	if ( is_Checked() ){
-		// 		$('#agreeAll').prop("checked", true);
-		// 		location.href = 'register_step02.php';
-		// 	} else {
-		// 		alert('모든 체크박스에 동의해주셔야 합니다');
-		// 	}
-		// });
 		$('#ccbx').click('on', function(e){
 			if(is_Checked()){
 				return true;
@@ -529,17 +518,9 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 			}
 		});
 		function agreeAllCheck(){
-			// alert(fagree.agree1.value);
-			// return false;
-			// alert('1111');
-			// if(fagree.agree1.value){
-			// 	alert(fagree.agree1.value)
-			// 	return false;
-			// }
 			return false;
 		}
 		$('#agreeAll').click('on', function(){
-			// alert('1111');
 			// .attr는 두번째 부터 체크가 안되는 문제가 있음
 			// .prop으로 수정
 			if ($('#agreeAll').prop("checked")){
@@ -564,7 +545,6 @@ Aqua Auth 컨텐츠의 녹화차단 - Aqua Director 컨텐츠의 다운로드 DR
 		}
 	});
 </script>
-
 <?php
 	include('../../footer.php');
 ?>

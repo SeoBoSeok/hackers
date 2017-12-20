@@ -2,9 +2,6 @@
 	
 	include('../config/database.php');
 
-	// print_r($_POST);
-	// print_r($_FILE);
-
 	$review_mode = trim($_POST['mode']);
 	$bo_name = trim($_POST['board_no']);
 
@@ -12,12 +9,9 @@
 	$writername = $_POST['mb_name'];
 	$writesubject = $_POST['review_title'];
 	$writecontents = stripslashes($_POST['content']);
-	// echo $writecontents;
 	$botable = $_POST['lecture_title'];
 	$bocategory = $_POST['lecture_cat'];
 	$lecturestar = $_POST['review_star'];
-
-	// $thumnail[] = $_
 
 	$url = $_POST['url'];
 
@@ -36,6 +30,5 @@
 	}
 
 	$conn->close();
-
 
 ?>

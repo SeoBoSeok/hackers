@@ -1,36 +1,16 @@
 <?php
+	include_once('../../header.php');
+	include_once('../../config/database.php');
+
+	$mode = $_GET['mode'];
 	
-	switch ($_GET['mode']) {
-		// case 'step_01':
-		// 	include('./register_step01.php');
-		// 	break;
-		case 'step_02':
-			include('./register_step02.php');
-			break;
-
-		case 'step_03':
-			include('./register_step03.php');
-			break;
-
-		case 'modify':
-			include('./register_step03.php');
-			break;
-
-		case 'find_id':
-			include('./find_userid.php');
-			break;
-
-		case 'find_pass':
-			include('./find_password.php');
-			break;
-
-		case 'complete':
-			include('./register_complete.php');
-			break;								
-		
-		default:
-			include('./register_step01.php');
-			break;
+	if ( $mode ) {
+		include_once('./register_' . $mode . ".php");
+		if ( $mode == 'modify' ) include_once ('./register_step03.php');
+	} else {
+		$mode = 'step01';
+		include_once('./register_' . $mode . ".php");
 	}
 
+	include_once('../../footer.php');
 ?>

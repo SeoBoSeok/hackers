@@ -4,6 +4,7 @@
 
 	$check_id = trim($_POST['c_id']);
     $check_name = trim($_POST['c_name']);
+    $check_hp = trim($_POST['c_hp']);
 
 	$sql = "SELECT mb_id FROM member WHERE mb_id = '$check_id' and mb_name = '$check_name'";
 	$result = $conn->query($sql);

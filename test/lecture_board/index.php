@@ -1,23 +1,19 @@
 <?php
-	switch ($_GET['mode']) {
-		// case 'list':
-		// 	include('./review_list.php');
-		// 	break;
+	include_once('../header.php');
+	include_once('../config/database.php');
+	include_once('../common.php');
 
-		case 'write':
-			include('./review_write.php');
-			break;
+	$mode = $_GET['mode'];
 
-		case 'view':
-			include('./review_view.php');
-			break;
+	if ( $mode ) {
 
-		case 'modify':
-			include('./review_modify.php');
-			break;							
+		include('./review_' . $mode . '.php');
+
+	} else {
+
+		include('./review_list.php');
 		
-		default:
-			include('./review_list.php');
-			break;
 	}
+
+	include_once('../footer.php');
 ?>

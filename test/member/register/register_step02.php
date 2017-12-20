@@ -1,13 +1,9 @@
 <?php
-	include_once('../../header.php');
 	session_start();
 
 	$_SESSION["mobile_auth_code"] = 123456;
 
 	$auth_hp = '';
-
-	// print_r($_SERVER);
-	// echo $_SERVER['HTTP_REFERER'];
 
 	if ( (($_POST['agree1'] == 'y') + ($_POST['agree2'] == 'y')) <= 1 ) {
 		echo "<script>alert(\"먼저 이용약관과 개인정보 취급방침에 동의를 하셔야 합니다.\");</script>";
@@ -53,7 +49,7 @@
 				<h3 class="tit-h4">본인인증</h3>
 			</div>
 
-			<form action="./register_step03.php" name="fhauth_form" id="fhauth_form" method="post" onsubmit="return checkAuthCode(e)" autocomplete="off">
+			<form action="./?mode=step03" name="fhauth_form" id="fhauth_form" method="post" onsubmit="return checkAuthCode(e)" autocomplete="off">
 
 				<div class="section-content after">
 					<div class="identify-box" style="width:100%;height:190px;">

@@ -2,8 +2,6 @@
 	include_once('../header.php');
 	include_once('../config/database.php');
 
-	// print_r($_GET);
-
 	$b_no = trim($_GET['no']);
 	$b_mode = trim($_GET['mode']);
 
@@ -20,12 +18,8 @@
 		}
 
 	} else {
-
-    	// echo "0 results";
     	
 	}
-
-	// print_r($mb_id);
 
 	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id' AND writeid = '$b_no'";
 
@@ -39,11 +33,7 @@
 
 	} else {
 
-    	// echo "0 results";
-    	
 	}
-
-	// print_r($bo_content);
 
 	$conn->close();
 
@@ -322,7 +312,6 @@
 	});
     $("select[name=lecture_title]").change((function(e){
     	var c_id = $("select[name=lecture_title]").val();
-    	// alert(c_id);
         e.preventDefault();
             $.ajax({
                 url: "./get_board_category.php",
@@ -330,7 +319,6 @@
                 data: { cat : c_id },
                 cache: false,
                 success : function(data, status, xhr) {
-                	// alert(data);
                 	if(data == false){
                 		$("select[name=lecture_cat]").append( $('<option/>').val('등록된 강의가 없습니다.').text('등록된 강의가 없습니다.') );
                 	}
@@ -343,8 +331,7 @@
                 	}
                 },
             }).done(function(response, data){
-            	// alert(response);
-            	// alert(data);
+            	
             });
         }));
 </script>

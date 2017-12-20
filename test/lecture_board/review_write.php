@@ -13,44 +13,28 @@
 			$bo_table[] = $row['botable'];
 			$bo_category[] = $row['bocategorylist'];
 			$bo_info[] = $row;
-			// print_r($row);
 		}
 
 	} else {
-
-    	// echo "0 results";
     	
 	}
-
-	// print_r($bo_table[0]);
 
 	$sql = "SELECT lname FROM lecture_board WHERE lcat = '$bo_table[0]'";
 
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0) {
-    // output data of each row
-		// $_SESSION['mb_id'] = $row['name'];
 		while($row = $result->fetch_assoc()) {
-			// echo "id: " . $row['mb_id'] . "<br>";
-			// $bo_table[] = $row['botable'];
+
 			$categories[] = $row['lname'];
-			// $bo_info[] = $row;
-			// print_r($row['bocategorylist']);
-			echo $row['lname'];
+			
 		}
-		// return $bo_category[];
 
 	} else {
 
     	echo "등록된 강좌가 없습니다.";
     	
 	}
-
-	// print_r($categories);
-
-	// $categories = explode('|', $bo_info[0]['bocategorylist']);
-	// print_r($categories);
 
 	$conn->close();
 ?>

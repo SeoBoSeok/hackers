@@ -1,8 +1,4 @@
 <?php
-	include('../../header.php');
-?>
-
-<?php
 	session_start();
 
 	$_SESSION['agree1'] = $_POST['agree1'];
@@ -279,7 +275,7 @@ $(document).ready(function(e){
             $.ajax({
                 url: "./ajax_checkid.php",
                 type: "POST",
-                data: { name : c_id },
+                data: { mb_cid : c_id },
                 // dataType: "json",
                 cache: false
             }).done(function(response){
@@ -383,16 +379,6 @@ $(document).ready(function(e){
             */
         }
 
-        // E-mail 검사
-        // if ((f.w.value == "") || (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
-        //     var msg = reg_mb_email_check();
-        //     if (msg) {
-        //         alert(msg);
-        //         f.reg_mb_email.select();
-        //         return false;
-        //     }
-        // }
-
         if(f.mb_email.value) {
         	if(!emailValidation(f.mb_email.value)) {
         		alert('email 주소를 형식에 맞게 다시 작성해주세요');
@@ -402,30 +388,6 @@ $(document).ready(function(e){
         }
         return true;
     }
-
- //    function checkPassword(id,password){
-	// if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
-	// 	alert('숫자와 영문자 조합으로 10~15자리를 사용해야 합니다.');
-	// 	return false;
-	// }
-
-	// var checkNumber = password.search(/[0-9]/g);
-	// var checkEnglish = password.search(/[a-z]/ig);
-
-	// if(checkNumber <0 || checkEnglish <0){
-	// 	alert("숫자와 영문자를 혼용하여야 합니다.");
-	// return false;
-	// }
-	// if(/(\w)\1\1\1/.test(password)){
-	// 	alert('444같은 문자를 4번 이상 사용하실 수 없습니다.');
-	// return false;
-	// }
-	// if(password.search(id) > -1){
-	// 	alert("비밀번호에 아이디가 포함되었습니다.");
-	// return false;
-	// }
-	// return true;
-	// }
 
 	$('input[type="text"][name="mb_tel_01"]').on("change", function(){
 		var tel_complete = [];
@@ -810,8 +772,6 @@ $(document).ready(function(e){
 	        return false;
 	    }
 	}
-
-	// $('input[type=radio][name=sms][value=n]').attr('checked', true);
 
 	// SMS 수신 및 메일 수신 불러오기
 	if (<?php echo ($mb_sms == 'y') ? "true" : "false";  ?> == true) {

@@ -4,8 +4,6 @@
 
 	$hashed_pw = trim($_POST['mb_password_re']) . $salt;
 
-	// print_r($_POST);
-
 	$db_mb_name = $_POST['mb_name'];
 	$db_mb_id = $_POST['mb_id'];
 	$db_mb_password = hash('sha256', $hashed_pw);
@@ -23,10 +21,7 @@
 	$db_mb_mailing = $_POST['mailing'];
 	$db_mb_datetime = date("Y-m-d H:i:s");
 
-	// echo $db_mb_postcode;
-
 	$r_url = $_POST['url'];
-	// echo $r_url;
 
 	if($_POST['w'] == 'W'){
 		$sql = "INSERT INTO member (mb_id, mb_name, mb_email, mb_password, mb_hp, mb_tel, mb_postcode, mb_add1, mb_add2, mb_add_jibun, mb_sms, mb_mailing, mb_hp_certify, mb_datetime, mb_agree1, mb_agree2 )
@@ -42,15 +37,11 @@
 		if ($conn->query($sql) === TRUE) {
 		    // echo "New record updated successfully";
 		    $home_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SESSION['PHP_SELF']) . '/index.php';
-		    // print_r($home_url);
-		    // alert("수정되었습니다.");
 			header('Location: ' . $home_url);
 		} else {
 		    echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	}
-
-	// header('Location: ' . $home_url);
 
 	$conn->close();
 

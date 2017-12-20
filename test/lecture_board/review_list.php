@@ -1,7 +1,4 @@
 <?php
-	include_once('../header.php');
-	include_once('../config/database.php');
-	include_once('../common.php');
 
 	$category = $_GET['category'];
 
@@ -289,10 +286,7 @@
 		</div>
 
 		<div class="box-btn t-r">
-			<a href="./review_write.php" class="btn-m">후기 작성</a>
+			<a href="./?mode=write" class="btn-m">후기 작성</a>
 		</div>
 	</div>
 </div>
-<?php
-	include_once('../footer.php');
-?>

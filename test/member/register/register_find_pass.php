@@ -1,5 +1,4 @@
 <?php
-	include_once('../../header.php');
 	session_start();
 
 	$_SESSION['auth_code_for_email'] = '1123456';
@@ -106,7 +105,7 @@
 									<option value="">선택입력</option>
 									<option value="">선택입력</option>
 								</select>
-								<button class="btn-s-tin ml10" id="get_auth_for_pw">인증번호 받기</button>
+								<a href="#" class="btn-s-tin ml10" id="get_auth_for_pw">인증번호 받기</a>
 							</td>
 						</tr>
 						<tr>
@@ -124,6 +123,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$('')
 		$('#confirm_auth').click('on', function(){
 			if($('#confirm_auth_text').val() == $('input[type=hidden][name=auth_code_for_pass]').val()){
 				alert('인증되었습니다');
@@ -132,7 +132,7 @@
 				alert('코드를 확인 해주세요');
 			}
 		});
-		$('#get_eauth').click('on', function(e){
+		$('#get_auth_for_pw').click('on', function(e){
 			e.preventDefault();
 			var c_id = $('input[type=text][name=fp_mb_id]').val();
 			var c_name = $('input[type=text][name=fp_mb_name]').val();
@@ -140,8 +140,33 @@
 	                url: "./ajax_checkpass.php",
 	                type: "POST",
 	                data: { c_id : c_id, c_name : c_name },
+	                // dataType: "json",
 	                cache: false
 	            }).done(function(response){
+	            	// alert(response);
+	            	if (response == 1) {
+	            		alert("<?php echo $_SESSION['auth_code_for_hp']?>");
+	            		$('input[type=text][name=fp_mb_id]').attr('readonly', true);
+	            		$('input[type=hidden][name=auth_confirm_for_pass]').val('y');
+	            		$('input[type=hidden][name=auth_code_for_pass]').val('<?php echo $_SESSION['auth_code_for_hp']?>');
+	            	} else {
+	            		alert('해당 회원 정보를 찾을 수 없습니다.');
+	            	}
+	            });
+		});
+		$('#get_eauth').click('on', function(e){
+			e.preventDefault();
+			var c_id = $('input[type=text][name=fp_mb_id]').val();
+			var c_name = $('input[type=text][name=fp_mb_name]').val();
+			var c_hp = $('input[type=hidden][name=mb_hp]').val();
+			$.ajax({
+	                url: "./ajax_checkpass.php",
+	                type: "POST",
+	                data: { c_id : c_id, c_name : c_name, c_hp : c_hp },
+	                // dataType: "json",
+	                cache: false
+	            }).done(function(response){
+	            	// alert(response);
 	            	if (response == 1) {
 	            		alert("<?php echo $_SESSION['auth_code_for_hp']?>");
 	            		$('input[type=text][name=fp_mb_id]').attr('readonly', true);
@@ -163,15 +188,5 @@
 				$('.option_select_email').removeClass('remove');
 			}
 		});
-		$('input[type="text"][name="hp_01"]').on("change", function(){
-			var tel_complete = [];
-			tel_complete[0] = $('#mb_hp_01').val();
-			tel_complete[1] = $('#mb_hp_02').val();
-			tel_complete[2] = $('#mb_hp_03').val();
-			$('#mb_hp').val(tel_complete[0]+'-'+tel_complete[1]+'-'+tel_complete[2]);
-		});
 	});
 </script>
-<?php
-	include_once('../../footer.php');
-?>

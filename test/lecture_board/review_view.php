@@ -1,8 +1,5 @@
 <?php
-	include_once('../header.php');
-	include_once('../config/database.php');
 
-	// echo $_GET['no'];
 	$w_id = $_GET['no'];
 
 	$sql = "SELECT * FROM hac_board_write WHERE writeid = '$w_id'";
@@ -274,7 +271,6 @@
 				<?php foreach ($bo_list as $key => $value) { ?>
 				<tr class="bbs-sbj">
 					<td>
-						<!-- <?=$value['writeid'];?> -->
 						<?=$key+$offset+1?>
 					</td>
 					<td>
@@ -300,7 +296,6 @@
 
 		<div class="box-paging">
 			<a href="?mode=list&page=1"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-			<!-- <a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a> -->
 			<?php
 
 				$num_of_rows = $result->num_rows;
@@ -322,7 +317,6 @@
 					} else {
 						echo "<a href='?mode=list&page=$i'>" . $i . "</a>";
 					}
-					// echo "<a href='mode=list&page='". $i ."'>" . $i . "</a>";
 				}
 
 				if(($numoflimit != 1) && ($numoflimit != $_GET['page'])) {
@@ -333,8 +327,6 @@
 
 				echo "<a href='?mode=list&page=$numoflimit'><i class='icon-last'><span class='hidden'>마지막페이지</span></i></a>";
 			?>
-			<!-- <a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a> -->
-			<!-- <a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a> -->
 		</div>
 	</div>
 </div>
@@ -363,6 +355,3 @@
 		});
 	});
 </script>
-<?php
-	include_once('../footer.php');
-?>

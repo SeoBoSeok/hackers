@@ -1,5 +1,4 @@
 <?php
-	include_once('../../header.php');
 	session_start();
 
 	$_SESSION['auth_code_for_email'] = '1123456';
@@ -231,6 +230,3 @@
 		});
 	});
 </script>
-<?php
-	include_once('../../footer.php');
-?>
