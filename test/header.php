@@ -1,6 +1,5 @@
 <?php
-
-	include_once('config.php');
+	include_once('common.php');
 	session_start();
 ?>
 
@@ -39,3 +38,7 @@
 <!--[if lte IE 9]> <script src="/js/common/place_holder.js"></script> <![endif]-->
 
 </head>
+
+<?php include_once('gnu.php'); ?>
+
+<?php include_once('top_section.php'); ?>

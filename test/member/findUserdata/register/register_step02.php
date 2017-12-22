@@ -49,7 +49,7 @@
 				<h3 class="tit-h4">본인인증</h3>
 			</div>
 
-			<form action="./?mode=step03" name="fhauth_form" id="fhauth_form" method="post" onsubmit="return checkAuthCode(e)" autocomplete="off">
+			<form action="./?mode=step03" name="fhauth_form" id="fhauth_form" method="post" autocomplete="off">
 
 				<div class="section-content after">
 					<div class="identify-box" style="width:100%;height:190px;">
@@ -105,8 +105,5 @@
 			$('#mb_hp').val(hp_complete[0]+'-'+hp_complete[1]+'-'+hp_complete[2]);
 		});
 
-		function validation_hp() {
-			return true;
-		}
 	});
 </script>

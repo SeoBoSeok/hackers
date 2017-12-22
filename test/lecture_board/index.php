@@ -3,11 +3,9 @@
 	include_once('../config/database.php');
 	include_once('../common.php');
 
-	$mode = $_GET['mode'];
+	if ( $_GET['mode'] ) {
 
-	if ( $mode ) {
-
-		include('./review_' . $mode . '.php');
+		include('./review_' . $_GET['mode'] . '.php');
 
 	} else {
 

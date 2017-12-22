@@ -1,3 +1,12 @@
+<body>
+<!-- skip nav -->
+<div id="skip-nav">
+<a href="#content">본문 바로가기</a>
+</div>
+<!-- //skip nav -->
+
+<div id="wrap">
+	<div id="header" class="header">
 <div class="nav-section">
 			<div class="inner p-r">
 				<h1><a href="/"><img src="http://img.hackershrd.com/common/logo.png" alt="해커스 HRD LOGO" width="165" height="37"/></a></h1>
@@ -65,7 +74,7 @@
 							<a href="#">직무교육 안내</a>
 							<ul class="nav-sub-lst">
 								<li><a href="/lecture_board/?mode=list">수강후기</a></li>
-								<?php if($mb_level > 9) : ?>
+								<?php if($mb_level == 10) : ?>
 								<li><a href="/adm/index.php" class="is_adm">관리자</a></li>
 								<?php endif; ?>
 								<li><a href="#">서브메뉴</a></li>
@@ -104,8 +113,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.is_adm').click(function(){
-			if(<?php echo $mb_level?> < 10) {
-				alert('관리자 권한 획득 후 이용하실 수 있습니다.');
+			if (<?php echo isset($mb_level)?>) {
+				if ( <?php echo $mb_level?> != 10 ) {
+					alert('관리자 권한 획득 후 이용하실 수 있습니다.');
+				}
 			}
 		});
 	});

@@ -1,7 +1,3 @@
-<?php
-	
-?>
-
 <div id="nav-left" class="nav-left">
 	<div class="nav-left-tit"> 
 		<span>직무교육 안내</span>

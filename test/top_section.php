@@ -1,18 +1,11 @@
-<?php
-	session_start();
-	$mb_id = $_SESSION['mb_id'];
-	$mb_name = $_SESSION['mb_name'];
-	$mb_level = $_SESSION['mb_level'];
-?>
-
 <div class="top-section">
 			<div class="inner">
 				<div class="link-box">
 					<?php
-						if ($mb_id) // 로그인한 상태($mb_id로 구별)
-							echo "<a href='#' id='hackers_logout'>로그아웃</a><a href='/member/register?mode=modify'>회원정보 수정</a>";
+						if ($_SESSION['mb_id']) // 로그인한 상태($mb_id로 구별)
+							echo "<a href='#' id='hackers_logout'>로그아웃</a><a href='/member?mode=modify'>회원정보 수정</a>";
 						else // 로그아웃 상태
-							echo "<a href='/member'>로그인</a><a href='/member/register?mode=step01'>회원가입</a>"
+							echo "<a href='/member'>로그인</a><a href='/member?mode=step01'>회원가입</a>"
 					?>
 					<a href="#">상담/고객센터</a>
 				</div>
@@ -36,7 +29,7 @@
 		            	// alert(response);
 		            	if (data == 'success') {
 		            		alert('로그아웃 되었습니다.');
-		            		window.location.href = 'http://test.hackers.com';
+		            		window.location.href = '/';
 		            	} else {
 		            		alert('로그아웃에 실패했습니다.');
 		            	}

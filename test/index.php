@@ -10,22 +10,7 @@
 	$mb_level = $_SESSION['mb_level'];
 
 ?>
-</head>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		
-		<?php include_once('./gnu.php'); ?>
-
-		<?php include_once('./top_section.php'); ?>
-
-	</div>
 <div id="container">
 	<div class="main-slider-applyclass">
 		<div id="applyclass" class="slider-applyclass col4"><!-- 갯수 1개 class="col1" / 갯수 2개 class="col2"  -->

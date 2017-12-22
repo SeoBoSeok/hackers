@@ -1,8 +1,4 @@
 <?php
-	include_once('../header.php');
-
-	include_once('../config/database.php');
-
 	$sql = "SELECT * FROM hac_board";
 
 	$result = $conn->query($sql);
@@ -38,18 +34,7 @@
 
 	$conn->close();
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		<?php include_once('../gnu.php'); ?>	
-		<?php include_once('../top_section.php'); ?>
-	</div>
 <div id="container" class="container">
 	<?php include_once('./lecture_board_sidemenu.php'); ?>
 	<div id="content" class="content">

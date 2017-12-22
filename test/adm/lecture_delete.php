@@ -22,8 +22,6 @@
 
 		$result = $conn->query($sql);
 
-	} else {
-
 	}
 
 ?>

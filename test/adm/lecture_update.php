@@ -15,8 +15,6 @@
 
 	$uploaddir = $_SERVER['DOCUMENT_ROOT'] . "/data";
 
-  // print_r($home_url);
-
   define('_UPLOADPATH', 'data/');
 
  	if(isset($_FILES['lthumbnail'])){
@@ -36,35 +34,24 @@
          $errors[]="extension not allowed, please choose a JPEG or PNG file.";
       }
       
-        if($file_size > 2097152){
-           $errors[]='File size must be excately 2 MB';
-        }
-        
-        if(empty($errors)==true){
-          move_uploaded_file($file_tmp, _UPLOADPATH . $target);
-
-          $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$target')";
-
-    		$result = $conn->query($sql);
-
-    		if ($result->num_rows > 0) {
-
-    			while($row = $result->fetch_assoc()) {
-    			 header('Location: ' . $home_url);
-          }
-
-    		} else {
-
-    	    	// echo "0 results";
-    	    	
-    		}
-
-  		  $conn->close();
-
-        header('Location: ' . $home_url);
-
-      } else {
-
+      if($file_size > 2097152){
+         $errors[]='File size must be excately 2 MB';
       }
+      
+      if(empty($errors)==true){
+        move_uploaded_file($file_tmp, _UPLOADPATH . $target);
+
+        $sql = "INSERT INTO lecture_board (lname, lcat, ltitle, lauthor, lhard, ltime, ldescription, lthumnail ) VALUES ('$lname', '$lcat', '$ltitle', '$lauthor', '$lhard', 'ltime', '$ldescription', '$target')";
+
+  		$result = $conn->query($sql);
+
+  		if ($result->num_rows > 0) {
+
+  			while($row = $result->fetch_assoc()) {
+  			 header('Location: ' . $home_url);
+        }
+
+  		}
+		  $conn->close();
    }
 ?>

@@ -17,20 +17,16 @@
 	if ($result->num_rows > 0) {
     // output data of each row
 		while($row = $result->fetch_assoc()) {
-
-			// echo 'success';
-
 			$_SESSION['mb_id'] = $row['mb_id'];
 			$_SESSION['mb_name'] = $row['mb_name'];
 			$_SESSION['mb_level'] = $row['mb_level'];
 		}
 
-		header("Location: ".$r_url, true, 301);
+		header("Location: " . $r_url , true, 301);
 
 	} else {
 
-		echo '비밀번호 오류';
-    	echo false;
+		header("Location: /member?error=perror");
     	
 	}
 

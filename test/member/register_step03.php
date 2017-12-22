@@ -1,9 +1,7 @@
 <?php
-	session_start();
-
-	$_SESSION['agree1'] = $_POST['agree1'];
-	$_SESSION['agree2'] = $_POST['agree2'];
-	$_SESSION['auth_hp'] = $_POST['auth_hp'];
+	// $_SESSION['agree1'] = $_POST['agree1'];
+	// $_SESSION['agree2'] = $_POST['agree2'];
+	// $_SESSION['auth_hp'] = $_POST['auth_hp'];
 
 	$agree1 = $_POST['agree1'];
 	$agree2 = $_POST['agree2'];
@@ -18,9 +16,8 @@
 
 	$write = 'W'; // write mode 가입모드
 
-	if ($mb_id) {
+	if ($_SESSION['mb_id']) {
 		$write = 'M';
-		include('../../config/database.php');
 
 		$sql = "SELECT * FROM member where mb_id = '$mb_id'";
 		$result = $conn->query($sql);
@@ -70,22 +67,7 @@
 	}
 
 ?>
-
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		
-		<?php include_once('../../gnu.php'); ?>
-
-		<?php include_once('../../top_section.php'); ?>
-
-	</div>
 <div id="container" class="container-full">
 	<div id="content" class="content">
 		<div class="inner">
@@ -236,58 +218,32 @@
 		</div>
 	</div>
 </div>
-
-	<div id="footer" class="footer">
-		<div class="inner p-r">
-			<img src="http://img.hackershrd.com/common/logo_footer.png" class="logo-footer" alt="해커스 HRD LOGO" width="165" height="37"/>
-			<div class="site-info">
-				<div class="link-box">
-					<a href="#">해커스 소개</a>
-					<a href="#">이용약관</a>
-					<a href="#"><strong class="tc-brand">개인정보취급방침</strong></a>
-					<a href="#">CONTACT US</a>
-					<a href="#">상담/고객센터</a>
-				</div>
-				<div class="address">
-					㈜챔프스터디 | 사업자등록번호 [120-87-09984] | TEL : 02)537-5000<br />
-					서울특별시 서초구 강남대로61길 23(서초동 1316-15) 현대성우빌딩 203호<br />
-					대표이사 : 전재윤 | 개인정보관리책임자 : 김병철<br />
-					통신판매업신고(제 2008-서울서초-0396호) 정보조회 부가통신사업신고(신고번호 : 013760)<br />
-				</div>
-			</div>
-			<a href="javascript:void(window.open('https://pgweb.uplus.co.kr/pg/wmp/mertadmin/jsp/mertservice/s_escrowYn.jsp?mertid=champescrow','','scrollbars=no,width=340,height=262,top=150,left=550'))" class="lg-info"><img src="http://img.hackershrd.com/common/lg_info.gif" alt="고객님은 안전거래를 위해 교재(유료)가 포함된 상품을 무통장 입금으로 결제하시는 경우 챔프스터디가 가입한 LG U+의 구매안전 서비스를 이용하실 수 있습니다.* LG U+의 결제대금예치업 등록번호 : 02-006-00001" width="163" height="114"/></a>
-		</div>
-	</div>
-</div>
 <script type="text/javascript">
 $(document).ready(function(e){
 
-	// alert($('input[type=radio][name=mb_sms]').is(':checked').val());
-
-    $("#check_duplicated_id").on('click',(function(e){
-
-    	var c_id = $('input[name="mb_id"]').val();
-    	if (!c_id) {
-    		alert('아이디를 입력해주세요');
-    		return;
-    	}
-        e.preventDefault();
-            $.ajax({
-                url: "./ajax_checkid.php",
-                type: "POST",
-                data: { mb_cid : c_id },
-                // dataType: "json",
-                cache: false
-            }).done(function(response){
-            	// alert(response);
-            	if (response == 1) {
-            		alert('해당 아이디가 이미 존재합니다. 다른 아이디를 선택해주세요.');
-            	} else {
-            		alert('가입가능한 아이디 입니다.');
-            	}
-            });
-        }));
+    $('#check_duplicated_id').on('click', function(e){
+    	// var c_id = $('input[name="mb_id"]').val();
+		if (!$('input[name="mb_id"]').val()) {
+			alert('아이디를 입력해주세요');
+			return;
+		}
+	    e.preventDefault();
+	    $.ajax({
+	        url: "./ajax_check.php",
+	        type: "POST",
+	        data: { mb_cid : $('input[name="mb_id"]').val() , mode : "check_id" },
+	        // dataType: "json",
+	        cache: false
+	    }).done(function(response){
+	    	// alert(response);
+	    	if (response == 1) {
+	    		alert('해당 아이디가 이미 존재합니다. 다른 아이디를 선택해주세요.');
+	    	} else {
+	    		alert('가입 가능한 아이디 입니다.');
+	    	}
+	    });
     });
+
 	function sample6_execDaumPostcode(e) {
 		e.preventDefault();
         new daum.Postcode({
@@ -345,7 +301,7 @@ $(document).ready(function(e){
         }
 
         if (f.mb_password) {
-        	var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}/;;
+        	var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}/;
         	
         	if(!passwordRules.test(f.mb_password.value)){
         		alert("8-15자의 영문자/숫자/툭수문자 혼합해서 만들어주세요");
@@ -368,15 +324,6 @@ $(document).ready(function(e){
                 f.mb_name.focus();
                 return false;
             }
-
-            /*
-            var pattern = /([^가-힣\x20])/i;
-            if (pattern.test(f.mb_name.value)) {
-                alert("이름은 한글로 입력하십시오.");
-                f.mb_name.select();
-                return false;
-            }
-            */
         }
 
         if(f.mb_email.value) {
@@ -557,8 +504,6 @@ $(document).ready(function(e){
 	            return false;
 	        }
 	    }
-
-	    // alert(alert_area);
 
 	    is_this.siblings($("."+alert_area).html(''));
 
@@ -774,23 +719,25 @@ $(document).ready(function(e){
 	}
 
 	// SMS 수신 및 메일 수신 불러오기
-	if (<?php echo ($mb_sms == 'y') ? "true" : "false";  ?> == true) {
-		$('input[type=radio][name=sms][value=y]').attr('checked', true);
-		$('input[type=radio][name=sms][value=n]').attr('checked', false);
-	} else {
-		$('input[type=radio][name=sms][value=y]').attr('checked', false);
-		$('input[type=radio][name=sms][value=n]').attr('checked', true);
+	if ( <?php echo isset($mb_sms); ?> ) {
+		if ( "<?php echo $mb_sms; ?>" == "y" ) {
+			$('input[type=radio][name=sms][value=y]').attr('checked', true);
+			$('input[type=radio][name=sms][value=n]').attr('checked', false);
+		} else {
+			$('input[type=radio][name=sms][value=y]').attr('checked', false);
+			$('input[type=radio][name=sms][value=n]').attr('checked', true);
+		}
 	}
 
-	if (<?php echo ($mb_mailing == 'y') ? "true" : "false";  ?> == true) {
-		$('input[type=radio][name=mailing][value=y]').attr('checked', true);
-		$('input[type=radio][name=mailing][value=n]').attr('checked', false);
-	} else {
-		$('input[type=radio][name=mailing][value=y]').attr('checked', false);
-		$('input[type=radio][name=mailing][value=n]').attr('checked', true);
+	if ( <?php echo isset($mb_mailing); ?> ) {
+		if ( "<?=$mb_mailing?>" == "y" ) {
+			$('input[type=radio][name=mailing][value=y]').attr('checked', true);
+			$('input[type=radio][name=mailing][value=n]').attr('checked', false);
+		} else {
+			$('input[type=radio][name=mailing][value=y]').attr('checked', false);
+			$('input[type=radio][name=mailing][value=n]').attr('checked', true);
+		}
 	}
-
+});
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-</body>
-</html>

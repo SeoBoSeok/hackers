@@ -25,10 +25,8 @@
 	if ($conn->query($sql) === TRUE) {
 	    // echo "New record created successfully";
 		header("Location: http://test.hackers.com/lecture_board/?mode=list", true, 301);
-	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
 	}
-
+	
 	$conn->close();
 
 ?>

@@ -1,10 +1,5 @@
 <?php
-	include('../header.php');
-	include('../config/database.php');
-
-	if ($mb_level) {
-
-	} else {
+	if ($_SESSION['mb_level'] != 10) {
 		echo "<script>alert('관리자 전용 페이지 입니다.');</script>";
 	}
 
@@ -18,32 +13,11 @@
 			$total[] = $row;
 		}
 
-	} else {
-
-    	echo "0 results";
-    	
 	}
-
-	// print_r($total);
-
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		
-		<?php include_once('../gnu.php'); ?>
-		<!-- gnu.php -->
-		<?php include_once('../top_section.php'); ?>
-
-	</div>
 <div id="container" class="container">
-	<?php include_once('../lecture_board/lecture_board_sidemenu_adm.php');?>
+	<?php include_once('./lecture_board_sidemenu_adm.php');?>
 	<form action="./lecture_update.php" method="post" enctype='multipart/form-data'>
 		<div id="content" class="content">
 			<div class="tit-box-h3">
@@ -109,7 +83,3 @@
 		</div>
 	</form>
 </div>
-
-<?php
-	include('../footer.php');
-?>

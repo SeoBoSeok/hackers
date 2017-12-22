@@ -12,7 +12,7 @@
 	$returnArray = array();
 
 	if ($result->num_rows > 0) {
-		// $_SESSION['mb_id'] = $row['name'];
+
 		while($row = $result->fetch_assoc()) {
 		
 			$r_category[] = $row;
@@ -25,10 +25,6 @@
 
 		echo json_encode($returnArray);
 
-	} else {
-
-    	echo false;
-    	
 	}
 
 	$conn->close();

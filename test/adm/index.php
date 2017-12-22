@@ -1,27 +1,19 @@
 <?php
 
-	session_start();
+	include('../header.php');
+	include('../config/database.php');
+	include_once('../common.php');
 
-	switch ($_GET['mode']) {
-		// case 'list':
-		// 	include('./review_list.php');
-		// 	break;
+	if ( $_GET['mode'] ) {
 
-		// case 'register':
-		// 	include('./lecture_register.php');
-		// 	break;
+		include('./lecture_' . $_GET['mode'] . '.php');
 
-		// case 'view':
-		// 	include('./review_view.php');
-		// 	break;
+	} else {
 
-		// case 'modify':
-		// 	include('./review_modify.php');
-		// 	break;							
+		include('./lecture_list.php');
 		
-		default:
-			include('./lecture_list.php');
-			break;
 	}
+
+	include('../footer.php');
 
 ?>

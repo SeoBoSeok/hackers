@@ -1,7 +1,4 @@
 <?php
-	include('../header.php');
-	include ('../config/database.php');
-
 	$sql = "SELECT * FROM hac_board";
 
 	$result = $conn->query($sql);
@@ -12,29 +9,11 @@
 			$total[] = $row;
 		}
 
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		
-		<?php include_once('../gnu.php'); ?>
-		<!-- gnu.php -->
-		<?php include_once('../top_section.php'); ?>
-
-	</div>
 <div id="container" class="container">
-	<?php include_once('../lecture_board/lecture_board_sidemenu_adm.php');?>
+	<?php include_once('./lecture_board_sidemenu_adm.php');?>
 	<!-- <form action="#" method="post" enctype='multipart/form-data'> -->
 		<div id="content" class="content">
 			<div class="tit-box-h3">
@@ -64,7 +43,7 @@
 			</table>
 
 			<div class="box-btn t-r">
-				<a href="./lecture_cat_add.php" class="btn-m">분류 추가</a>
+				<a href="./?mode=cat_add" class="btn-m">분류 추가</a>
 			</div>
 		</div>
 	<!-- </form> -->
@@ -96,7 +75,3 @@
 	});
 
 </script>
-
-<?php
-	include('../footer.php');
-?>

@@ -95,21 +95,7 @@
 
 	$conn->close();
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		
-		<?php include_once('../gnu.php'); ?>
-		<!-- gnu.php -->
-		<?php include_once('../top_section.php'); ?>
-
-	</div>
 <div id="container" class="container">
 	<?php include_once('./lecture_board_sidemenu.php');?>
 	<div id="content" class="content">
@@ -202,7 +188,6 @@
 				<?php foreach ($bo_list as $key => $value) { ?>
 				<tr class="bbs-sbj">
 					<td>
-						<!-- <?=$value['writeid'];?> -->
 						<?=$key+$offset+1?>
 					</td>
 					<td>
@@ -231,30 +216,13 @@
 			</tbody>
 		</table>
 
-<!-- 		<div class="box-paging">
-			<a href="#"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-			<a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a>
-			<a href="#" class="active">1</a>
-			<a href="#">2</a>
-			<a href="#">3</a>
-			<a href="#">4</a>
-			<a href="#">5</a>
-			<a href="#">6</a>
-			<a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a>
-			<a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a>
-		</div> -->
-
 		<div class="box-paging">
 			<a href="?mode=list&page=1"><i class="icon-first"><span class="hidden">첫페이지</span></i></a>
-			<!-- <a href="#"><i class="icon-prev"><span class="hidden">이전페이지</span></i></a> -->
 			<?php
 
-				// print_r(count($bo_list));
 				$num_of_rows = count($bo_list);
-				// print_r($total);
 				$num = $total / $page_result;
 				$numoflimit = ceil($num);
-				// print_r($numoflimit);
 				$prev = $_GET['page'] - 1;
 				$next = $_GET['page'] + 1;
 
@@ -270,7 +238,6 @@
 					} else {
 						echo "<a href='?mode=list&category=$category&page=$i'>" . $i . "</a>";
 					}
-					// echo "<a href='mode=list&page='". $i ."'>" . $i . "</a>";
 				}
 
 				if(($numoflimit != 1) && ($numoflimit != $_GET['page'])) {
@@ -281,8 +248,6 @@
 
 				echo "<a href='?mode=list&category=$category&page=$numoflimit'><i class='icon-last'><span class='hidden'>마지막페이지</span></i></a>";
 			?>
-			<!-- <a href="#"><i class="icon-next"><span class="hidden">다음페이지</span></i></a> -->
-			<!-- <a href="#"><i class="icon-last"><span class="hidden">마지막페이지</span></i></a> -->
 		</div>
 
 		<div class="box-btn t-r">

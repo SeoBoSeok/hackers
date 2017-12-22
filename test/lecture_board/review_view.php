@@ -12,20 +12,12 @@
 			$bo_content = $row;
 		}
 
-	} else {
-
-    	// echo "0 results";
-    	
 	}
-
-	// print_r($home_url);
 
 	$bo_content_q_subject = $bo_content['bocategory'];
 	$bo_content_q_table =  $bo_content['botable'];
 
 	$sql = "SELECT * FROM lecture_board WHERE lname='$bo_content_q_subject' AND lcat = '$bo_content_q_table'";
-
-	// print_r($sql);
 
 	$result = $conn->query($sql);
 
@@ -35,12 +27,6 @@
 			$bo_detail = $row;
 		}
 
-		// print_r($bo_detail);
-
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 
 	$sql = "SELECT * FROM hac_board";
@@ -53,12 +39,6 @@
 			$bo_detail_category[] = $row;
 		}
 
-		// print_r($bo_category);
-
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 
 	if($w_id)
@@ -72,12 +52,6 @@
 			$bo_detail_category[] = $row;
 		}
 
-		// print_r($bo_category);
-
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 
 	$category = $_GET['category'];
@@ -92,10 +66,6 @@
 			$total = $row['count'];
 		}
 
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 
 	$page = 1;
@@ -104,9 +74,6 @@
 
 	if($_GET['category'])
 		$sql .= " WHERE bocategory = '$category'";
-
-	// print_r($sql);
-
 
 	$offset = 0;
 	$page_result = 5;
@@ -125,35 +92,18 @@
 
 	$result = $conn->query($sql);
 
-	// echo $row_cnt;
-
 	if ($result->num_rows > 0) {
 
 		while($row = $result->fetch_assoc()) {
 			$bo_list[] = $row;
 		}
 
-	} else {
-
-    	// echo "0 results";
-    	
 	}
 
 	$conn->close();
 
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
-</div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		<?php include_once('../gnu.php'); ?>	
-		<?php include_once('../top_section.php'); ?>
-	</div>	
+</div>	
 <div id="container" class="container">
 	<?php include_once('./lecture_board_sidemenu.php');?>
 	<div id="content" class="content">
@@ -222,7 +172,7 @@
 			<a href="/lecture_board/?mode=list&page=1" class="btn-m-gray">목록</a>
 			
 			<?php if ($bo_content['writerid'] == $mb_id): ?>
-				<a href="./review_modify.php?mode=M&no=<?php echo $w_id; ?>" class="btn-m ml5">수정</a>
+				<a href="./?mode=modify&wmode=M&no=<?php echo $w_id; ?>" class="btn-m ml5">수정</a>
 				<a href="#" class="btn-m-dark" id="btn_review_delete">삭제</a>
 			<?php endif; ?>
 

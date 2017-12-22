@@ -1,9 +1,6 @@
 <?php
-	include_once('../header.php');
-	include_once('../config/database.php');
-
 	$b_no = trim($_GET['no']);
-	$b_mode = trim($_GET['mode']);
+	$b_mode = trim($_GET['wmode']);
 
 	$sql = "SELECT * FROM hac_board";
 
@@ -17,8 +14,6 @@
 			$bo_info[] = $row;
 		}
 
-	} else {
-    	
 	}
 
 	$sql = "SELECT * FROM hac_board_write WHERE writerid = '$mb_id' AND writeid = '$b_no'";
@@ -31,37 +26,17 @@
 			$bo_content = $row;
 		}
 
-	} else {
-
 	}
 
 	$conn->close();
 
-	// print_r($bo_content);
     preg_match_all("/<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/i", $bo_content['writecontents'], $matches);
-    // print_r($matches[1][0]);
 
     $f_divide = explode("/", $matches[1][0]);
     $f_count = count($f_divide) - 1;
 
-    // print_r($f_divide[1]);
-    print_r($f_divide[$f_count]);
-
-    // print_r($bo_content['writecontents']);
-
 ?>
-<body>
-<!-- skip nav -->
-<div id="skip-nav">
-<a href="#content">본문 바로가기</a>
 </div>
-<!-- //skip nav -->
-
-<div id="wrap">
-	<div id="header" class="header">
-		<?php include_once('../gnu.php'); ?>
-		<?php include_once('../top_section.php'); ?>
-	</div>
 <div id="container" class="container">
 		<?php include_once('./lecture_board_sidemenu.php'); ?>
 		<div id="content" class="content">
@@ -81,7 +56,7 @@
 				<li>욕설(욕설을 표현하는 자음어/기호표현 포함) 및 명예훼손, 비방,도배글, 상업적 목적의 홍보성 게시글 등 사회상규에 반하는 게시글 및 강의내용과 상관없는 서비스에 대해 작성한 글들은 삭제 될 수 있으며, 법적 책임을 질 수 있습니다.</li>
 			</ul>
 		</div>
-		<form name="tx_editor_form" id="tx_editor_form" action="review_update.php" method="post" accept-charset="utf-8">
+		<form name="tx_editor_form" id="tx_editor_form" action="./review_update.php" method="post" accept-charset="utf-8">
 		<table border="0" cellpadding="0" cellspacing="0" class="tbl-col">
 			<caption class="hidden">강의정보</caption>
 			<colgroup>
@@ -175,7 +150,7 @@
 		</form>
 	
 		<div class="box-btn t-r">
-			<a href="/lecture_board/?mode=view&page=1" class="btn-m-gray">목록</a>
+			<a href="/lecture_board/?mode=list&page=1" class="btn-m-gray">목록</a>
 			<a href="#" class="btn-m ml5" id="review_modify">수정</a>
 		</div>
 	</div>
@@ -310,6 +285,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
+
 	    $("#star"+<?php echo $bo_content['lecturestar']?>).attr('checked', true);
 	    $('input[type=hidden][name="review_star"]').val(<?php echo $bo_content['lecturestar']?>);
 	    var attachments = {};
